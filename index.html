@@ -1,0 +1,1891 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Антон Мужельский | CDTO & Директор по цифровой трансформации</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #FAFAF9;
+            --bg-surface: #FFFFFF;
+            --text-primary: #0F172A;
+            --text-secondary: #64748B;
+            --accent: #0F766E;
+            --accent-light: #F0FDFA;
+            --border: #E2E8F0;
+            --gradient-start: #0F766E;
+            --gradient-end: #06B6D4;
+            --neon-glow: rgba(16, 185, 129, 0.4);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0B1120;
+            --bg-surface: #1E293B;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --accent: #14B8A6;
+            --accent-light: #0F2927;
+            --border: #334155;
+            --gradient-start: #14B8A6;
+            --gradient-end: #06B6D4;
+            --neon-glow: rgba(20, 184, 166, 0.5);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6);
+            --shadow-glow: 0 0 30px rgba(20, 184, 166, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Particle Canvas Background */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(var(--bg-surface), 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            padding: 0.75rem 0;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)) 1;
+        }
+
+        .sticky-nav.visible {
+            transform: translateY(0);
+        }
+
+        .sticky-nav-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sticky-nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .sticky-nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .sticky-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .sticky-nav-links a:hover,
+        .sticky-nav-links a.active {
+            color: var(--accent);
+        }
+
+        .sticky-nav-links a:hover::after,
+        .sticky-nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
+            border-radius: 9999px;
+            width: 50px;
+            height: 26px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-glow);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        [data-theme="dark"] .theme-toggle-slider {
+            transform: translateX(24px);
+        }
+
+        /* Header with Gradient Text */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)) 1;
+            position: relative;
+            padding-top: 2rem;
+        }
+
+        .avatar-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--bg-surface), var(--bg-surface)) padding-box,
+                        linear-gradient(135deg, var(--gradient-start), var(--gradient-end)) border-box;
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .avatar-container:hover .avatar {
+            transform: scale(1.03) rotate(1deg);
+        }
+
+        .avatar-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--bg-primary);
+            font-size: 18px;
+            z-index: 3;
+            box-shadow: var(--shadow-glow);
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .title {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .contacts {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .contact-link:hover::before {
+            width: 250px;
+            height: 250px;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md), var(--shadow-glow);
+        }
+
+        .contact-link svg {
+            width: 16px;
+            height: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-link span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Minimal Fixed Stats Bar */
+        .stats-bar-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(var(--bg-surface), 0.98);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+            padding: 0.5rem 0;
+            z-index: 998;
+            box-shadow: 0 -2px 4px rgb(0 0 0 / 0.05);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .stats-bar-fixed.visible {
+            transform: translateY(0);
+        }
+
+        .stats-bar-fixed-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .stat-fixed-item {
+            text-align: center;
+            padding: 0.25rem;
+        }
+
+        .stat-fixed-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .stat-fixed-label {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-top: 0.15rem;
+        }
+
+        /* Animated Stats Bar (Original) */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.25rem;
+            margin: 2.5rem 0;
+            padding: 1.75rem;
+            background: linear-gradient(135deg, var(--accent-light), transparent);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 80px;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Cover Letter Toggle */
+        .cover-letter-toggle {
+            background: linear-gradient(135deg, var(--accent-light), transparent);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-letter-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+        }
+
+        .cover-letter-toggle:hover {
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        .cover-letter-toggle summary {
+            font-weight: 700;
+            color: var(--accent);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .cover-letter-toggle summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .cover-letter-toggle summary::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cover-letter-toggle[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .cover-letter-content {
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .cover-letter-content p {
+            margin-bottom: 0.875rem;
+        }
+
+        .cover-letter-content strong {
+            color: var(--text-primary);
+        }
+
+        /* Enhanced Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateX(-25px);
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.9rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            border: 2px solid var(--bg-primary);
+            box-shadow: var(--shadow-glow);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover::before {
+            transform: scale(1.25);
+        }
+
+        .experience-item {
+            background-color: var(--bg-surface);
+            border-radius: 12px;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .experience-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            transform: translateY(-6px) rotateX(1deg);
+        }
+
+        .experience-item:hover::after {
+            transform: scaleX(1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.875rem;
+        }
+
+        .job-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .company {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 0.2rem;
+            font-size: 0.95rem;
+        }
+
+        .company a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 2px dotted var(--accent);
+            transition: all 0.2s ease;
+        }
+
+        .company a:hover {
+            color: var(--accent);
+            border-bottom-style: solid;
+        }
+
+        .date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: linear-gradient(135deg, var(--accent-light), transparent);
+            padding: 0.35rem 0.875rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            white-space: nowrap;
+            border: 1px solid var(--border);
+        }
+
+        .job-summary {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.65;
+            font-size: 0.95rem;
+        }
+
+        /* Expandable Details */
+        details {
+            margin-top: 0.875rem;
+        }
+
+        details summary {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.65rem 0;
+            transition: all 0.3s ease;
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details summary:hover {
+            color: var(--accent);
+            opacity: 0.8;
+        }
+
+        details summary::before {
+            content: '+';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 50%;
+            font-size: 1rem;
+            line-height: 1;
+            color: white;
+            box-shadow: var(--shadow-glow);
+            transition: transform 0.3s ease;
+        }
+
+        details summary:hover::before {
+            transform: rotate(90deg);
+        }
+
+        details[open] summary::before {
+            content: '−';
+            transform: rotate(0deg);
+        }
+
+        .details-content {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px dashed var(--border);
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .details-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .details-content li {
+            position: relative;
+            padding-left: 1.65rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.925rem;
+            line-height: 1.6;
+        }
+
+        .details-content li::before {
+            content: '▸';
+            color: var(--accent);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: var(--text-primary);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+        }
+
+        /* Skills with Progress Bars */
+        .skills-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .skills-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .skill-category {
+            background: var(--bg-surface);
+            padding: 1.35rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-category h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.15rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.15rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.45rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .skill-percent {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.875rem;
+        }
+
+        .skill-bar {
+            height: 7px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 3px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Awards Grid */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.15rem;
+        }
+
+        @media (min-width: 768px) {
+            .awards-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .award-card {
+            background: linear-gradient(135deg, var(--bg-surface), var(--accent-light));
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.35rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .award-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .award-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            transform: translateY(-5px) scale(1.01);
+        }
+
+        .award-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .award-card.liked {
+            animation: likeAnimation 0.6s ease;
+        }
+
+        @keyframes likeAnimation {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+
+        .award-card h3 {
+            color: var(--accent);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.45rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .award-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.45;
+        }
+
+        .award-year {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.775rem;
+            font-weight: 700;
+            margin-top: 0.75rem;
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            h1 {
+                font-size: 3.25rem;
+            }
+        }
+
+        .info-block {
+            background: linear-gradient(135deg, var(--bg-surface), var(--accent-light));
+            padding: 1.75rem;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .info-block:hover {
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            transform: translateY(-3px);
+        }
+
+        .info-block h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.15rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            margin-bottom: 0.875rem;
+            color: var(--text-secondary);
+            font-size: 0.925rem;
+            display: flex;
+            gap: 0.65rem;
+            line-height: 1.55;
+        }
+
+        .info-list li strong {
+            color: var(--text-primary);
+            min-width: 120px;
+            font-weight: 600;
+        }
+
+        .info-list a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 2px dotted var(--accent);
+            transition: all 0.2s ease;
+        }
+
+        .info-list a:hover {
+            border-bottom-style: solid;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .stat-value { font-size: 1.875rem; }
+            .timeline { padding-left: 2.25rem; }
+            .job-header { flex-direction: column; }
+            .sticky-nav-links { gap: 0.875rem; font-size: 0.75rem; }
+            .stats-bar-fixed-content { grid-template-columns: repeat(3, 1fr); }
+            .stat-fixed-value { font-size: 1.1rem; }
+            .stat-fixed-label { font-size: 0.65rem; }
+        }
+
+        /* Print Styles */
+        @media print {
+            #particles-canvas { display: none; }
+            .theme-toggle, .sticky-nav, .stats-bar-fixed { display: none; }
+            body { background-color: white; }
+            .cover-letter-toggle[open] summary::after { display: none; }
+            details[open] .details-content { display: block !important; }
+            .contact-link { border: none; padding: 0; color: black; box-shadow: none; }
+            .experience-item { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+            .award-card { break-inside: avoid; }
+            .stats-bar { break-inside: avoid; }
+            footer { margin-bottom: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particle Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav" id="stickyNav">
+        <div class="sticky-nav-content">
+            <ul class="sticky-nav-links">
+                <li><a href="#about" class="nav-link">О себе</a></li>
+                <li><a href="#experience" class="nav-link">Опыт</a></li>
+                <li><a href="#skills" class="nav-link">Навыки</a></li>
+                <li><a href="#awards" class="nav-link">Награды</a></li>
+                <li><a href="#contacts" class="nav-link">Контакты</a></li>
+            </ul>
+            <div style="color: var(--text-secondary); font-weight: 600; font-size: 0.85rem;">АМ</div>
+        </div>
+    </nav>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Переключить тему">
+            <div class="theme-toggle-slider">
+                <span id="theme-icon">☀️</span>
+            </div>
+        </button>
+    </div>
+
+    <!-- Minimal Fixed Stats Bar -->
+    <div class="stats-bar-fixed" id="statsBarFixed">
+        <div class="stats-bar-fixed-content">
+            <div class="stat-fixed-item">
+                <div class="stat-fixed-value">12+</div>
+                <div class="stat-fixed-label">Лет опыта</div>
+            </div>
+            <div class="stat-fixed-item">
+                <div class="stat-fixed-value">150+</div>
+                <div class="stat-fixed-label">Сервисов</div>
+            </div>
+            <div class="stat-fixed-item">
+                <div class="stat-fixed-value">100M₽</div>
+                <div class="stat-fixed-label">Экономии</div>
+            </div>
+            <div class="stat-fixed-item">
+                <div class="stat-fixed-value">5</div>
+                <div class="stat-fixed-label">Премий</div>
+            </div>
+            <div class="stat-fixed-item">
+                <div class="stat-fixed-value">50+</div>
+                <div class="stat-fixed-label">Публикаций</div>
+            </div>
+        </div>
+    </div>
+
+<div class="container">
+    <header id="contacts">
+        <div class="avatar-container">
+            <img src="https://s10.iimage.su/s/03/g1QZN6VxO6De802eqUPonbRWVCbbBZsjGh01HmXv2.jpg" alt="Антон Мужельский" class="avatar">
+            <div class="avatar-badge">👨‍</div>
+        </div>
+        <h1>Антон Мужельский</h1>
+        <div class="title">Директор по цифровой трансформации / CDTO</div>
+        <div class="contacts">
+            <a href="tel:+79262899214" class="contact-link magnetic-btn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                <span>+7 (926) 289-92-14</span>
+            </a>
+            <a href="mailto:anton.muzhelskiy@gmail.com" class="contact-link magnetic-btn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <span>anton.muzhelskiy@gmail.com</span>
+            </a>
+            <a href="https://t.me/anton.muzhelskiy" target="_blank" class="contact-link magnetic-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                <span>Telegram</span>
+            </a>
+            <a href="https://max.ru/u/f9LHodD0cOLXBCJrz0ilG7y8aQWExyfeuJrSrYwPN4rj3tiZwmSkIxfRjkc" target="_blank" class="contact-link magnetic-btn">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 3a7 7 0 100 14 7 7 0 000-14zm0 2a5 5 0 110 10 5 5 0 010-10z"/></svg>
+                <span>MAX</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Animated Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item" onclick="rippleEffect(this)">
+            <div class="stat-value" data-target="150">0</div>
+            <div class="stat-label">Автоматизированных сервисов</div>
+        </div>
+        <div class="stat-item" onclick="rippleEffect(this)">
+            <div class="stat-value" data-target="100">0</div>
+            <div class="stat-label">млн ₽ экономии в год</div>
+        </div>
+        <div class="stat-item" onclick="rippleEffect(this)">
+            <div class="stat-value" data-target="5">0</div>
+            <div class="stat-label">Международных премий</div>
+        </div>
+        <div class="stat-item" onclick="rippleEffect(this)">
+            <div class="stat-value" data-target="50">0</div>
+            <div class="stat-label">Публикаций в СМИ</div>
+        </div>
+        <div class="stat-item" onclick="rippleEffect(this)">
+            <div class="stat-value" data-target="90">0</div>
+            <div class="stat-label">% на удалённой работе</div>
+        </div>
+    </div>
+
+    <!-- Сопроводительное письмо -->
+    <details class="cover-letter-toggle" open>
+        <summary>
+            <span>📄 Сопроводительное письмо</span>
+        </summary>
+        <div class="cover-letter-content">
+            <p>Добрый день!</p>
+            <p>Прошу рассмотреть мое резюме на руководящие позиции цифровых продуктов, программ и проектов.</p>
+            <p>Имею большой опыт создания цифровых экосистем для пользователей, обеспечивающий цифровой комфорт и сервисы «в 1 клик». Продукты, созданные командой под моим руководством, были удостоены ряда российских и международных премий в области цифровых экосистем и инновационных продуктов.</p>
+            <p>Являюсь членом жюри ряда российских и международных премий и имею широкую экспертизу и насмотренность интерфейсов и цифровых решений.</p>
+            <p>Имею высокомотивированную команду, а также широкий круг знакомств в профессиональном сообществе, что позволит быстро собрать коллектив высокоэффективных специалистов для решения поставленных задач в масштабах страны.</p>
+            <p>С уважением,<br><strong>Антон Мужельский</strong></p>
+        </div>
+    </details>
+
+    <section id="about">
+        <h2>О себе</h2>
+        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.75; max-width: 800px;">
+            Высокоэффективный менеджер, способный решать масштабные задачи, связанные с технологической трансформацией. Нахожу оптимальные пути решения и говорю на одном языке как с бизнесом, так и с IT. Активный участник профессионального сообщества, спикер конференций и член жюри ряда международных премий.
+        </p>
+    </section>
+
+    <section id="awards">
+        <h2>Член жюри профессиональных премий</h2>
+        <div class="awards-grid">
+            <a href="https://rexawards.com/" target="_blank" class="award-card" onclick="handleLike(event, this)">
+                <h3>🏆 REXAwards (Rivelty)</h3>
+                <p>Международная премия в области внутренних коммуникаций и employee experience</p>
+                <span class="award-year">2020 -- н.в.</span>
+            </a>
+            <a href="https://intercomm-award.ru/" target="_blank" class="award-card" onclick="handleLike(event, this)">
+                <h3>🏆 InterComm</h3>
+                <p>Международная премия в области корпоративных коммуникаций</p>
+                <span class="award-year">2020 -- н.в.</span>
+            </a>
+            <a href="https://silvermercury.ru/" target="_blank" class="award-card" onclick="handleLike(event, this)">
+                <h3>🏆 Silver Mercury</h3>
+                <p>Национальная премия в области развития связей с общественностью</p>
+                <span class="award-year">2021 -- н.в.</span>
+            </a>
+            <a href="https://www.steptwo.com.au/awards/" target="_blank" class="award-card" onclick="handleLike(event, this)">
+                <h3>🏆 StepTwo Awards</h3>
+                <p>Международная премия Intranet and Digital Workplace Awards</p>
+                <span class="award-year">2021 -- н.в.</span>
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <h2>Награды и достижения</h2>
+        <div class="awards-grid">
+            <a href="https://intercomm-award.ru/" target="_blank" class="award-card" onclick="handleLike(event, this)">
+                <h3>🥇 InterComm 2021</h3>
+                <p>Победа за внедрение искусственного интеллекта в анализе внутренних коммуникаций для прогнозирования эмоционального выгорания</p>
+                <span class="award-year">2021</span>
+            </a>
+            <a href="https://www.steptwo.com.au/awards/intranet-and-digital-workplace-awards-2021-winners/" target="_blank" class="award-card" onclick="handleLike(event, this)">
+                <h3>🥇 StepTwo Awards 2021</h3>
+                <p>Intranet and Digital Workplace Awards в номинации Digital Employee Experience</p>
+                <span class="award-year">2021</span>
+            </a>
+            <a href="https://www.steptwo.com.au/awards/digital-workplace-of-the-year-2021/" target="_blank" class="award-card" onclick="handleLike(event, this)">
+                <h3>🏆 Digital Workplace of the Year 2021</h3>
+                <p>Лучшее цифровое рабочее года по версии StepTwo</p>
+                <span class="award-year">2021</span>
+            </a>
+            <a href="https://rexawards.com/winners-2021/" target="_blank" class="award-card" onclick="handleLike(event, this)">
+                <h3>🥇 Rivelty REXA Awards 2021</h3>
+                <p>Международная премия за excellence in employee communications</p>
+                <span class="award-year">2021</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Опыт работы</h2>
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Директор по цифровой трансформации</div>
+                            <div class="company"><a href="https://veb.ru/" target="_blank">Государственная корпорация ВЭБ.РФ</a></div>
+                        </div>
+                        <div class="date">04/2022 – н.в.</div>
+                    </div>
+                    <div class="job-summary">
+                        Координация портфеля проектов по созданию цифровой безбарьерной среды в условиях импортозамещения и повышенных требований к информационной безопасности. Контроль реализации указов Президента и постановлений Правительства РФ в области цифровой трансформации.
+                    </div>
+                    <details>
+                        <summary>Раскрыть ключевые проекты и достижения</summary>
+                        <div class="details-content">
+                            <ul>
+                                <li>Внедрена автоматизированная <span class="highlight">HR-экосистема полного цикла</span>, в т.ч. на мобильных устройствах.</li>
+                                <li>Развитие экосистемы интерактивных аналитических отчетов для топ-менеджмента для принятия решений на основе качественных данных.</li>
+                                <li>Развитие ИТ-ландшафта для повышения качества процессов управления персоналом (подсистемы безопасности, мониторинга, аутентификации).</li>
+                                <li>Организована информационная кампания, результатом которой стал <span class="highlight">полный перевод на ЭДО всех сотрудников</span> (3 вида электронной подписи).</li>
+                                <li>Организация закупки ИТ-услуг по 223-ФЗ и анализ применимости отечественных информационных систем.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Директор подразделения «Пользовательские сервисы»</div>
+                            <div class="company"><a href="https://domrf.ru/" target="_blank">ДОМ.РФ</a></div>
+                        </div>
+                        <div class="date">02/2019 – 04/2022</div>
+                    </div>
+                    <div class="job-summary">
+                        Создание цифровой экосистемы пользовательских сервисов и цифровизация пользовательского опыта группы компаний. Внедрение ИИ, чат-ботов и автоматизированных бизнес-процессов.
+                    </div>
+                    <details>
+                        <summary>Раскрыть ключевые проекты и достижения</summary>
+                        <div class="details-content">
+                            <ul>
+                                <li><span class="highlight">Цифровой прорыв в работе с персоналом:</span> цифровизация кадрового ЭДО, внедрение механизмов электронной подписи.</li>
+                                <li>Централизация автоматизированных сервисов на внутреннем корпоративном портале для всех точек контакта сотрудников.</li>
+                                <li>Создание мобильного приложения для сотрудников <span class="highlight">ДОМ24</span>.</li>
+                                <li>Комплексный проект с применением ИИ для прогнозирования эмоционального выгорания сотрудников (экономия до <span class="highlight">100 млн руб. в год</span>). Освещалось в программе Face to Face и спецвыпуске РБК.</li>
+                                <li>Внедрение гибкого формата работы: перевод до 90% группы компаний на удаленный формат в пиковые периоды COVID-19 с сохранением высокого уровня эффективности.</li>
+                                <li>Создано более 150 автоматизированных сервисов для внутренних подразделений.</li>
+                                <li><span class="highlight">5 побед и номинаций</span> в международных и российских премиях (Intranet and Digital Workplace Awards 2021, Magic People IT-channel, Rivelty Intranet Awards 2020, InterComm 2020, Национальная банковская премия).</li>
+                                <li>Более 50 публикаций в СМИ.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Директор проектов, Управление изменениями HR</div>
+                            <div class="company"><a href="https://rosbank.ru/" target="_blank">Группа Societe Generale (Росбанк)</a></div>
+                        </div>
+                        <div class="date">07/2017 – 02/2019</div>
+                    </div>
+                    <details>
+                        <summary>Раскрыть детали</summary>
+                        <div class="details-content">
+                            <ul>
+                                <li><strong>IT and HR Stream:</strong> Анализ инициатив по автоматизации с точки зрения экономической эффективности. Внедрение платформы-конструктора для создания чат-ботов для внутренних процессов.</li>
+                                <li><strong>Finance Stream:</strong> Анализ и расчет экономической эффективности объединения функций и инфраструктуры компаний группы SG в РФ. Контроль формирования HR-бюджета и модели численности Банка.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Руководитель проектов</div>
+                            <div class="company"><a href="https://sberbank.ru/" target="_blank">Сбербанк (Департамент проектного управления, Стратегия)</a></div>
+                        </div>
+                        <div class="date">02/2015 – 07/2017</div>
+                    </div>
+                    <details>
+                        <summary>Раскрыть детали</summary>
+                        <div class="details-content">
+                            <ul>
+                                <li>Программа «Технологическая трансформация»: сокращение Time-to-market и снижение стоимости бизнес-операций.</li>
+                                <li>Программа Operational Excellence: повышение операционной эффективности.</li>
+                                <li>Программа «Олимп 3.0»: трансформация сети центров сопровождения клиентских операций.</li>
+                                <li>Разработка единой модели локации и численности Блока с точки зрения финансовой эффективности.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Старший консультант / Консультант</div>
+                            <div class="company"><a href="https://ey.com/" target="_blank">Ernst & Young</a> / <a href="https://home.kpmg/" target="_blank">KPMG (Финансовое консультирование, Сопровождение сделок)</a></div>
+                        </div>
+                        <div class="date">09/2012 – 02/2015</div>
+                    </div>
+                    <details>
+                        <summary>Раскрыть детали</summary>
+                        <div class="details-content">
+                            <ul>
+                                <li>Проведение предынвестиционных исследований (Due Diligence) для целей слияния/поглощения.</li>
+                                <li>Проекты: интеграция активов Роснефть и ТНК-БП, Due Diligence ТГК-2 для Группы Синтез, исследование для Вымпелком и Hearst Corp.</li>
+                                <li>Полный анализ финансовой деятельности, определение потенциальных корректировок к EBITDA и цене сделки.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-up">
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Предпринимательская деятельность</div>
+                            <div class="company">Интернет-продажи</div>
+                        </div>
+                        <div class="date">2009 – 2012</div>
+                    </div>
+                    <details>
+                        <summary>Раскрыть детали</summary>
+                        <div class="details-content">
+                            <ul>
+                                <li>Организация интернет-магазина систем связи (профессиональные радиостанции, GSM-терминалы) и оптических приборов.</li>
+                                <li>Полный цикл: от переговоров с российскими и иностранными поставщиками до организации доставки и поддержки клиентов.</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Ключевые навыки</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>🎯 Management</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Цифровая трансформация</span>
+                        <span class="skill-percent">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="95"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Управление проектами</span>
+                        <span class="skill-percent">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Change Management</span>
+                        <span class="skill-percent">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="88"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Agile & Lean</span>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="85"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>💻 Technical</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Искусственный интеллект (AI)</span>
+                        <span class="skill-percent">82%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="82"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Power BI</span>
+                        <span class="skill-percent">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="80"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">UI/UX & Figma</span>
+                        <span class="skill-percent">75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="75"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">C++ / VBA / Delphi</span>
+                        <span class="skill-percent">70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="70"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>🛠 Tools</h3>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">JIRA</span>
+                        <span class="skill-percent">92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="92"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Bitrix24</span>
+                        <span class="skill-percent">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" data-width="88"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="two-col">
+        <section>
+            <h2>Образование</h2>
+            <div class="info-block">
+                <ul class="info-list">
+                    <li>
+                        <strong><a href="https://bmstu.ru/" target="_blank">МГТУ им. Н.Э. Баумана</a></strong>
+                        <span>Информатика и системы управления. Инженер по комплексному обеспечению информационной безопасности (2006 – 2012)</span>
+                    </li>
+                    <li>
+                        <strong><a href="https://accaglobal.com/" target="_blank">ACCA</a></strong>
+                        <span>Association of Chartered Certified Accountants (2012 – н.в.)</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Дополнительно</h2>
+            <div class="info-block">
+                <ul class="info-list">
+                    <li>
+                        <strong>Языки:</strong>
+                        <span>Английский – свободно (Cambridge CAE, 2012)</span>
+                    </li>
+                    <li>
+                        <strong>Публикации:</strong>
+                        <span>Более 50 публикаций в СМИ</span>
+                    </li>
+                    <li>
+                        <strong>Лидерство:</strong>
+                        <span>Опыт управления (лейтенант, командир 2-х рот, 160 курсантов, 2012)</span>
+                    </li>
+                    <li>
+                        <strong>Интересы:</strong>
+                        <span>Хоккей, горные лыжи, боевые искусства, путешествия, классическая гитара, фортепиано</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Антон Мужельский. Интерактивное резюме с анимированными элементами.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Для сохранения в PDF нажмите Ctrl+P (или Cmd+P) и выберите "Сохранить как PDF". Все интерактивные элементы раскроются автоматически.</p>
+    </footer>
+</div>
+
+<script>
+    // Particle Animation System
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 150 };
+    
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    }
+    
+    window.addEventListener('resize', resize);
+    resize();
+    
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.x;
+        mouse.y = e.y;
+    });
+    
+    window.addEventListener('mouseout', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+    
+    class Particle {
+        constructor() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.size = Math.random() * 2 + 1;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+            this.color = Math.random() > 0.5 ? '#14B8A6' : '#06B6D4';
+        }
+        
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            
+            if (this.x > width || this.x < 0) this.speedX *= -1;
+            if (this.y > height || this.y < 0) this.speedY *= -1;
+            
+            if (mouse.x != null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius) {
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    const directionX = forceDirectionX * force * 2;
+                    const directionY = forceDirectionY * force * 2;
+                    
+                    this.x -= directionX;
+                    this.y -= directionY;
+                }
+            }
+        }
+        
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+    
+    function init() {
+        particles = [];
+        const numberOfParticles = Math.min(100, (width * height) / 15000);
+        for (let i = 0; i < numberOfParticles; i++) {
+            particles.push(new Particle());
+        }
+    }
+    
+    function connect() {
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                             + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                
+                if (distance < (canvas.width/7) * (canvas.height/7)) {
+                    ctx.strokeStyle = 'rgba(20, 184, 166, 0.15)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        
+        connect();
+        requestAnimationFrame(animate);
+    }
+    
+    init();
+    animate();
+    
+    // Sticky Navigation
+    const stickyNav = document.getElementById('stickyNav');
+    const statsBarFixed = document.getElementById('statsBarFixed');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 600) {
+            stickyNav.classList.add('visible');
+            statsBarFixed.classList.add('visible');
+        } else {
+            stickyNav.classList.remove('visible');
+            statsBarFixed.classList.remove('visible');
+        }
+        
+        lastScroll = currentScroll;
+    });
+    
+    // Active Navigation Link
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // Animated Counters
+    const statsSection = document.querySelector('.stats-bar');
+    const counters = document.querySelectorAll('.stat-value');
+    let started = false;
+    
+    function startCounters() {
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const increment = target / 50;
+            let current = 0;
+            
+            const updateCounter = () => {
+                if (current < target) {
+                    current += increment;
+                    counter.innerText = Math.ceil(current) + (target === 90 ? '%' : target === 100 ? '' : '+');
+                    setTimeout(updateCounter, 30);
+                } else {
+                    counter.innerText = target + (target === 90 ? '%' : target === 100 ? '' : '+');
+                }
+            };
+            
+            updateCounter();
+        });
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !started) {
+                startCounters();
+                started = true;
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+    
+    // Skills Progress Bars Animation
+    const skillsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const skillBars = entry.target.querySelectorAll('.skill-bar-fill');
+                skillBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    setTimeout(() => {
+                        bar.style.width = width + '%';
+                    }, 200);
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    const skillsContainer = document.querySelector('.skills-container');
+    if (skillsContainer) {
+        skillsObserver.observe(skillsContainer);
+    }
+    
+    // Ripple Effect
+    function rippleEffect(element) {
+        const ripple = document.createElement('span');
+        const rect = element.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = event.clientX - rect.left - size / 2;
+        const y = event.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.3);
+            left: ${x}px;
+            top: ${y}px;
+            transform: scale(0);
+            animation: rippleAnimation 0.6s ease-out;
+            pointer-events: none;
+        `;
+        
+        element.style.position = 'relative';
+        element.style.overflow = 'hidden';
+        element.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+    }
+    
+    // Add ripple animation to styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes rippleAnimation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Like Animation for Awards
+    function handleLike(event, card) {
+        if (event.ctrlKey || event.metaKey) {
+            event.preventDefault();
+            card.classList.add('liked');
+            setTimeout(() => {
+                card.classList.remove('liked');
+            }, 600);
+        }
+    }
+    
+    // Magnetic Buttons
+    const magneticBtns = document.querySelectorAll('.magnetic-btn');
+    
+    magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0, 0)';
+        });
+    });
+    
+    // Parallax Scrolling
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.timeline-item');
+        
+        parallaxElements.forEach((el, index) => {
+            const speed = 0.1 + (index * 0.02);
+            el.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+    
+    // Theme Toggle Functionality
+    function toggleTheme() {
+        const html = document.documentElement;
+        const themeIcon = document.getElementById('theme-icon');
+        
+        if (html.getAttribute('data-theme') === 'light') {
+            html.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '🌙';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            themeIcon.textContent = '☀️';
+            localStorage.setItem('theme', 'light');
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const themeIcon = document.getElementById('theme-icon');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+    });
+    
+    // Smooth animation for details
+    document.querySelectorAll('details').forEach((detail) => {
+        detail.addEventListener('toggle', () => {
+            if (detail.open) {
+                const content = detail.querySelector('.details-content');
+                content.style.animation = 'none';
+                content.offsetHeight;
+                content.style.animation = 'fadeIn 0.4s ease-out';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+

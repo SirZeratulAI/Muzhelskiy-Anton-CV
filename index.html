@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
 <html lang="ru" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Антон Мужельский | CDTO & Директор по цифровой трансформации</title>
+    <title>Антон Мужельский | CDTO / CPO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -42,15 +42,9 @@
             --shadow-glow: 0 0 30px rgba(20, 184, 166, 0.4);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -60,13 +54,27 @@
             overflow-x: hidden;
         }
 
-        /* ===== PROGRESS BAR (TOP) ===== */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+
+        ::selection { background: var(--accent); color: white; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+        *:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Progress Bar */
         .progress-bar {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
             background: var(--bg-surface);
             z-index: 1002;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -87,11 +95,10 @@
             100% { background-position: 200% 50%; }
         }
 
-        /* Section indicator next to progress bar */
         .section-indicator {
             position: fixed;
-            top: 8px;
-            right: 2rem;
+            top: 1.2rem;
+            right: 6rem;
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.75rem;
             font-weight: 600;
@@ -107,18 +114,12 @@
             box-shadow: var(--shadow-md);
         }
 
-        .section-indicator.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .section-indicator.visible { opacity: 1; transform: translateY(0); }
 
-        /* ===== PARTICLES CANVAS ===== */
         #particles-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
             opacity: 0.7;
@@ -126,39 +127,34 @@
 
         #confetti-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 9998;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        #confetti-canvas.active {
-            opacity: 1;
-        }
+        #confetti-canvas.active { opacity: 1; }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 1.5rem 1.5rem;
             position: relative;
             z-index: 1;
         }
 
-        /* ===== BURGER MENU ===== */
+        /* Burger Menu - Aligned horizontally */
         .burger-menu {
             position: fixed;
-            top: 1.5rem;
+            top: 1.2rem;
             left: 1.5rem;
             z-index: 1001;
         }
 
         .burger-btn {
-            width: 44px;
-            height: 44px;
+            width: 42px; height: 42px;
             background: var(--bg-surface);
             border: 2px solid var(--border);
             border-radius: 10px;
@@ -180,76 +176,55 @@
         }
 
         .burger-line {
-            width: 22px;
-            height: 2px;
+            width: 20px; height: 2px;
             background: var(--text-primary);
             border-radius: 2px;
             transition: all 0.3s ease;
         }
 
-        .burger-btn.active .burger-line:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .burger-btn.active .burger-line:nth-child(2) {
-            opacity: 0;
-        }
-
-        .burger-btn.active .burger-line:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
+        .burger-btn.active .burger-line:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .burger-btn.active .burger-line:nth-child(2) { opacity: 0; }
+        .burger-btn.active .burger-line:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         .burger-nav {
             position: fixed;
-            top: 0;
-            left: -320px;
-            width: 300px;
-            height: 100vh;
+            top: 0; left: -320px;
+            width: 300px; height: 100vh;
             background: var(--bg-surface);
             box-shadow: var(--shadow-lg);
             z-index: 1000;
-            padding: 6rem 2rem 2rem;
+            padding: 5rem 2rem 2rem;
             transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             border-right: 2px solid transparent;
             border-image: linear-gradient(180deg, var(--gradient-start), var(--gradient-end)) 1;
         }
 
-        .burger-nav.active {
-            left: 0;
-        }
+        .burger-nav.active { left: 0; }
 
-        .burger-nav ul {
-            list-style: none;
-        }
-
-        .burger-nav li {
-            margin-bottom: 0.5rem;
-        }
+        .burger-nav ul { list-style: none; }
+        .burger-nav li { margin-bottom: 0.5rem; }
 
         .burger-nav a {
             color: var(--text-primary);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             display: block;
-            padding: 0.85rem 1rem;
+            padding: 0.75rem 1rem;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
 
-        .burger-nav a:hover,
-        .burger-nav a.active {
+        .burger-nav a:hover, .burger-nav a.active {
             color: var(--accent);
             background: var(--accent-light);
-            padding-left: 1.5rem;
+            padding-left: 1.4rem;
         }
 
         .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
             z-index: 999;
@@ -258,15 +233,12 @@
             transition: all 0.3s ease;
         }
 
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        .overlay.active { opacity: 1; visibility: visible; }
 
-        /* ===== THEME TOGGLE ===== */
+        /* Theme Toggle - Aligned horizontally */
         .theme-toggle {
             position: fixed;
-            top: 1.5rem;
+            top: 1.2rem;
             right: 1.5rem;
             z-index: 1001;
         }
@@ -275,8 +247,7 @@
             background: var(--bg-surface);
             border: 2px solid var(--border);
             border-radius: 9999px;
-            width: 50px;
-            height: 26px;
+            width: 50px; height: 26px;
             cursor: pointer;
             position: relative;
             box-shadow: var(--shadow-md);
@@ -292,10 +263,8 @@
 
         .theme-toggle-slider {
             position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 18px;
-            height: 18px;
+            top: 2px; left: 2px;
+            width: 18px; height: 18px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             transition: transform 0.3s ease;
@@ -304,23 +273,17 @@
             justify-content: center;
         }
 
-        [data-theme="dark"] .theme-toggle-slider {
-            transform: translateX(24px);
-        }
+        [data-theme="dark"] .theme-toggle-slider { transform: translateX(24px); }
 
-        .theme-icon {
-            width: 12px;
-            height: 12px;
-        }
+        .theme-icon { width: 12px; height: 12px; }
 
-        /* ===== FLOATING CONTACT BUTTON ===== */
+        /* Floating Contact Button */
         .floating-contact {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
             z-index: 100;
-            width: 56px;
-            height: 56px;
+            width: 56px; height: 56px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border: none;
@@ -339,11 +302,7 @@
             box-shadow: 0 12px 32px var(--neon-glow), 0 0 0 8px rgba(20, 184, 166, 0.15);
         }
 
-        .floating-contact svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
-        }
+        .floating-contact svg { width: 24px; height: 24px; fill: white; }
 
         .floating-contact .tooltip {
             position: absolute;
@@ -372,36 +331,31 @@
             border-left-color: var(--bg-surface);
         }
 
-        .floating-contact:hover .tooltip {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .floating-contact:hover .tooltip { opacity: 1; transform: translateX(0); }
 
         @keyframes floatPulse {
             0%, 100% { box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 0 rgba(20, 184, 166, 0.4); }
             50% { box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 12px rgba(20, 184, 166, 0); }
         }
 
-        /* ===== HEADER ===== */
+        /* Header with typing animation */
         header {
             text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            padding-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            padding-top: 1.5rem;
             border-bottom: 2px solid transparent;
             border-image: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)) 1;
         }
 
         .avatar-container {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 1.5rem;
+            width: 160px; height: 160px;
+            margin: 0 auto 0.75rem;
             position: relative;
         }
 
         .avatar {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid transparent;
@@ -411,40 +365,39 @@
             transition: transform 0.3s ease;
         }
 
-        .avatar-container:hover .avatar {
-            transform: scale(1.03);
-        }
+        .avatar-container:hover .avatar { transform: scale(1.03); }
 
         h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.75rem;
+            font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: -0.03em;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             min-height: 1.2em;
+            display: inline-block;
         }
 
+        /* Letter animation */
         .letter {
             display: inline-block;
             opacity: 0;
             transform: translateY(20px);
-            animation: letterReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: letterReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .letter.space {
-            width: 0.3em;
-        }
+        .letter.space { width: 0.3em; }
 
         @keyframes letterReveal {
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Title animation */
         .title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--accent);
             font-weight: 600;
             letter-spacing: 0.05em;
@@ -452,6 +405,12 @@
             opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
             animation-delay: 1.5s;
+            margin-bottom: 0.75rem;
+            min-height: 1.5em;
+        }
+
+        .title .letter {
+            animation: letterReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeInUp {
@@ -459,17 +418,17 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Career counter */
         .career-counter {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
-            margin-top: 1.25rem;
-            padding: 0.75rem 1.5rem;
+            padding: 0.6rem 1.25rem;
             background: linear-gradient(135deg, var(--accent-light), transparent);
             border: 1px solid var(--border);
             border-radius: 9999px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             color: var(--text-secondary);
             opacity: 0;
@@ -481,14 +440,15 @@
         .career-counter .counter-value {
             font-weight: 700;
             color: var(--accent);
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-variant-numeric: tabular-nums;
             letter-spacing: -0.02em;
+            min-width: 80px;
+            text-align: center;
         }
 
         .career-counter .live-dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             animation: livePulse 2s ease-in-out infinite;
@@ -503,19 +463,19 @@
         @media (max-width: 640px) {
             .career-counter {
                 flex-direction: column;
-                gap: 0.4rem;
-                padding: 0.6rem 1rem;
-                font-size: 0.85rem;
+                gap: 0.3rem;
+                padding: 0.5rem 0.9rem;
+                font-size: 0.8rem;
             }
-            h1 { font-size: 2rem; }
+            h1 { font-size: 1.85rem; }
         }
 
-        /* ===== STATS ===== */
+        /* Stats */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             padding: 1.25rem;
             background: linear-gradient(135deg, var(--accent-light), transparent);
             border-radius: 12px;
@@ -533,9 +493,7 @@
         .stat-item::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 2px;
             background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
             transform: scaleX(0);
@@ -569,16 +527,16 @@
         }
 
         section {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             scroll-margin-top: 80px;
         }
 
         h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 1.75rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -589,19 +547,19 @@
             content: '';
             display: block;
             width: 4px;
-            height: 28px;
+            height: 26px;
             background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
             border-radius: 2px;
             box-shadow: var(--shadow-glow);
         }
 
-        /* ===== COVER LETTER ===== */
+        /* Cover Letter */
         .cover-letter-toggle {
             background: linear-gradient(135deg, var(--accent-light), transparent);
             border: 2px solid var(--border);
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2.5rem;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -643,7 +601,7 @@
         .cover-letter-content p { margin-bottom: 0.875rem; }
         .cover-letter-content strong { color: var(--text-primary); }
 
-        /* ===== ABOUT ===== */
+        /* About */
         .about-expandable summary {
             color: var(--accent);
             font-weight: 600;
@@ -664,8 +622,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 20px;
-            height: 20px;
+            width: 20px; height: 20px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             font-size: 0.9rem;
@@ -684,16 +641,16 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        /* ===== TIMELINE ===== */
+        /* Timeline with vertical dates */
         .timeline {
             position: relative;
-            padding-left: 4rem;
+            padding-left: 0;
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            left: 2.8rem;
+            left: 1.2rem;
             top: 0;
             bottom: 0;
             width: 3px;
@@ -703,9 +660,9 @@
 
         .timeline-item {
             position: relative;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             opacity: 0;
-            transform: translateX(-30px);
+            transform: translateX(-20px);
             animation: slideIn 0.6s ease forwards;
         }
 
@@ -721,8 +678,8 @@
 
         .timeline-marker {
             position: absolute;
-            left: -1.45rem;
-            top: 1.5rem;
+            left: 0.85rem;
+            top: 1.2rem;
             width: 16px;
             height: 16px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
@@ -746,51 +703,68 @@
 
         .timeline-item:hover .timeline-marker { transform: scale(1.3); }
 
+        /* Vertical dates along the line */
         .timeline-date {
             position: absolute;
-            left: -3.8rem;
-            top: 50%;
-            transform: translateY(-50%);
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
+            left: 1.2rem;
+            top: 3rem;
+            transform-origin: left top;
+            transform: rotate(-90deg);
             font-size: 0.75rem;
             font-weight: 700;
             color: var(--accent);
             white-space: nowrap;
-            background: var(--bg-surface);
-            padding: 0.6rem 0.4rem;
-            border-radius: 9999px;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            letter-spacing: 0.05em;
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            letter-spacing: 0.08em;
+            z-index: 3;
+            border: none;
+            width: auto;
+            text-align: center;
         }
 
         .current-badge {
             position: absolute;
-            left: -3.8rem;
-            top: calc(50% + 2.5rem);
-            transform: translateY(-50%);
+            left: 1.2rem;
+            top: 4.5rem;
+            transform-origin: left top;
+            transform: rotate(-90deg);
             background: linear-gradient(135deg, #10B981, #34D399);
             color: white;
-            padding: 0.3rem 0.5rem;
+            padding: 0.35rem 0.75rem;
             border-radius: 9999px;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 700;
             white-space: nowrap;
             box-shadow: var(--shadow-glow);
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            letter-spacing: 0.05em;
+            z-index: 3;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% {
+                opacity: 1;
+                transform: rotate(-90deg) scale(1);
+                box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            }
+            50% {
+                opacity: 0.85;
+                transform: rotate(-90deg) scale(1.08);
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+            }
         }
 
         .experience-item {
             background-color: var(--bg-surface);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1.25rem;
             border: 1px solid var(--border);
             box-shadow: var(--shadow-md);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+            margin-left: 2.5rem;
         }
 
         .experience-item.current {
@@ -804,16 +778,25 @@
         }
 
         .job-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
         }
 
         .company {
             color: var(--accent);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .department {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
         }
 
         .company a {
@@ -827,23 +810,58 @@
 
         .job-summary {
             color: var(--text-secondary);
-            margin: 0.75rem 0;
+            margin: 0.5rem 0;
             line-height: 1.6;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
         }
 
-        details { margin-top: 0.75rem; }
+        /* Inline stats in experience */
+        .inline-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-light), transparent);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .inline-stat {
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .inline-stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .inline-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        details { margin-top: 0.5rem; }
 
         details summary {
             color: var(--accent);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
             cursor: pointer;
             list-style: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 0;
+            padding: 0.4rem 0;
         }
 
         details summary::-webkit-details-marker { display: none; }
@@ -853,8 +871,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 20px;
-            height: 20px;
+            width: 20px; height: 20px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             font-size: 0.9rem;
@@ -866,8 +883,8 @@
         details[open] summary::before { content: '−'; transform: rotate(0deg); }
 
         .details-content {
-            margin-top: 0.875rem;
-            padding-top: 0.875rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
             border-top: 2px dashed var(--border);
             animation: fadeIn 0.4s ease-in-out;
         }
@@ -882,9 +899,9 @@
         .details-content li {
             position: relative;
             padding-left: 1.5rem;
-            margin-bottom: 0.65rem;
+            margin-bottom: 0.5rem;
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             line-height: 1.6;
         }
 
@@ -897,7 +914,18 @@
 
         .highlight { color: var(--text-primary); font-weight: 600; }
 
-        /* ===== AWARDS ===== */
+        .details-content a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent);
+            transition: all 0.2s ease;
+        }
+
+        .details-content a:hover {
+            border-bottom-style: solid;
+        }
+
+        /* Awards */
         .awards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -978,8 +1006,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px;
-            height: 28px;
+            width: 28px; height: 28px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             color: white;
@@ -996,11 +1023,11 @@
 
         .award-link-icon svg { width: 14px; height: 14px; }
 
-        /* ===== SKILLS ===== */
+        /* Skills */
         .skills-container {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.75rem;
+            gap: 1.5rem;
         }
 
         @media (min-width: 768px) {
@@ -1009,7 +1036,7 @@
 
         .skill-category {
             background: var(--bg-surface);
-            padding: 1.35rem;
+            padding: 1.25rem;
             border-radius: 12px;
             border: 1px solid var(--border);
         }
@@ -1017,20 +1044,20 @@
         .skill-category h3 {
             font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 1.15rem;
+            margin-bottom: 1rem;
             color: var(--text-primary);
         }
 
-        .skill-item { margin-bottom: 1.15rem; }
+        .skill-item { margin-bottom: 1rem; }
 
         .skill-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.4rem;
         }
 
-        .skill-name { font-weight: 600; color: var(--text-secondary); font-size: 0.875rem; }
-        .skill-percent { font-weight: 700; color: var(--accent); font-size: 0.875rem; }
+        .skill-name { font-weight: 600; color: var(--text-secondary); font-size: 0.85rem; }
+        .skill-percent { font-weight: 700; color: var(--accent); font-size: 0.85rem; }
 
         .skill-bar {
             height: 7px;
@@ -1047,21 +1074,21 @@
             transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ===== TWO COL ===== */
+        /* Two Column */
         .two-col {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.75rem;
+            gap: 1.5rem;
         }
 
         @media (min-width: 768px) {
             .two-col { grid-template-columns: 1fr 1fr; }
-            h1 { font-size: 3.25rem; }
+            h1 { font-size: 3rem; }
         }
 
         .info-block {
             background: linear-gradient(135deg, var(--bg-surface), var(--accent-light));
-            padding: 1.75rem;
+            padding: 1.5rem;
             border-radius: 12px;
             border: 2px solid var(--border);
             transition: all 0.3s ease;
@@ -1073,19 +1100,27 @@
         }
 
         .info-block h3 {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.875rem;
             color: var(--text-primary);
         }
 
         .info-list { list-style: none; }
 
         .info-list li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.55;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
         }
 
         .info-list a {
@@ -1094,10 +1129,144 @@
             border-bottom: 1px dotted var(--accent);
         }
 
-        /* ===== PARALLAX CONTACTS ===== */
+        /* Education item with date badge */
+        .edu-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .edu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .edu-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .edu-title a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent);
+        }
+
+        .edu-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .edu-date-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Language popup */
+        .language-trigger {
+            color: var(--accent);
+            cursor: pointer;
+            border-bottom: 2px dotted var(--accent);
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .language-trigger:hover {
+            border-bottom-style: solid;
+            transform: translateY(-1px);
+        }
+
+        .language-popup {
+            margin-top: 0.5rem;
+        }
+
+        .language-popup summary {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0;
+        }
+
+        .language-popup summary::-webkit-details-marker { display: none; }
+
+        .language-popup summary::before {
+            content: '🎓';
+            font-size: 0.9rem;
+        }
+
+        .language-popup-content {
+            margin-top: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            animation: fadeIn 0.4s ease-in-out;
+            box-shadow: var(--shadow-md);
+        }
+
+        .language-popup-content h4 {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .language-popup-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+
+        .language-popup-content li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
+        }
+
+        .language-popup-content li::before {
+            content: '✓';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .language-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        /* Parallax Contact Block */
         .parallax-contacts {
-            margin-top: 4rem;
-            padding: 4rem 2rem;
+            margin-top: 3rem;
+            padding: 3rem 2rem;
             background: linear-gradient(135deg, var(--accent-light), var(--bg-surface));
             border-radius: 20px;
             text-align: center;
@@ -1110,9 +1279,7 @@
         .parallax-contacts::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 4px;
             background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
         }
@@ -1120,10 +1287,8 @@
         .parallax-contacts::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
             animation: parallaxGlow 8s ease-in-out infinite;
             pointer-events: none;
@@ -1136,7 +1301,7 @@
 
         .parallax-contacts h3 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
+            font-size: 1.75rem;
             margin-bottom: 0.5rem;
             color: var(--text-primary);
             position: relative;
@@ -1149,8 +1314,8 @@
 
         .parallax-contacts .subtitle {
             color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
             position: relative;
             z-index: 1;
         }
@@ -1165,8 +1330,7 @@
         }
 
         .contact-icon-circle {
-            width: 70px;
-            height: 70px;
+            width: 70px; height: 70px;
             background: var(--bg-surface);
             border: 2px solid var(--border);
             border-radius: 50%;
@@ -1217,7 +1381,7 @@
 
         .contact-icon-circle:hover .contact-icon-label { opacity: 1; }
 
-        /* ===== TOAST ===== */
+        /* Toast */
         .toast {
             position: fixed;
             top: 2rem;
@@ -1242,10 +1406,7 @@
             gap: 0.75rem;
         }
 
-        .toast.show {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
+        .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
@@ -1255,54 +1416,64 @@
 
         footer {
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
             border-top: 2px solid var(--border);
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.85rem;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* Responsive - MOBILE FIXES */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .timeline { padding-left: 3.5rem; }
-            .timeline::before { left: 2.3rem; }
+            h1 { font-size: 1.85rem; }
+            .timeline { padding-left: 0; }
+            .timeline::before { left: 1.2rem; }
+            .timeline-marker { left: 0.85rem; }
             .timeline-date {
-                left: -3.3rem;
+                left: 1.2rem;
+                top: 3rem;
                 font-size: 0.7rem;
-                padding: 0.5rem 0.3rem;
             }
             .current-badge {
-                left: -3.3rem;
-                font-size: 0.6rem;
-                top: calc(50% + 2.2rem);
+                left: 1.2rem;
+                top: 4.5rem;
+                font-size: 0.65rem;
+                padding: 0.3rem 0.6rem;
             }
-            .timeline-marker { left: -1.45rem; }
-            .parallax-contacts { padding: 3rem 1.5rem; }
-            .parallax-contacts h3 { font-size: 1.5rem; }
+            .experience-item { margin-left: 2.5rem; padding: 1.25rem; }
+            .inline-stats { grid-template-columns: repeat(2, 1fr); }
+            .parallax-contacts { padding: 2.5rem 1.25rem; }
+            .parallax-contacts h3 { font-size: 1.4rem; }
             .contact-icon-circle { width: 60px; height: 60px; }
             .contact-icon-circle svg { width: 24px; height: 24px; }
             .floating-contact { bottom: 1.5rem; right: 1.5rem; width: 50px; height: 50px; }
             .floating-contact svg { width: 20px; height: 20px; }
             .floating-contact .tooltip { display: none; }
             .section-indicator { right: 1rem; font-size: 0.7rem; }
+            .job-title { font-size: 1rem; word-wrap: break-word; }
         }
 
         @media (max-width: 480px) {
-            .timeline { padding-left: 3rem; }
-            .timeline::before { left: 2rem; }
+            .timeline { padding-left: 0; }
+            .timeline::before { left: 1rem; }
+            .timeline-marker { left: 0.65rem; width: 14px; height: 14px; }
             .timeline-date {
-                left: -2.8rem;
+                left: 1rem;
+                top: 2.8rem;
                 font-size: 0.65rem;
-                padding: 0.4rem 0.25rem;
             }
             .current-badge {
-                left: -2.8rem;
-                font-size: 0.55rem;
-                top: calc(50% + 2rem);
+                left: 1rem;
+                top: 4.2rem;
+                font-size: 0.6rem;
+                padding: 0.25rem 0.5rem;
             }
-            .timeline-marker { left: -1.2rem; }
+            .experience-item { margin-left: 2.2rem; padding: 1rem; }
+            .inline-stats { grid-template-columns: 1fr; }
+            .inline-stat-value { font-size: 1.25rem; }
+            .job-title { font-size: 0.95rem; }
+            .company { font-size: 0.8rem; }
         }
 
         @media print {
@@ -1316,19 +1487,15 @@
 </head>
 <body>
 
-    <!-- Progress Bar -->
     <div class="progress-bar">
         <div class="progress-bar-fill" id="progressFill"></div>
     </div>
 
-    <!-- Section Indicator -->
     <div class="section-indicator" id="sectionIndicator">О себе</div>
 
-    <!-- Canvases -->
     <canvas id="particles-canvas"></canvas>
     <canvas id="confetti-canvas"></canvas>
 
-    <!-- Burger Menu -->
     <div class="burger-menu">
         <button class="burger-btn" onclick="toggleBurger()" aria-label="Меню">
             <div class="burger-line"></div>
@@ -1344,13 +1511,13 @@
             <li><a href="#skills" onclick="closeBurger()" data-section="Навыки">Навыки</a></li>
             <li><a href="#jury" onclick="closeBurger()" data-section="Жюри">Жюри</a></li>
             <li><a href="#awards" onclick="closeBurger()" data-section="Награды">Награды</a></li>
+            <li><a href="#education" onclick="closeBurger()" data-section="Образование">Образование</a></li>
             <li><a href="#contacts" onclick="closeBurger()" data-section="Контакты">Контакты</a></li>
         </ul>
     </nav>
 
     <div class="overlay" id="overlay" onclick="closeBurger()"></div>
 
-    <!-- Theme Toggle -->
     <div class="theme-toggle">
         <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Переключить тему">
             <div class="theme-toggle-slider">
@@ -1361,7 +1528,6 @@
         </button>
     </div>
 
-    <!-- Floating Contact Button -->
     <button class="floating-contact" onclick="scrollToContacts()" aria-label="Связаться">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -1369,7 +1535,6 @@
         <span class="tooltip">Связаться</span>
     </button>
 
-    <!-- Toast for Konami -->
     <div class="toast" id="konamiToast">
         <span style="font-size: 1.5rem;">🎮</span>
         <span>Easter Egg Found! You're a true explorer</span>
@@ -1381,46 +1546,21 @@
             <img src="https://s10.iimage.su/s/03/g1QZN6VxO6De802eqUPonbRWVCbbBZsjGh01HmXv2.jpg" alt="Антон Мужельский" class="avatar">
         </div>
         <h1 id="animatedName"></h1>
-        <div class="title">Директор по цифровой трансформации / CDTO</div>
+        <div class="title" id="animatedTitle"></div>
         <div class="career-counter">
             <span class="live-dot"></span>
             <span>В профессии с сентября 2012:</span>
-            <span class="counter-value" id="careerTime">--</span>
+            <span class="counter-value" id="careerTime">0 лет, 0 мес, 0 дн</span>
         </div>
     </header>
 
-    <!-- Stats -->
-    <div class="stats-bar">
-        <div class="stat-item">
-            <div class="stat-value" data-target="150">0</div>
-            <div class="stat-label">Сервисов</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value" data-target="100">0</div>
-            <div class="stat-label">млн ₽ экономии</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value" data-target="5">0</div>
-            <div class="stat-label">Премий</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value" data-target="50">0</div>
-            <div class="stat-label">Публикаций</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value" data-target="90">0</div>
-            <div class="stat-label">% удалёнки</div>
-        </div>
-    </div>
-
-    <!-- About (перемещён в верх) -->
     <section id="about">
         <h2>О себе</h2>
-        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.75; max-width: 800px;">
+        <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.75; max-width: 800px;">
             Высокоэффективный менеджер, способный решать масштабные задачи, связанные с технологической трансформацией. Нахожу оптимальные пути решения и говорю на одном языке как с бизнесом, так и с IT.
         </p>
         <details class="about-expandable">
-            <summary>Читать подробнее</summary>
+            <summary>Подробнее</summary>
             <div class="details-content">
                 <p>Активный участник профессионального сообщества, спикер различных конференций. Член жюри премий Russian Intranet Awards, InterComm и Серебряный лучник.</p>
                 <p>Имею большой опыт создания цифровых экосистем для пользователей, обеспечивающий цифровой комфорт и сервисы «в 1 клик». Продукты, созданные командой под моим руководством, были удостоены ряда российских и международных премий в области цифровых экосистем и инновационных продуктов.</p>
@@ -1429,10 +1569,9 @@
         </details>
     </section>
 
-    <!-- Cover Letter (сразу после О себе) -->
     <details class="cover-letter-toggle">
         <summary>
-            <span> Сопроводительное письмо</span>
+            <span>📄 Сопроводительное письмо</span>
         </summary>
         <div class="cover-letter-content">
             <p>Добрый день!</p>
@@ -1444,28 +1583,36 @@
         </div>
     </details>
 
-    <!-- Experience -->
     <section id="experience">
         <h2>Опыт работы</h2>
         <div class="timeline">
 
             <div class="timeline-item current">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2022 -- н.в.</div>
+                <div class="timeline-date">2022--н.в.</div>
                 <div class="current-badge">Работает</div>
                 <div class="experience-item current">
                     <div class="job-title">Директор по цифровой трансформации</div>
+                    <div class="department">Центр стратегии и аналитики</div>
                     <div class="company"><a href="https://veb.ru/" target="_blank">ВЭБ.РФ</a></div>
                     <div class="job-summary">
                         Координация портфеля проектов по созданию цифровой безбарьерной среды для сотрудников в условиях импортозамещения и информационной безопасности.
                     </div>
                     <details>
-                        <summary>Раскрыть проекты</summary>
+                        <summary>Подробнее</summary>
                         <div class="details-content">
                             <ul>
-                                <li>Внедрена автоматизированная <span class="highlight">HR-экосистема полного цикла</span>, в т.ч. на мобильных устройствах</li>
+                                <li>Внедрена автоматизированная <span class="highlight">платформа Управления персоналом</span></li>
+                                <li>Внедрена автоматизированная HR экосистема полного цикла, в т.ч. на мобильных устройствах</li>
+                                <li>Внедрено мобильное приложение для сотрудников</li>
+                                <li>Активное развитие сервисов <span class="highlight">КЭДО</span></li>
+                                <li>Экосистема сервисов реализации <a href="https://стратегия2030.рф/o-banke/strategiya-razvitiya/" target="_blank">Стратегии 2030</a></li>
                                 <li>Развитие экосистемы интерактивных аналитических отчетов для топ-менеджмента</li>
-                                <li>Развитие ИТ-ландшафта для повышения качества процессов управления персоналом</li>
+                                <li>Внедрена модель <span class="highlight">Генеративного ИИ</span> во внутренний периметр организации</li>
+                                <li>Организация системного обучения работников введению в генеративный ИИ для популяризации новых форматов взаимодействия</li>
+                                <li>Внедрена практика <span class="highlight">ИИ-подкастов</span> в регулярные корпоративные подкасты «Полный заряд»</li>
+                                <li>Организация комплексных архитектурных изменений в ИТ-ландшафте для достижения цифрового комфорта сотрудников</li>
+                                <li>Развитие ИТ-ландшафта для повышения качества процессов управления персоналом (подсистемы безопасности, мониторинга, аутентификации)</li>
                                 <li>Организована информационная кампания: <span class="highlight">полный перевод на ЭДО</span> всех сотрудников (3 вида электронной подписи)</li>
                                 <li>Контроль реализации указов Президента и постановлений Правительства РФ в области ЦТ</li>
                                 <li>Анализ применимости отечественных ИС с целью последующего внедрения</li>
@@ -1478,15 +1625,39 @@
 
             <div class="timeline-item">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2019 -- 2022</div>
+                <div class="timeline-date">2019--2022</div>
                 <div class="experience-item">
                     <div class="job-title">Директор подразделения «Пользовательские сервисы»</div>
                     <div class="company"><a href="https://domrf.ru/" target="_blank">ДОМ.РФ</a></div>
                     <div class="job-summary">
                         Создание цифровой экосистемы пользовательских сервисов и цифровизация пользовательского опыта группы компаний.
                     </div>
+                    
+                    <div class="inline-stats">
+                        <div class="inline-stat">
+                            <div class="inline-stat-value" data-target="150">0</div>
+                            <div class="inline-stat-label">Автоматизированных сервисов</div>
+                        </div>
+                        <div class="inline-stat">
+                            <div class="inline-stat-value" data-target="100">0</div>
+                            <div class="inline-stat-label">Экономии в год (ИИ), млн ₽</div>
+                        </div>
+                        <div class="inline-stat">
+                            <div class="inline-stat-value" data-target="90">0</div>
+                            <div class="inline-stat-label">Сотрудников на удалёнке, %</div>
+                        </div>
+                        <div class="inline-stat">
+                            <div class="inline-stat-value" data-target="50">0</div>
+                            <div class="inline-stat-label">Публикаций в СМИ</div>
+                        </div>
+                        <div class="inline-stat">
+                            <div class="inline-stat-value" data-target="5">0</div>
+                            <div class="inline-stat-label">Побед в премиях</div>
+                        </div>
+                    </div>
+
                     <details>
-                        <summary>Раскрыть проекты</summary>
+                        <summary>Подробнее</summary>
                         <div class="details-content">
                             <ul>
                                 <li>Создано более <span class="highlight">150 автоматизированных сервисов</span> для внутренних подразделений</li>
@@ -1504,7 +1675,7 @@
 
             <div class="timeline-item">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2017 -- 2019</div>
+                <div class="timeline-date">2017--2019</div>
                 <div class="experience-item">
                     <div class="job-title">Директор проектов, Управление изменениями HR</div>
                     <div class="company"><a href="https://rosbank.ru/" target="_blank">Группа Societe Generale (Росбанк)</a></div>
@@ -1512,7 +1683,7 @@
                         Анализ инициатив по автоматизации бизнес-процессов с точки зрения экономической эффективности.
                     </div>
                     <details>
-                        <summary>Раскрыть детали</summary>
+                        <summary>Подробнее</summary>
                         <div class="details-content">
                             <ul>
                                 <li>Внедрение платформы-конструктора для создания чат-ботов</li>
@@ -1527,7 +1698,7 @@
 
             <div class="timeline-item">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2015 -- 2017</div>
+                <div class="timeline-date">2015--2017</div>
                 <div class="experience-item">
                     <div class="job-title">Руководитель проектов</div>
                     <div class="company"><a href="https://sberbank.ru/" target="_blank">Сбербанк</a></div>
@@ -1535,7 +1706,7 @@
                         Программа «Технологическая трансформация»: сокращение Time-to-market и снижение стоимости бизнес-операций.
                     </div>
                     <details>
-                        <summary>Раскрыть детали</summary>
+                        <summary>Подробнее</summary>
                         <div class="details-content">
                             <ul>
                                 <li>Программа Operational Excellence</li>
@@ -1549,7 +1720,7 @@
 
             <div class="timeline-item">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2012 -- 2015</div>
+                <div class="timeline-date">2012--2015</div>
                 <div class="experience-item">
                     <div class="job-title">Старший консультант / Консультант</div>
                     <div class="company"><a href="https://ey.com/" target="_blank">Ernst & Young</a> / <a href="https://home.kpmg/" target="_blank">KPMG</a></div>
@@ -1557,7 +1728,7 @@
                         Проведение предынвестиционных исследований (Due Diligence) компаний для целей слияния/поглощения.
                     </div>
                     <details>
-                        <summary>Раскрыть детали</summary>
+                        <summary>Подробнее</summary>
                         <div class="details-content">
                             <ul>
                                 <li>Проекты: интеграция активов Роснефть и ТНК-БП</li>
@@ -1573,7 +1744,6 @@
         </div>
     </section>
 
-    <!-- Jury -->
     <section id="jury">
         <h2>Член жюри</h2>
         <div class="awards-grid">
@@ -1624,12 +1794,11 @@
         </div>
     </section>
 
-    <!-- Awards -->
     <section id="awards">
         <h2>Награды</h2>
         <div class="awards-grid">
             <div class="award-card">
-                <h3>🥇 InterComm 2021</h3>
+                <h3>🥇 InterComm</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1644,7 +1813,7 @@
             </div>
 
             <div class="award-card">
-                <h3> StepTwo 2021</h3>
+                <h3>🏆 StepTwo</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1659,7 +1828,7 @@
             </div>
 
             <div class="award-card">
-                <h3> Digital Workplace 2021</h3>
+                <h3>🏆 Digital Workplace</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1674,7 +1843,7 @@
             </div>
 
             <div class="award-card">
-                <h3>🥇 REXA 2021</h3>
+                <h3>🥇 REXA</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1720,12 +1889,11 @@
         </div>
     </section>
 
-    <!-- Skills -->
     <section id="skills">
         <h2>Ключевые навыки</h2>
         <div class="skills-container">
             <div class="skill-category">
-                <h3> Management</h3>
+                <h3>🎯 Management</h3>
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Цифровая трансформация</span>
@@ -1754,9 +1922,9 @@
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">Искусственный интеллект (AI)</span>
-                        <span class="skill-percent">82%</span>
+                        <span class="skill-percent">91%</span>
                     </div>
-                    <div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="91"></div></div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
@@ -1785,6 +1953,13 @@
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
+                        <span class="skill-name">VibeCoding</span>
+                        <span class="skill-percent">90%</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
                         <span class="skill-name">C++ / VBA / Delphi</span>
                         <span class="skill-percent">70%</span>
                     </div>
@@ -1796,7 +1971,7 @@
                 <h3>🌐 Soft Skills</h3>
                 <div class="skill-item">
                     <div class="skill-header">
-                        <span class="skill-name">Английский (CAE, свободно)</span>
+                        <span class="skill-name">Публичные выступления</span>
                         <span class="skill-percent">95%</span>
                     </div>
                     <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
@@ -1808,48 +1983,82 @@
                     </div>
                     <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
                 </div>
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <span class="skill-name">Публичные выступления</span>
-                        <span class="skill-percent">85%</span>
-                    </div>
-                    <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
-                </div>
             </div>
         </div>
     </section>
 
-    <div class="two-col">
+    <div class="two-col" id="education">
         <section>
             <h2>Образование</h2>
             <div class="info-block">
-                <ul class="info-list">
-                    <li>
-                        <strong><a href="https://bmstu.ru/" target="_blank">МГТУ им. Баумана</a></strong><br>
-                        Информатика и системы управления. Инженер по комплексному обеспечению ИБ (2006 – 2012)
-                    </li>
-                    <li>
-                        <strong><a href="https://accaglobal.com/" target="_blank">ACCA</a></strong><br>
-                        Association of Chartered Certified Accountants (2012 – н.в.)
-                    </li>
-                </ul>
+                <div class="edu-item">
+                    <div class="edu-header">
+                        <div class="edu-title"><a href="https://bmstu.ru/" target="_blank">МГТУ им. Баумана</a></div>
+                        <span class="edu-date-badge">2006 -- 2012</span>
+                    </div>
+                    <div class="edu-description">Информатика и системы управления. Инженер по комплексному обеспечению информационной безопасности</div>
+                </div>
+                <div class="edu-item" style="margin-top: 1.25rem;">
+                    <div class="edu-header">
+                        <div class="edu-title"><a href="https://accaglobal.com/" target="_blank">ACCA</a></div>
+                        <span class="edu-date-badge">2012 -- н.в.</span>
+                    </div>
+                    <div class="edu-description">Association of Chartered Certified Accountants</div>
+                </div>
             </div>
         </section>
 
         <section>
-            <h2>Дополнительно</h2>
+            <h2>Дополнительное образование</h2>
             <div class="info-block">
-                <ul class="info-list">
-                    <li><strong>Языки:</strong> Английский – свободно (Cambridge CAE, 2012)</li>
-                    <li><strong>Публикации:</strong> Более 50 публикаций в СМИ</li>
-                    <li><strong>Лидерство:</strong> Лейтенант, командир 2-х рот, 160 курсантов (2012)</li>
-                    <li><strong>Интересы:</strong> Хоккей, горные лыжи, боевые искусства, путешествия, классическая гитара, фортепиано</li>
-                </ul>
+                <div class="edu-item">
+                    <div class="edu-header">
+                        <div class="edu-title">МШУ Сколково</div>
+                        <span class="edu-date-badge">2025 -- 2026</span>
+                    </div>
+                    <div class="edu-description">Программа «Лидеры изменений»</div>
+                </div>
+                <div class="edu-item" style="margin-top: 1.25rem;">
+                    <div class="edu-header">
+                        <div class="edu-title">СколТех</div>
+                        <span class="edu-date-badge">2025</span>
+                    </div>
+                    <div class="edu-description">«Введение в практику эффективного промптинга»</div>
+                </div>
             </div>
         </section>
     </div>
 
-    <!-- Parallax Contact Block -->
+    <section>
+        <h2>Дополнительно</h2>
+        <div class="info-block">
+            <ul class="info-list">
+                <li>
+                    <strong>Языки:</strong>
+                    <details class="language-popup" style="display: inline;">
+                        <summary class="language-trigger">Английский – свободно (подробнее)</summary>
+                        <div class="language-popup-content">
+                            <h4>Cambridge Certificate in Advanced English (CAE)</h4>
+                            <span class="language-badge">Уровень C1 · 2012</span>
+                            <p style="margin-top: 0.75rem;">
+                                Cambridge CAE -- internationally recognised qualification proving high-level achievement in learning English as a foreign language.
+                            </p>
+                            <ul>
+                                <li>Свободное понимание сложных текстов на различные темы</li>
+                                <li>Свободное выражение мыслей в устной и письменной форме</li>
+                                <li>Использование языка в профессиональном и академическом контексте</li>
+                                <li>Эффективное участие в переговорах и дискуссиях</li>
+                            </ul>
+                        </div>
+                    </details>
+                </li>
+                <li><strong>Публикации:</strong> Более 50 публикаций в СМИ</li>
+                <li><strong>Лидерство:</strong> Лейтенант, командир 2-х рот, 160 курсантов (2012)</li>
+                <li><strong>Интересы:</strong> Хоккей, горные лыжи, боевые искусства, путешествия, классическая гитара, фортепиано</li>
+            </ul>
+        </div>
+    </section>
+
     <section id="contacts">
         <div class="parallax-contacts" id="parallaxContacts">
             <h3>Свяжитесь со мной</h3>
@@ -1857,11 +2066,11 @@
             <div class="contact-icons-grid">
                 <a href="tel:+79262899214" class="contact-icon-circle">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                    <span class="contact-icon-label">+7 (926) 289-92-14</span>
+                    <span class="contact-icon-label">Позвонить</span>
                 </a>
                 <a href="mailto:anton.muzhelskiy@gmail.com" class="contact-icon-circle">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    <span class="contact-icon-label">anton.muzhelskiy@gmail.com</span>
+                    <span class="contact-icon-label">Написать</span>
                 </a>
                 <a href="https://t.me/anton.muzhelskiy" target="_blank" class="contact-icon-circle">
                     <svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
@@ -1882,23 +2091,35 @@
 </div>
 
 <script>
-    // ========== LETTER-BY-LETTER NAME ANIMATION ==========
-    (function animateName() {
-        const name = "АНТОН МУЖЕЛЬСКИЙ";
-        const container = document.getElementById('animatedName');
-        if (!container) return;
-        
-        const letters = name.split('');
+    // Letter-by-letter typing animation for name and title
+    function typeText(element, text, delay = 0) {
+        const letters = text.split('');
         letters.forEach((char, index) => {
             const span = document.createElement('span');
             span.className = char === ' ' ? 'letter space' : 'letter';
             span.textContent = char === ' ' ? '' : char;
-            span.style.animationDelay = `${0.2 + index * 0.08}s`;
-            container.appendChild(span);
+            span.style.animationDelay = `${delay + index * 0.05}s`;
+            element.appendChild(span);
         });
-    })();
+    }
 
-    // ========== LIVE CAREER COUNTER ==========
+    // Animate name and title on load
+    window.addEventListener('load', () => {
+        const nameElement = document.getElementById('animatedName');
+        const titleElement = document.getElementById('animatedTitle');
+        
+        if (nameElement) {
+            typeText(nameElement, "АНТОН МУЖЕЛЬСКИЙ", 0);
+        }
+        
+        if (titleElement) {
+            setTimeout(() => {
+                typeText(titleElement, "Директор по цифровой трансформации / CDTO / CPO", 1.2);
+            }, 100);
+        }
+    });
+
+    // Live career counter with animation
     (function liveCareerCounter() {
         const startDate = new Date(2012, 8, 1);
         const displayEl = document.getElementById('careerTime');
@@ -1936,11 +2157,46 @@
             displayEl.textContent = `${years} ${yText}, ${months} ${mText}, ${days} ${dText}`;
         }
 
-        update();
+        // Animate counter from 0
+        function animateCounter() {
+            const duration = 2000;
+            const startTime = Date.now();
+            
+            function updateCounter() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                if (progress < 1) {
+                    const currentYears = Math.floor(progress * 12);
+                    const currentMonths = Math.floor((progress * 144) % 12);
+                    const currentDays = Math.floor((progress * 4380) % 30);
+                    displayEl.textContent = `${currentYears} лет, ${currentMonths} мес, ${currentDays} дн`;
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    update();
+                }
+            }
+            
+            updateCounter();
+        }
+
+        // Start animation when element is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(displayEl);
+        
+        // Update every minute after animation
         setInterval(update, 60000);
     })();
 
-    // ========== PROGRESS BAR + SECTION INDICATOR ==========
+    // Progress bar + section indicator
     (function progressAndNavigation() {
         const progressFill = document.getElementById('progressFill');
         const sectionIndicator = document.getElementById('sectionIndicator');
@@ -1952,6 +2208,7 @@
             'jury': 'Жюри',
             'awards': 'Награды',
             'skills': 'Навыки',
+            'education': 'Образование',
             'contacts': 'Контакты'
         };
 
@@ -1961,7 +2218,6 @@
             const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
             progressFill.style.width = progress + '%';
 
-            // Determine current section
             let currentSection = 'О себе';
             sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
@@ -1978,16 +2234,16 @@
                 sectionIndicator.classList.remove('visible');
             }
 
-            // Update burger nav active state
             document.querySelectorAll('.burger-nav a').forEach(link => {
                 link.classList.remove('active');
                 const href = link.getAttribute('href').slice(1);
-                if (href === 'about' && currentSection === 'О себе') link.classList.add('active');
-                if (href === 'experience' && currentSection === 'Опыт работы') link.classList.add('active');
-                if (href === 'jury' && currentSection === 'Жюри') link.classList.add('active');
-                if (href === 'awards' && currentSection === 'Награды') link.classList.add('active');
-                if (href === 'skills' && currentSection === 'Навыки') link.classList.add('active');
-                if (href === 'contacts' && currentSection === 'Контакты') link.classList.add('active');
+                const map = {
+                    'about': 'О себе', 'experience': 'Опыт работы',
+                    'jury': 'Жюри', 'awards': 'Награды',
+                    'skills': 'Навыки', 'education': 'Образование',
+                    'contacts': 'Контакты'
+                };
+                if (map[href] === currentSection) link.classList.add('active');
             });
         }
 
@@ -1995,7 +2251,6 @@
         updateProgress();
     })();
 
-    // ========== SCROLL TO CONTACTS ==========
     function scrollToContacts() {
         const contactsSection = document.getElementById('contacts');
         if (contactsSection) {
@@ -2003,7 +2258,7 @@
         }
     }
 
-    // ========== KONAMI CODE ==========
+    // Konami Code
     (function konamiCode() {
         const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
         let currentIndex = 0;
@@ -2082,7 +2337,6 @@
                 pieces.forEach(p => {
                     if (p.life <= 0) return;
                     alive = true;
-
                     p.vy += p.gravity;
                     p.x += p.vx;
                     p.y += p.vy;
@@ -2110,7 +2364,7 @@
         }
     })();
 
-    // ========== BURGER MENU ==========
+    // Burger menu
     function toggleBurger() {
         document.querySelector('.burger-btn').classList.toggle('active');
         document.getElementById('burgerNav').classList.toggle('active');
@@ -2125,7 +2379,7 @@
         document.body.style.overflow = '';
     }
 
-    // ========== PARTICLES ==========
+    // Particles with theme-aware colors
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
@@ -2143,6 +2397,13 @@
     window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
     window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
 
+    function getParticleColors() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        return isDark ? 
+            { primary: '#14B8A6', secondary: '#06B6D4', opacity: 0.6 } :
+            { primary: '#0F766E', secondary: '#0891B2', opacity: 0.4 };
+    }
+
     class Particle {
         constructor() {
             this.x = Math.random() * width;
@@ -2150,7 +2411,8 @@
             this.size = Math.random() * 2 + 1;
             this.speedX = Math.random() * 1 - 0.5;
             this.speedY = Math.random() * 1 - 0.5;
-            this.color = Math.random() > 0.5 ? '#14B8A6' : '#06B6D4';
+            const colors = getParticleColors();
+            this.color = Math.random() > 0.5 ? colors.primary : colors.secondary;
         }
         update() {
             this.x += this.speedX; this.y += this.speedY;
@@ -2167,8 +2429,9 @@
             }
         }
         draw() {
+            const colors = getParticleColors();
             ctx.fillStyle = this.color;
-            ctx.globalAlpha = 0.6;
+            ctx.globalAlpha = colors.opacity;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -2182,13 +2445,16 @@
     }
 
     function connect() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const lineColor = isDark ? 'rgba(20, 184, 166, 0.15)' : 'rgba(15, 118, 110, 0.2)';
+        
         for (let a = 0; a < particles.length; a++) {
             for (let b = a + 1; b < particles.length; b++) {
                 let dx = particles[a].x - particles[b].x;
                 let dy = particles[a].y - particles[b].y;
                 let distance = dx * dx + dy * dy;
                 if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                    ctx.strokeStyle = 'rgba(20, 184, 166, 0.15)';
+                    ctx.strokeStyle = lineColor;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particles[a].x, particles[a].y);
@@ -2207,31 +2473,50 @@
     }
     init(); animate();
 
-    // ========== COUNTERS ==========
-    const counters = document.querySelectorAll('.stat-value');
+    // Update particles on theme change
+    function updateParticlesForTheme() {
+        const colors = getParticleColors();
+        particles.forEach(p => {
+            p.color = Math.random() > 0.5 ? colors.primary : colors.secondary;
+        });
+    }
+
+    // Counters with animation
+    const counters = document.querySelectorAll('.stat-value, .inline-stat-value');
     let started = false;
+
+    function animateCounterValue(element, target) {
+        const duration = 1500;
+        const startTime = Date.now();
+        const startValue = 0;
+        
+        function update() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.floor(startValue + (target - startValue) * easeProgress);
+            
+            let suffix = '';
+            if (target === 90) suffix = '%';
+            else if (target !== 100) suffix = '+';
+            
+            element.textContent = currentValue + suffix;
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                element.textContent = target + suffix;
+            }
+        }
+        
+        update();
+    }
 
     function startCounters() {
         counters.forEach(counter => {
             const target = +counter.getAttribute('data-target');
-            const increment = target / 40;
-            let current = 0;
-            const updateCounter = () => {
-                if (current < target) {
-                    current += increment;
-                    let suffix = '';
-                    if (target === 90) suffix = '%';
-                    else if (target !== 100) suffix = '+';
-                    counter.innerText = Math.ceil(current) + suffix;
-                    setTimeout(updateCounter, 30);
-                } else {
-                    let suffix = '';
-                    if (target === 90) suffix = '%';
-                    else if (target !== 100) suffix = '+';
-                    counter.innerText = target + suffix;
-                }
-            };
-            updateCounter();
+            if (!target) return;
+            animateCounterValue(counter, target);
         });
     }
 
@@ -2242,11 +2527,15 @@
                 started = true;
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
 
-    observer.observe(document.querySelector('.stats-bar'));
+    const statsBar = document.querySelector('.stats-bar');
+    if (statsBar) observer.observe(statsBar);
+    
+    const inlineStats = document.querySelector('.inline-stats');
+    if (inlineStats) observer.observe(inlineStats);
 
-    // ========== SKILLS ==========
+    // Skills
     const skillsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -2259,7 +2548,7 @@
 
     skillsObserver.observe(document.querySelector('.skills-container'));
 
-    // ========== PARALLAX CONTACTS ==========
+    // Parallax contacts
     const parallaxContacts = document.getElementById('parallaxContacts');
     window.addEventListener('scroll', () => {
         if (!parallaxContacts) return;
@@ -2272,7 +2561,7 @@
         }
     }, { passive: true });
 
-    // ========== THEME TOGGLE ==========
+    // Theme toggle
     function toggleTheme() {
         const html = document.documentElement;
         const themeIcon = document.getElementById('theme-icon');
@@ -2280,10 +2569,12 @@
             html.setAttribute('data-theme', 'light');
             themeIcon.innerHTML = '<circle cx="12" cy="12" r="5" fill="none"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
             localStorage.setItem('theme', 'light');
+            updateParticlesForTheme();
         } else {
             html.setAttribute('data-theme', 'dark');
             themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
             localStorage.setItem('theme', 'dark');
+            updateParticlesForTheme();
         }
     }
 
@@ -2296,13 +2587,14 @@
         } else {
             themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
         }
+        updateParticlesForTheme();
     });
 
-    // ========== DETAILS ANIMATION ==========
+    // Details animation
     document.querySelectorAll('details').forEach((detail) => {
         detail.addEventListener('toggle', () => {
             if (detail.open) {
-                const content = detail.querySelector('.details-content');
+                const content = detail.querySelector('.details-content, .language-popup-content');
                 if (content) {
                     content.style.animation = 'none';
                     content.offsetHeight;
@@ -2310,6 +2602,15 @@
                 }
             }
         });
+    });
+
+    // Dynamic tab title
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            document.title = '👋 Вернитесь! Резюме Антона';
+        } else {
+            document.title = 'Антон Мужельский | CDTO / CPO';
+        }
     });
 </script>
 

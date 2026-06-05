@@ -70,13 +70,15 @@
             border-radius: 4px;
         }
 
-        /* Word break prevention for headings */
-        h1, h2, h3, .job-title, .title, .stat-label, .inline-stat-label, .skill-name {
-            word-break: keep-all;
-            overflow-wrap: break-word;
-            hyphens: none;
-            -webkit-hyphens: none;
-            -ms-hyphens: none;
+        /* КОРРЕКТНЫЙ ПЕРЕНОС СЛОВ - БЕЗ РАЗРЫВА */
+        h1, h2, h3, .job-title, .title, .award-card h3, .skill-name, .stat-label, .inline-stat-label, .edu-title, .edu-description, .company, .department {
+            word-break: keep-all !important;
+            overflow-wrap: normal !important;
+            word-wrap: normal !important;
+            hyphens: none !important;
+            -webkit-hyphens: none !important;
+            -ms-hyphens: none !important;
+            white-space: normal !important;
         }
 
         /* Progress Bar */
@@ -121,6 +123,7 @@
             transform: translateY(-10px);
             transition: all 0.3s ease;
             box-shadow: var(--shadow-md);
+            white-space: nowrap;
         }
 
         .section-indicator.visible { opacity: 1; transform: translateY(0); }
@@ -244,7 +247,7 @@
 
         .overlay.active { opacity: 1; visibility: visible; }
 
-        /* Theme Toggle - enlarged hit area */
+        /* Theme Toggle */
         .theme-toggle {
             position: fixed;
             top: 1.2rem;
@@ -647,7 +650,7 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        /* Timeline with grid layout */
+        /* Timeline */
         .timeline {
             position: relative;
             padding-left: 0;
@@ -711,7 +714,6 @@
 
         .timeline-item:hover .timeline-marker { transform: scale(1.3); }
 
-        /* Dates centered vertically relative to card */
         .timeline-date {
             position: absolute;
             left: 1.5rem;
@@ -819,7 +821,6 @@
             font-size: 0.875rem;
         }
 
-        /* Inline stats */
         .inline-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -1413,9 +1414,12 @@
             font-size: 0.85rem;
         }
 
-        /* Responsive */
+        /* Responsive - УМЕНЬШАЕМ ШРИФТЫ НА МОБИЛЬНЫХ */
         @media (max-width: 768px) {
-            h1 { font-size: 1.85rem; }
+            h1 { font-size: 1.6rem !important; }
+            h2 { font-size: 1.3rem !important; }
+            .title { font-size: 0.95rem !important; line-height: 1.4 !important; }
+            
             .timeline::before { left: 1.5rem; }
             .timeline-item {
                 grid-template-columns: 2.5rem 1fr;
@@ -1446,6 +1450,10 @@
 
         @media (max-width: 480px) {
             .container { padding: 1.25rem 1rem; }
+            h1 { font-size: 1.3rem !important; letter-spacing: -0.02em !important; }
+            h2 { font-size: 1.2rem !important; }
+            .title { font-size: 0.85rem !important; }
+            
             .timeline::before { left: 1.25rem; }
             .timeline-item {
                 grid-template-columns: 2.2rem 1fr;
@@ -1744,7 +1752,7 @@
         <h2>Член жюри</h2>
         <div class="awards-grid">
             <div class="award-card">
-                <h3> REXAwards</h3>
+                <h3>⚖️ REXAwards</h3>
                 <span class="award-year">2020 -- н.в.</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1759,7 +1767,7 @@
             </div>
 
             <div class="award-card">
-                <h3>🏆 InterComm</h3>
+                <h3>️ InterComm</h3>
                 <span class="award-year">2020 -- н.в.</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1774,7 +1782,7 @@
             </div>
 
             <div class="award-card">
-                <h3>🏆 Silver Mercury</h3>
+                <h3>⚖️ Silver Mercury</h3>
                 <span class="award-year">2021 -- н.в.</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1794,7 +1802,7 @@
         <h2>Награды</h2>
         <div class="awards-grid">
             <div class="award-card">
-                <h3> InterComm</h3>
+                <h3>🏆 InterComm</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1824,7 +1832,7 @@
             </div>
 
             <div class="award-card">
-                <h3>🏆 Digital Workplace</h3>
+                <h3> Digital Workplace</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1839,7 +1847,7 @@
             </div>
 
             <div class="award-card">
-                <h3>🥇 REXA</h3>
+                <h3>🏆 REXA</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1854,7 +1862,7 @@
             </div>
 
             <div class="award-card">
-                <h3>🏆 Magic People IT</h3>
+                <h3> Magic People IT</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1869,7 +1877,7 @@
             </div>
 
             <div class="award-card">
-                <h3> Нац. банковская премия</h3>
+                <h3>🏆 Нац. банковская премия</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -2009,14 +2017,14 @@
             <div class="info-block">
                 <div class="edu-item">
                     <div class="edu-header">
-                        <div class="edu-title">МШУ Сколково</div>
+                        <div class="edu-title"><a href="https://www.skolkovobs.ru/" target="_blank">МШУ Сколково</a></div>
                         <span class="edu-date-badge">2025 -- 2026</span>
                     </div>
                     <div class="edu-description">Программа «Лидеры изменений»</div>
                 </div>
                 <div class="edu-item" style="margin-top: 1.25rem;">
                     <div class="edu-header">
-                        <div class="edu-title">СколТех</div>
+                        <div class="edu-title"><a href="https://skoltech.ru/" target="_blank">СколТех</a></div>
                         <span class="edu-date-badge">2025</span>
                     </div>
                     <div class="edu-description">«Введение в практику эффективного промптинга»</div>
@@ -2583,3 +2591,43 @@
 </body>
 </html>
 
+4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+        } else {
+            themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        }
+        updateParticlesForTheme();
+    });
+
+    document.querySelectorAll('details').forEach((detail) => {
+        detail.addEventListener('toggle', () => {
+            if (detail.open) {
+                const content = detail.querySelector('.details-content, .language-popup-content');
+                if (content) {
+                    content.style.animation = 'none';
+                    content.offsetHeight;
+                    content.style.animation = 'fadeIn 0.4s ease-out';
+                }
+            }
+        });
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            document.title = '👋 Вернитесь! Резюме Антона';
+        } else {
+            document.title = 'Антон Мужельский | CDTO / CPO';
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
+
+              <script>
+                              
+              </script>
+                        </body>
+                        </html>
+                    

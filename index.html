@@ -70,6 +70,15 @@
             border-radius: 4px;
         }
 
+        /* Word break prevention for headings */
+        h1, h2, h3, .job-title, .title, .stat-label, .inline-stat-label, .skill-name {
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            hyphens: none;
+            -webkit-hyphens: none;
+            -ms-hyphens: none;
+        }
+
         /* Progress Bar */
         .progress-bar {
             position: fixed;
@@ -98,13 +107,13 @@
         .section-indicator {
             position: fixed;
             top: 1.2rem;
-            right: 6rem;
+            right: 5.5rem;
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-secondary);
             background: var(--bg-surface);
-            padding: 0.3rem 0.8rem;
+            padding: 0.4rem 0.9rem;
             border-radius: 9999px;
             border: 1px solid var(--border);
             z-index: 1003;
@@ -145,7 +154,7 @@
             z-index: 1;
         }
 
-        /* Burger Menu - Aligned horizontally */
+        /* Burger Menu */
         .burger-menu {
             position: fixed;
             top: 1.2rem;
@@ -154,7 +163,7 @@
         }
 
         .burger-btn {
-            width: 42px; height: 42px;
+            width: 44px; height: 44px;
             background: var(--bg-surface);
             border: 2px solid var(--border);
             border-radius: 10px;
@@ -176,7 +185,7 @@
         }
 
         .burger-line {
-            width: 20px; height: 2px;
+            width: 22px; height: 2px;
             background: var(--text-primary);
             border-radius: 2px;
             transition: all 0.3s ease;
@@ -235,7 +244,7 @@
 
         .overlay.active { opacity: 1; visibility: visible; }
 
-        /* Theme Toggle - Aligned horizontally */
+        /* Theme Toggle - enlarged hit area */
         .theme-toggle {
             position: fixed;
             top: 1.2rem;
@@ -247,7 +256,7 @@
             background: var(--bg-surface);
             border: 2px solid var(--border);
             border-radius: 9999px;
-            width: 50px; height: 26px;
+            width: 60px; height: 36px;
             cursor: pointer;
             position: relative;
             box-shadow: var(--shadow-md);
@@ -263,8 +272,8 @@
 
         .theme-toggle-slider {
             position: absolute;
-            top: 2px; left: 2px;
-            width: 18px; height: 18px;
+            top: 4px; left: 4px;
+            width: 24px; height: 24px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             transition: transform 0.3s ease;
@@ -275,7 +284,7 @@
 
         [data-theme="dark"] .theme-toggle-slider { transform: translateX(24px); }
 
-        .theme-icon { width: 12px; height: 12px; }
+        .theme-icon { width: 14px; height: 14px; }
 
         /* Floating Contact Button */
         .floating-contact {
@@ -338,7 +347,7 @@
             50% { box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 12px rgba(20, 184, 166, 0); }
         }
 
-        /* Header with typing animation */
+        /* Header */
         header {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -381,7 +390,6 @@
             display: inline-block;
         }
 
-        /* Letter animation */
         .letter {
             display: inline-block;
             opacity: 0;
@@ -395,7 +403,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Title animation */
         .title {
             font-size: 1.1rem;
             color: var(--accent);
@@ -418,7 +425,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Career counter */
         .career-counter {
             display: inline-flex;
             align-items: center;
@@ -641,7 +647,7 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        /* Timeline with vertical dates */
+        /* Timeline with grid layout */
         .timeline {
             position: relative;
             padding-left: 0;
@@ -650,7 +656,7 @@
         .timeline::before {
             content: '';
             position: absolute;
-            left: 1.2rem;
+            left: 1.5rem;
             top: 0;
             bottom: 0;
             width: 3px;
@@ -659,11 +665,13 @@
         }
 
         .timeline-item {
+            display: grid;
+            grid-template-columns: 3rem 1fr;
+            align-items: center;
             position: relative;
             margin-bottom: 2.5rem;
             opacity: 0;
-            transform: translateX(-20px);
-            animation: slideIn 0.6s ease forwards;
+            animation: fadeIn 0.6s ease forwards;
         }
 
         .timeline-item:nth-child(1) { animation-delay: 0.1s; }
@@ -672,14 +680,14 @@
         .timeline-item:nth-child(4) { animation-delay: 0.4s; }
         .timeline-item:nth-child(5) { animation-delay: 0.5s; }
 
-        @keyframes slideIn {
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .timeline-marker {
-            position: absolute;
-            left: 0.85rem;
-            top: 1.2rem;
+            grid-column: 1;
+            justify-self: center;
             width: 16px;
             height: 16px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
@@ -703,34 +711,30 @@
 
         .timeline-item:hover .timeline-marker { transform: scale(1.3); }
 
-        /* Vertical dates along the line */
+        /* Dates centered vertically relative to card */
         .timeline-date {
             position: absolute;
-            left: 1.2rem;
-            top: 3rem;
-            transform-origin: left top;
-            transform: rotate(-90deg);
+            left: 1.5rem;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-90deg);
             font-size: 0.75rem;
             font-weight: 700;
             color: var(--accent);
             white-space: nowrap;
-            background: transparent;
-            padding: 0;
-            border-radius: 0;
-            box-shadow: none;
-            letter-spacing: 0.08em;
+            background: var(--bg-surface);
+            padding: 0.4rem 0.7rem;
+            border-radius: 9999px;
+            box-shadow: var(--shadow-sm);
+            letter-spacing: 0.05em;
             z-index: 3;
-            border: none;
-            width: auto;
-            text-align: center;
+            border: 1px solid var(--border);
         }
 
         .current-badge {
             position: absolute;
-            left: 1.2rem;
-            top: 4.5rem;
-            transform-origin: left top;
-            transform: rotate(-90deg);
+            left: 1.5rem;
+            top: calc(50% + 2rem);
+            transform: translate(-50%, -50%) rotate(-90deg);
             background: linear-gradient(135deg, #10B981, #34D399);
             color: white;
             padding: 0.35rem 0.75rem;
@@ -746,17 +750,18 @@
         @keyframes badgePulse {
             0%, 100% {
                 opacity: 1;
-                transform: rotate(-90deg) scale(1);
+                transform: translate(-50%, -50%) rotate(-90deg) scale(1);
                 box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
             }
             50% {
                 opacity: 0.85;
-                transform: rotate(-90deg) scale(1.08);
+                transform: translate(-50%, -50%) rotate(-90deg) scale(1.08);
                 box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
             }
         }
 
         .experience-item {
+            grid-column: 2;
             background-color: var(--bg-surface);
             border-radius: 12px;
             padding: 1.25rem;
@@ -764,7 +769,6 @@
             box-shadow: var(--shadow-md);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            margin-left: 2.5rem;
         }
 
         .experience-item.current {
@@ -815,7 +819,7 @@
             font-size: 0.875rem;
         }
 
-        /* Inline stats in experience */
+        /* Inline stats */
         .inline-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -889,11 +893,6 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .details-content ul { list-style: none; padding-left: 0; }
 
         .details-content li {
@@ -921,9 +920,7 @@
             transition: all 0.2s ease;
         }
 
-        .details-content a:hover {
-            border-bottom-style: solid;
-        }
+        .details-content a:hover { border-bottom-style: solid; }
 
         /* Awards */
         .awards-grid {
@@ -1129,7 +1126,6 @@
             border-bottom: 1px dotted var(--accent);
         }
 
-        /* Education item with date badge */
         .edu-item {
             display: flex;
             flex-direction: column;
@@ -1174,7 +1170,6 @@
             box-shadow: var(--shadow-sm);
         }
 
-        /* Language popup */
         .language-trigger {
             color: var(--accent);
             cursor: pointer;
@@ -1188,9 +1183,7 @@
             transform: translateY(-1px);
         }
 
-        .language-popup {
-            margin-top: 0.5rem;
-        }
+        .language-popup { margin-top: 0.5rem; }
 
         .language-popup summary {
             color: var(--accent);
@@ -1205,11 +1198,7 @@
         }
 
         .language-popup summary::-webkit-details-marker { display: none; }
-
-        .language-popup summary::before {
-            content: '🎓';
-            font-size: 0.9rem;
-        }
+        .language-popup summary::before { content: ''; font-size: 0.9rem; }
 
         .language-popup-content {
             margin-top: 0.75rem;
@@ -1424,56 +1413,63 @@
             font-size: 0.85rem;
         }
 
-        /* Responsive - MOBILE FIXES */
+        /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 1.85rem; }
-            .timeline { padding-left: 0; }
-            .timeline::before { left: 1.2rem; }
-            .timeline-marker { left: 0.85rem; }
+            .timeline::before { left: 1.5rem; }
+            .timeline-item {
+                grid-template-columns: 2.5rem 1fr;
+            }
             .timeline-date {
-                left: 1.2rem;
-                top: 3rem;
+                left: 1.5rem;
                 font-size: 0.7rem;
+                padding: 0.35rem 0.6rem;
             }
             .current-badge {
-                left: 1.2rem;
-                top: 4.5rem;
+                left: 1.5rem;
+                top: calc(50% + 1.8rem);
                 font-size: 0.65rem;
                 padding: 0.3rem 0.6rem;
             }
-            .experience-item { margin-left: 2.5rem; padding: 1.25rem; }
             .inline-stats { grid-template-columns: repeat(2, 1fr); }
             .parallax-contacts { padding: 2.5rem 1.25rem; }
             .parallax-contacts h3 { font-size: 1.4rem; }
             .contact-icon-circle { width: 60px; height: 60px; }
             .contact-icon-circle svg { width: 24px; height: 24px; }
+            .contact-icons-grid { gap: 1rem; }
             .floating-contact { bottom: 1.5rem; right: 1.5rem; width: 50px; height: 50px; }
             .floating-contact svg { width: 20px; height: 20px; }
             .floating-contact .tooltip { display: none; }
-            .section-indicator { right: 1rem; font-size: 0.7rem; }
-            .job-title { font-size: 1rem; word-wrap: break-word; }
+            .section-indicator { right: 5rem; font-size: 0.7rem; }
+            .job-title { font-size: 1rem; }
         }
 
         @media (max-width: 480px) {
-            .timeline { padding-left: 0; }
-            .timeline::before { left: 1rem; }
-            .timeline-marker { left: 0.65rem; width: 14px; height: 14px; }
+            .container { padding: 1.25rem 1rem; }
+            .timeline::before { left: 1.25rem; }
+            .timeline-item {
+                grid-template-columns: 2.2rem 1fr;
+            }
             .timeline-date {
-                left: 1rem;
-                top: 2.8rem;
+                left: 1.25rem;
                 font-size: 0.65rem;
+                padding: 0.3rem 0.5rem;
             }
             .current-badge {
-                left: 1rem;
-                top: 4.2rem;
+                left: 1.25rem;
+                top: calc(50% + 1.6rem);
                 font-size: 0.6rem;
                 padding: 0.25rem 0.5rem;
             }
-            .experience-item { margin-left: 2.2rem; padding: 1rem; }
-            .inline-stats { grid-template-columns: 1fr; }
+            .experience-item { padding: 1rem; }
+            .inline-stats { grid-template-columns: 1fr 1fr; gap: 0.5rem; padding: 0.75rem; }
             .inline-stat-value { font-size: 1.25rem; }
             .job-title { font-size: 0.95rem; }
             .company { font-size: 0.8rem; }
+            .contact-icons-grid { gap: 0.75rem; }
+            .contact-icon-circle { width: 56px; height: 56px; }
+            .contact-icon-circle svg { width: 22px; height: 22px; }
+            .section-indicator { right: 4.5rem; }
         }
 
         @media print {
@@ -1506,13 +1502,13 @@
 
     <nav class="burger-nav" id="burgerNav">
         <ul>
-            <li><a href="#about" onclick="closeBurger()" data-section="О себе">О себе</a></li>
-            <li><a href="#experience" onclick="closeBurger()" data-section="Опыт работы">Опыт работы</a></li>
-            <li><a href="#skills" onclick="closeBurger()" data-section="Навыки">Навыки</a></li>
-            <li><a href="#jury" onclick="closeBurger()" data-section="Жюри">Жюри</a></li>
-            <li><a href="#awards" onclick="closeBurger()" data-section="Награды">Награды</a></li>
-            <li><a href="#education" onclick="closeBurger()" data-section="Образование">Образование</a></li>
-            <li><a href="#contacts" onclick="closeBurger()" data-section="Контакты">Контакты</a></li>
+            <li><a href="#about" onclick="closeBurger()">О себе</a></li>
+            <li><a href="#experience" onclick="closeBurger()">Опыт работы</a></li>
+            <li><a href="#skills" onclick="closeBurger()">Навыки</a></li>
+            <li><a href="#jury" onclick="closeBurger()">Жюри</a></li>
+            <li><a href="#awards" onclick="closeBurger()">Награды</a></li>
+            <li><a href="#education" onclick="closeBurger()">Образование</a></li>
+            <li><a href="#contacts" onclick="closeBurger()">Контакты</a></li>
         </ul>
     </nav>
 
@@ -1571,7 +1567,7 @@
 
     <details class="cover-letter-toggle">
         <summary>
-            <span>📄 Сопроводительное письмо</span>
+            <span> Сопроводительное письмо</span>
         </summary>
         <div class="cover-letter-content">
             <p>Добрый день!</p>
@@ -1612,7 +1608,7 @@
                                 <li>Организация системного обучения работников введению в генеративный ИИ для популяризации новых форматов взаимодействия</li>
                                 <li>Внедрена практика <span class="highlight">ИИ-подкастов</span> в регулярные корпоративные подкасты «Полный заряд»</li>
                                 <li>Организация комплексных архитектурных изменений в ИТ-ландшафте для достижения цифрового комфорта сотрудников</li>
-                                <li>Развитие ИТ-ландшафта для повышения качества процессов управления персоналом (подсистемы безопасности, мониторинга, аутентификации)</li>
+                                <li>Развитие ИТ-ландшафта для повышения качества процессов управления персоналом</li>
                                 <li>Организована информационная кампания: <span class="highlight">полный перевод на ЭДО</span> всех сотрудников (3 вида электронной подписи)</li>
                                 <li>Контроль реализации указов Президента и постановлений Правительства РФ в области ЦТ</li>
                                 <li>Анализ применимости отечественных ИС с целью последующего внедрения</li>
@@ -1748,7 +1744,7 @@
         <h2>Член жюри</h2>
         <div class="awards-grid">
             <div class="award-card">
-                <h3>🏆 REXAwards</h3>
+                <h3> REXAwards</h3>
                 <span class="award-year">2020 -- н.в.</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1798,7 +1794,7 @@
         <h2>Награды</h2>
         <div class="awards-grid">
             <div class="award-card">
-                <h3>🥇 InterComm</h3>
+                <h3> InterComm</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1873,7 +1869,7 @@
             </div>
 
             <div class="award-card">
-                <h3>🏆 Нац. банковская премия</h3>
+                <h3> Нац. банковская премия</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1947,9 +1943,9 @@
                 <div class="skill-item">
                     <div class="skill-header">
                         <span class="skill-name">UI/UX & Figma</span>
-                        <span class="skill-percent">75%</span>
+                        <span class="skill-percent">99%</span>
                     </div>
-                    <div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div>
+                    <div class="skill-bar"><div class="skill-bar-fill" data-width="99"></div></div>
                 </div>
                 <div class="skill-item">
                     <div class="skill-header">
@@ -2091,7 +2087,6 @@
 </div>
 
 <script>
-    // Letter-by-letter typing animation for name and title
     function typeText(element, text, delay = 0) {
         const letters = text.split('');
         letters.forEach((char, index) => {
@@ -2103,7 +2098,6 @@
         });
     }
 
-    // Animate name and title on load
     window.addEventListener('load', () => {
         const nameElement = document.getElementById('animatedName');
         const titleElement = document.getElementById('animatedTitle');
@@ -2119,7 +2113,6 @@
         }
     });
 
-    // Live career counter with animation
     (function liveCareerCounter() {
         const startDate = new Date(2012, 8, 1);
         const displayEl = document.getElementById('careerTime');
@@ -2157,7 +2150,6 @@
             displayEl.textContent = `${years} ${yText}, ${months} ${mText}, ${days} ${dText}`;
         }
 
-        // Animate counter from 0
         function animateCounter() {
             const duration = 2000;
             const startTime = Date.now();
@@ -2180,7 +2172,6 @@
             updateCounter();
         }
 
-        // Start animation when element is visible
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2191,12 +2182,9 @@
         }, { threshold: 0.5 });
 
         observer.observe(displayEl);
-        
-        // Update every minute after animation
         setInterval(update, 60000);
     })();
 
-    // Progress bar + section indicator
     (function progressAndNavigation() {
         const progressFill = document.getElementById('progressFill');
         const sectionIndicator = document.getElementById('sectionIndicator');
@@ -2233,18 +2221,6 @@
             } else {
                 sectionIndicator.classList.remove('visible');
             }
-
-            document.querySelectorAll('.burger-nav a').forEach(link => {
-                link.classList.remove('active');
-                const href = link.getAttribute('href').slice(1);
-                const map = {
-                    'about': 'О себе', 'experience': 'Опыт работы',
-                    'jury': 'Жюри', 'awards': 'Награды',
-                    'skills': 'Навыки', 'education': 'Образование',
-                    'contacts': 'Контакты'
-                };
-                if (map[href] === currentSection) link.classList.add('active');
-            });
         }
 
         window.addEventListener('scroll', updateProgress, { passive: true });
@@ -2258,7 +2234,6 @@
         }
     }
 
-    // Konami Code
     (function konamiCode() {
         const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
         let currentIndex = 0;
@@ -2364,7 +2339,6 @@
         }
     })();
 
-    // Burger menu
     function toggleBurger() {
         document.querySelector('.burger-btn').classList.toggle('active');
         document.getElementById('burgerNav').classList.toggle('active');
@@ -2379,7 +2353,6 @@
         document.body.style.overflow = '';
     }
 
-    // Particles with theme-aware colors
     const canvas = document.getElementById('particles-canvas');
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
@@ -2400,8 +2373,8 @@
     function getParticleColors() {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         return isDark ? 
-            { primary: '#14B8A6', secondary: '#06B6D4', opacity: 0.6 } :
-            { primary: '#0F766E', secondary: '#0891B2', opacity: 0.4 };
+            { primary: '#14B8A6', secondary: '#06B6D4', opacity: 0.6, lineOpacity: 0.15 } :
+            { primary: '#0F766E', secondary: '#0891B2', opacity: 0.35, lineOpacity: 0.18 };
     }
 
     class Particle {
@@ -2445,8 +2418,9 @@
     }
 
     function connect() {
+        const colors = getParticleColors();
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const lineColor = isDark ? 'rgba(20, 184, 166, 0.15)' : 'rgba(15, 118, 110, 0.2)';
+        const lineColor = isDark ? `rgba(20, 184, 166, ${colors.lineOpacity})` : `rgba(15, 118, 110, ${colors.lineOpacity})`;
         
         for (let a = 0; a < particles.length; a++) {
             for (let b = a + 1; b < particles.length; b++) {
@@ -2473,7 +2447,6 @@
     }
     init(); animate();
 
-    // Update particles on theme change
     function updateParticlesForTheme() {
         const colors = getParticleColors();
         particles.forEach(p => {
@@ -2481,23 +2454,21 @@
         });
     }
 
-    // Counters with animation
     const counters = document.querySelectorAll('.stat-value, .inline-stat-value');
     let started = false;
 
     function animateCounterValue(element, target) {
         const duration = 1500;
         const startTime = Date.now();
-        const startValue = 0;
         
         function update() {
             const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const easeProgress = 1 - Math.pow(1 - progress, 3);
-            const currentValue = Math.floor(startValue + (target - startValue) * easeProgress);
+            const currentValue = Math.floor(target * easeProgress);
             
             let suffix = '';
-            if (target === 90) suffix = '%';
+            if (target === 90 || target === 99) suffix = '%';
             else if (target !== 100) suffix = '+';
             
             element.textContent = currentValue + suffix;
@@ -2535,7 +2506,6 @@
     const inlineStats = document.querySelector('.inline-stats');
     if (inlineStats) observer.observe(inlineStats);
 
-    // Skills
     const skillsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -2548,7 +2518,6 @@
 
     skillsObserver.observe(document.querySelector('.skills-container'));
 
-    // Parallax contacts
     const parallaxContacts = document.getElementById('parallaxContacts');
     window.addEventListener('scroll', () => {
         if (!parallaxContacts) return;
@@ -2561,7 +2530,6 @@
         }
     }, { passive: true });
 
-    // Theme toggle
     function toggleTheme() {
         const html = document.documentElement;
         const themeIcon = document.getElementById('theme-icon');
@@ -2590,7 +2558,6 @@
         updateParticlesForTheme();
     });
 
-    // Details animation
     document.querySelectorAll('details').forEach((detail) => {
         detail.addEventListener('toggle', () => {
             if (detail.open) {
@@ -2604,7 +2571,6 @@
         });
     });
 
-    // Dynamic tab title
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             document.title = '👋 Вернитесь! Резюме Антона';

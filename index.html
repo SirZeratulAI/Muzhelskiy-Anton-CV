@@ -47,8 +47,7 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;            background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
@@ -70,7 +69,6 @@
             border-radius: 4px;
         }
 
-        /* КОРРЕКТНЫЙ ПЕРЕНОС СЛОВ - БЕЗ РАЗРЫВА */
         h1, h2, h3, .job-title, .title, .award-card h3, .skill-name, .stat-label, .inline-stat-label, .edu-title, .edu-description, .company, .department {
             word-break: keep-all !important;
             overflow-wrap: normal !important;
@@ -81,7 +79,6 @@
             white-space: normal !important;
         }
 
-        /* Progress Bar */
         .progress-bar {
             position: fixed;
             top: 0; left: 0;
@@ -100,7 +97,6 @@
             transition: width 0.1s linear;
             box-shadow: 0 0 10px var(--neon-glow);
         }
-
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
@@ -149,15 +145,13 @@
 
         #confetti-canvas.active { opacity: 1; }
 
-        .container {
-            max-width: 1100px;
+        .container {            max-width: 1100px;
             margin: 0 auto;
             padding: 1.5rem 1.5rem;
             position: relative;
             z-index: 1;
         }
 
-        /* Burger Menu */
         .burger-menu {
             position: fixed;
             top: 1.2rem;
@@ -200,8 +194,7 @@
 
         .burger-nav {
             position: fixed;
-            top: 0; left: -320px;
-            width: 300px; height: 100vh;
+            top: 0; left: -320px;            width: 300px; height: 100vh;
             background: var(--bg-surface);
             box-shadow: var(--shadow-lg);
             z-index: 1000;
@@ -247,12 +240,10 @@
 
         .overlay.active { opacity: 1; visibility: visible; }
 
-        /* Theme Toggle */
         .theme-toggle {
             position: fixed;
             top: 1.2rem;
-            right: 1.5rem;
-            z-index: 1001;
+            right: 1.5rem;            z-index: 1001;
         }
 
         .theme-toggle-btn {
@@ -289,7 +280,6 @@
 
         .theme-icon { width: 14px; height: 14px; }
 
-        /* Floating Contact Button */
         .floating-contact {
             position: fixed;
             bottom: 2rem;
@@ -302,8 +292,7 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 0 rgba(20, 184, 166, 0.4);
+            justify-content: center;            box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 0 rgba(20, 184, 166, 0.4);
             animation: floatPulse 3s ease-in-out infinite;
             transition: all 0.3s ease;
             color: white;
@@ -350,11 +339,9 @@
             50% { box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 12px rgba(20, 184, 166, 0); }
         }
 
-        /* Header */
         header {
             text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;            padding-bottom: 1.5rem;
             padding-top: 1.5rem;
             border-bottom: 2px solid transparent;
             border-image: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)) 1;
@@ -379,48 +366,43 @@
 
         .avatar-container:hover .avatar { transform: scale(1.03); }
 
+        /* ИМЯ - ВИДИМОЕ СРАЗУ */
         h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
             letter-spacing: -0.03em;
+            color: var(--gradient-start);
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.25rem;
-            min-height: 1.2em;
-            display: inline-block;
-        }
-
-        .letter {
-            display: inline-block;
+            margin-bottom: 0.5rem;
+            display: block;
+            line-height: 1.1;
             opacity: 0;
-            transform: translateY(20px);
-            animation: letterReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInName 0.8s ease forwards;
         }
 
-        .letter.space { width: 0.3em; }
-
-        @keyframes letterReveal {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInName {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);             }
         }
 
         .title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--accent);
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
             opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 1.5s;
+            animation-delay: 0.4s;
             margin-bottom: 0.75rem;
-            min-height: 1.5em;
-        }
-
-        .title .letter {
-            animation: letterReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes fadeInUp {
@@ -442,7 +424,7 @@
             color: var(--text-secondary);
             opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
-            animation-delay: 2s;
+            animation-delay: 0.6s;
             box-shadow: var(--shadow-sm);
         }
 
@@ -457,8 +439,7 @@
         }
 
         .career-counter .live-dot {
-            width: 8px; height: 8px;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            width: 8px; height: 8px;            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             animation: livePulse 2s ease-in-out infinite;
             box-shadow: 0 0 10px var(--neon-glow);
@@ -469,6 +450,11 @@
             50% { transform: scale(1.3); opacity: 0.6; }
         }
 
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem !important; }
+            .title { font-size: 0.85rem !important; }
+        }
+
         @media (max-width: 640px) {
             .career-counter {
                 flex-direction: column;
@@ -476,10 +462,9 @@
                 padding: 0.5rem 0.9rem;
                 font-size: 0.8rem;
             }
-            h1 { font-size: 1.85rem; }
+            h1 { font-size: 1.7rem !important; }
         }
 
-        /* Stats */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -503,8 +488,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            height: 2px;            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -553,8 +537,7 @@
         }
 
         h2::before {
-            content: '';
-            display: block;
+            content: '';            display: block;
             width: 4px;
             height: 26px;
             background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
@@ -562,7 +545,6 @@
             box-shadow: var(--shadow-glow);
         }
 
-        /* Cover Letter */
         .cover-letter-toggle {
             background: linear-gradient(135deg, var(--accent-light), transparent);
             border: 2px solid var(--border);
@@ -604,13 +586,11 @@
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
             font-size: 1rem;
-            line-height: 1.7;
-        }
+            line-height: 1.7;        }
 
         .cover-letter-content p { margin-bottom: 0.875rem; }
         .cover-letter-content strong { color: var(--text-primary); }
 
-        /* About */
         .about-expandable summary {
             color: var(--accent);
             font-weight: 600;
@@ -650,14 +630,12 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        /* Timeline */
         .timeline {
             position: relative;
             padding-left: 0;
         }
 
-        .timeline::before {
-            content: '';
+        .timeline::before {            content: '';
             position: absolute;
             left: 1.5rem;
             top: 0;
@@ -706,7 +684,6 @@
             box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.3);
             animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
@@ -756,8 +733,7 @@
                 box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
             }
             50% {
-                opacity: 0.85;
-                transform: translate(-50%, -50%) rotate(-90deg) scale(1.08);
+                opacity: 0.85;                transform: translate(-50%, -50%) rotate(-90deg) scale(1.08);
                 box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
             }
         }
@@ -806,8 +782,7 @@
         }
 
         .company a {
-            color: inherit;
-            text-decoration: none;
+            color: inherit;            text-decoration: none;
             border-bottom: 2px dotted var(--accent);
             transition: all 0.2s ease;
         }
@@ -856,7 +831,6 @@
         }
 
         details { margin-top: 0.5rem; }
-
         details summary {
             color: var(--accent);
             font-weight: 600;
@@ -906,8 +880,7 @@
         }
 
         .details-content li::before {
-            content: '▸';
-            color: var(--accent);
+            content: '▸';            color: var(--accent);
             position: absolute;
             left: 0;
         }
@@ -923,7 +896,6 @@
 
         .details-content a:hover { border-bottom-style: solid; }
 
-        /* Awards */
         .awards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -957,8 +929,7 @@
             margin-bottom: 0.25rem;
         }
 
-        .award-year {
-            display: inline-block;
+        .award-year {            display: inline-block;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             padding: 0.2rem 0.55rem;
@@ -1007,8 +978,7 @@
             width: 28px; height: 28px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
-            color: white;
-            text-decoration: none;
+            color: white;            text-decoration: none;
             margin-top: 0.5rem;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-glow);
@@ -1021,7 +991,6 @@
 
         .award-link-icon svg { width: 14px; height: 14px; }
 
-        /* Skills */
         .skills-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -1058,8 +1027,7 @@
         .skill-percent { font-weight: 700; color: var(--accent); font-size: 0.85rem; }
 
         .skill-bar {
-            height: 7px;
-            background: var(--border);
+            height: 7px;            background: var(--border);
             border-radius: 3px;
             overflow: hidden;
         }
@@ -1072,7 +1040,6 @@
             transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Two Column */
         .two-col {
             display: grid;
             grid-template-columns: 1fr;
@@ -1081,7 +1048,6 @@
 
         @media (min-width: 768px) {
             .two-col { grid-template-columns: 1fr 1fr; }
-            h1 { font-size: 3rem; }
         }
 
         .info-block {
@@ -1110,8 +1076,7 @@
             margin-bottom: 1rem;
             color: var(--text-secondary);
             font-size: 0.9rem;
-            line-height: 1.55;
-            padding-bottom: 1rem;
+            line-height: 1.55;            padding-bottom: 1rem;
             border-bottom: 1px dashed var(--border);
         }
 
@@ -1160,8 +1125,7 @@
         }
 
         .edu-date-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            display: inline-block;            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             padding: 0.25rem 0.65rem;
             border-radius: 9999px;
@@ -1210,8 +1174,7 @@
             color: var(--text-secondary);
             font-size: 0.875rem;
             line-height: 1.6;
-            animation: fadeIn 0.4s ease-in-out;
-            box-shadow: var(--shadow-md);
+            animation: fadeIn 0.4s ease-in-out;            box-shadow: var(--shadow-md);
         }
 
         .language-popup-content h4 {
@@ -1253,7 +1216,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Parallax Contact Block */
         .parallax-contacts {
             margin-top: 3rem;
             padding: 3rem 2rem;
@@ -1261,8 +1223,7 @@
             border-radius: 20px;
             text-align: center;
             position: relative;
-            overflow: hidden;
-            border: 2px solid var(--border);
+            overflow: hidden;            border: 2px solid var(--border);
             box-shadow: var(--shadow-lg);
         }
 
@@ -1311,8 +1272,7 @@
         }
 
         .contact-icons-grid {
-            display: flex;
-            justify-content: center;
+            display: flex;            justify-content: center;
             gap: 1.5rem;
             flex-wrap: wrap;
             position: relative;
@@ -1361,8 +1321,7 @@
             bottom: -28px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.75rem;            font-weight: 600;
             color: var(--text-secondary);
             white-space: nowrap;
             opacity: 0;
@@ -1371,7 +1330,6 @@
 
         .contact-icon-circle:hover .contact-icon-label { opacity: 1; }
 
-        /* Toast */
         .toast {
             position: fixed;
             top: 2rem;
@@ -1413,28 +1371,11 @@
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
-
-        /* Responsive - УМЕНЬШАЕМ ШРИФТЫ НА МОБИЛЬНЫХ */
         @media (max-width: 768px) {
-            h1 { font-size: 1.6rem !important; }
-            h2 { font-size: 1.3rem !important; }
-            .title { font-size: 0.95rem !important; line-height: 1.4 !important; }
-            
             .timeline::before { left: 1.5rem; }
-            .timeline-item {
-                grid-template-columns: 2.5rem 1fr;
-            }
-            .timeline-date {
-                left: 1.5rem;
-                font-size: 0.7rem;
-                padding: 0.35rem 0.6rem;
-            }
-            .current-badge {
-                left: 1.5rem;
-                top: calc(50% + 1.8rem);
-                font-size: 0.65rem;
-                padding: 0.3rem 0.6rem;
-            }
+            .timeline-item { grid-template-columns: 2.5rem 1fr; }
+            .timeline-date { left: 1.5rem; font-size: 0.7rem; padding: 0.35rem 0.6rem; }
+            .current-badge { left: 1.5rem; top: calc(50% + 1.8rem); font-size: 0.65rem; padding: 0.3rem 0.6rem; }
             .inline-stats { grid-template-columns: repeat(2, 1fr); }
             .parallax-contacts { padding: 2.5rem 1.25rem; }
             .parallax-contacts h3 { font-size: 1.4rem; }
@@ -1450,25 +1391,10 @@
 
         @media (max-width: 480px) {
             .container { padding: 1.25rem 1rem; }
-            h1 { font-size: 1.3rem !important; letter-spacing: -0.02em !important; }
-            h2 { font-size: 1.2rem !important; }
-            .title { font-size: 0.85rem !important; }
-            
             .timeline::before { left: 1.25rem; }
-            .timeline-item {
-                grid-template-columns: 2.2rem 1fr;
-            }
-            .timeline-date {
-                left: 1.25rem;
-                font-size: 0.65rem;
-                padding: 0.3rem 0.5rem;
-            }
-            .current-badge {
-                left: 1.25rem;
-                top: calc(50% + 1.6rem);
-                font-size: 0.6rem;
-                padding: 0.25rem 0.5rem;
-            }
+            .timeline-item { grid-template-columns: 2.2rem 1fr; }
+            .timeline-date { left: 1.25rem; font-size: 0.65rem; padding: 0.3rem 0.5rem; }
+            .current-badge { left: 1.25rem; top: calc(50% + 1.6rem); font-size: 0.6rem; padding: 0.25rem 0.5rem; }
             .experience-item { padding: 1rem; }
             .inline-stats { grid-template-columns: 1fr 1fr; gap: 0.5rem; padding: 0.75rem; }
             .inline-stat-value { font-size: 1.25rem; }
@@ -1494,7 +1420,6 @@
     <div class="progress-bar">
         <div class="progress-bar-fill" id="progressFill"></div>
     </div>
-
     <div class="section-indicator" id="sectionIndicator">О себе</div>
 
     <canvas id="particles-canvas"></canvas>
@@ -1543,14 +1468,13 @@
         <span style="font-size: 1.5rem;">🎮</span>
         <span>Easter Egg Found! You're a true explorer</span>
     </div>
-
 <div class="container">
     <header>
         <div class="avatar-container">
             <img src="https://s10.iimage.su/s/03/g1QZN6VxO6De802eqUPonbRWVCbbBZsjGh01HmXv2.jpg" alt="Антон Мужельский" class="avatar">
         </div>
-        <h1 id="animatedName"></h1>
-        <div class="title" id="animatedTitle"></div>
+        <h1>АНТОН МУЖЕЛЬСКИЙ</h1>
+        <div class="title">Директор по цифровой трансформации / CDTO / CPO</div>
         <div class="career-counter">
             <span class="live-dot"></span>
             <span>В профессии с сентября 2012:</span>
@@ -1575,7 +1499,7 @@
 
     <details class="cover-letter-toggle">
         <summary>
-            <span> Сопроводительное письмо</span>
+            <span>📄 Сопроводительное письмо</span>
         </summary>
         <div class="cover-letter-content">
             <p>Добрый день!</p>
@@ -1593,8 +1517,7 @@
 
             <div class="timeline-item current">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2022--н.в.</div>
-                <div class="current-badge">Работает</div>
+                <div class="timeline-date">2022--н.в.</div>                <div class="current-badge">Работает</div>
                 <div class="experience-item current">
                     <div class="job-title">Директор по цифровой трансформации</div>
                     <div class="department">Центр стратегии и аналитики</div>
@@ -1632,7 +1555,7 @@
                 <div class="timeline-date">2019--2022</div>
                 <div class="experience-item">
                     <div class="job-title">Директор подразделения «Пользовательские сервисы»</div>
-                    <div class="company"><a href="https://domrf.ru/" target="_blank">ДОМ.РФ</a></div>
+                    <div class="company"><a href="https://дом.рф/" target="_blank">ДОМ.РФ</a></div>
                     <div class="job-summary">
                         Создание цифровой экосистемы пользовательских сервисов и цифровизация пользовательского опыта группы компаний.
                     </div>
@@ -1643,8 +1566,7 @@
                             <div class="inline-stat-label">Автоматизированных сервисов</div>
                         </div>
                         <div class="inline-stat">
-                            <div class="inline-stat-value" data-target="100">0</div>
-                            <div class="inline-stat-label">Экономии в год (ИИ), млн ₽</div>
+                            <div class="inline-stat-value" data-target="100">0</div>                            <div class="inline-stat-label">Экономии в год (ИИ), млн ₽</div>
                         </div>
                         <div class="inline-stat">
                             <div class="inline-stat-value" data-target="90">0</div>
@@ -1693,8 +1615,7 @@
                                 <li>Внедрение платформы-конструктора для создания чат-ботов</li>
                                 <li>Десятки цифровых сервисов для IT и HR</li>
                                 <li>Контроль формирования HR-бюджета Банка</li>
-                                <li>Контроль модели численности Банка</li>
-                            </ul>
+                                <li>Контроль модели численности Банка</li>                            </ul>
                         </div>
                     </details>
                 </div>
@@ -1727,7 +1648,7 @@
                 <div class="timeline-date">2012--2015</div>
                 <div class="experience-item">
                     <div class="job-title">Старший консультант / Консультант</div>
-                    <div class="company"><a href="https://ey.com/" target="_blank">Ernst & Young</a> / <a href="https://home.kpmg/" target="_blank">KPMG</a></div>
+                    <div class="company"><a href="https://www.ey.com/en_rs/locations/russia" target="_blank">Ernst & Young</a> / <a href="https://kpmg.com/xx/en.html" target="_blank">KPMG</a></div>
                     <div class="job-summary">
                         Проведение предынвестиционных исследований (Due Diligence) компаний для целей слияния/поглощения.
                     </div>
@@ -1744,7 +1665,6 @@
                     </details>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -1759,7 +1679,7 @@
                     <div class="award-details-content">
                         Международная премия Rivelty в области внутренних коммуникаций и employee experience.
                         <br>
-                        <a href="https://rexawards.com/" target="_blank" class="award-link-icon" title="Перейти на сайт">
+                        <a href="https://awards.rivelty.ru/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
@@ -1767,14 +1687,14 @@
             </div>
 
             <div class="award-card">
-                <h3>️ InterComm</h3>
+                <h3>⚖️ InterComm</h3>
                 <span class="award-year">2020 -- н.в.</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
                         Международная премия в области корпоративных коммуникаций.
                         <br>
-                        <a href="https://intercomm-award.ru/" target="_blank" class="award-link-icon" title="Перейти на сайт">
+                        <a href="https://award.intercomm.media/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
@@ -1793,8 +1713,7 @@
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
-                </details>
-            </div>
+                </details>            </div>
         </div>
     </section>
 
@@ -1809,7 +1728,7 @@
                     <div class="award-details-content">
                         Победа за внедрение ИИ в анализе внутренних коммуникаций для прогнозирования эмоционального выгорания.
                         <br>
-                        <a href="https://intercomm-award.ru/" target="_blank" class="award-link-icon" title="Перейти на сайт">
+                        <a href="https://award.intercomm.media/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
@@ -1824,7 +1743,7 @@
                     <div class="award-details-content">
                         Intranet and Digital Workplace Awards в номинации Digital Employee Experience.
                         <br>
-                        <a href="https://www.steptwo.com.au/awards/" target="_blank" class="award-link-icon" title="Перейти на сайт">
+                        <a href="https://www.steptwo.com.au/award-winner/dom-rf-building-a-digital-ecosystem-of-services/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
@@ -1832,19 +1751,18 @@
             </div>
 
             <div class="award-card">
-                <h3> Digital Workplace</h3>
+                <h3>🏆 Digital Workplace</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
                         Digital Workplace of the Year -- лучшее цифровое рабочее место года по версии StepTwo.
                         <br>
-                        <a href="https://www.steptwo.com.au/awards/digital-workplace-of-the-year-2021/" target="_blank" class="award-link-icon" title="Перейти на сайт">
+                        <a href="https://дом.рф/media/news/dom-rf-udostoen-premii-digital-workplace-of-the-year-2021/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
-                </details>
-            </div>
+                </details>            </div>
 
             <div class="award-card">
                 <h3>🏆 REXA</h3>
@@ -1854,7 +1772,7 @@
                     <div class="award-details-content">
                         Rivelty REXA Awards -- международная премия за excellence in employee communications.
                         <br>
-                        <a href="https://rexawards.com/winners-2021/" target="_blank" class="award-link-icon" title="Перейти на сайт">
+                        <a href="https://awards.rivelty.ru/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
@@ -1862,7 +1780,7 @@
             </div>
 
             <div class="award-card">
-                <h3> Magic People IT</h3>
+                <h3>🏆 Magic People IT</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
@@ -1893,8 +1811,7 @@
         </div>
     </section>
 
-    <section id="skills">
-        <h2>Ключевые навыки</h2>
+    <section id="skills">        <h2>Ключевые навыки</h2>
         <div class="skills-container">
             <div class="skill-category">
                 <h3>🎯 Management</h3>
@@ -1943,8 +1860,7 @@
                         <span class="skill-percent">90%</span>
                     </div>
                     <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
-                </div>
-            </div>
+                </div>            </div>
 
             <div class="skill-category">
                 <h3>🎨 Design & Dev</h3>
@@ -1993,8 +1909,7 @@
 
     <div class="two-col" id="education">
         <section>
-            <h2>Образование</h2>
-            <div class="info-block">
+            <h2>Образование</h2>            <div class="info-block">
                 <div class="edu-item">
                     <div class="edu-header">
                         <div class="edu-title"><a href="https://bmstu.ru/" target="_blank">МГТУ им. Баумана</a></div>
@@ -2017,14 +1932,14 @@
             <div class="info-block">
                 <div class="edu-item">
                     <div class="edu-header">
-                        <div class="edu-title"><a href="https://www.skolkovobs.ru/" target="_blank">МШУ Сколково</a></div>
+                        <div class="edu-title"><a href="https://www.skolkovo.ru/" target="_blank">МШУ Сколково</a></div>
                         <span class="edu-date-badge">2025 -- 2026</span>
                     </div>
                     <div class="edu-description">Программа «Лидеры изменений»</div>
                 </div>
                 <div class="edu-item" style="margin-top: 1.25rem;">
                     <div class="edu-header">
-                        <div class="edu-title"><a href="https://skoltech.ru/" target="_blank">СколТех</a></div>
+                        <div class="edu-title"><a href="https://www.skoltech.ru/" target="_blank">СколТех</a></div>
                         <span class="edu-date-badge">2025</span>
                     </div>
                     <div class="edu-description">«Введение в практику эффективного промптинга»</div>
@@ -2043,8 +1958,7 @@
                         <summary class="language-trigger">Английский – свободно (подробнее)</summary>
                         <div class="language-popup-content">
                             <h4>Cambridge Certificate in Advanced English (CAE)</h4>
-                            <span class="language-badge">Уровень C1 · 2012</span>
-                            <p style="margin-top: 0.75rem;">
+                            <span class="language-badge">Уровень C1 · 2012</span>                            <p style="margin-top: 0.75rem;">
                                 Cambridge CAE -- internationally recognised qualification proving high-level achievement in learning English as a foreign language.
                             </p>
                             <ul>
@@ -2093,34 +2007,7 @@
         <p style="margin-top: 0.5rem; font-size: 0.8rem;">Для PDF: Ctrl+P → Сохранить как PDF</p>
     </footer>
 </div>
-
 <script>
-    function typeText(element, text, delay = 0) {
-        const letters = text.split('');
-        letters.forEach((char, index) => {
-            const span = document.createElement('span');
-            span.className = char === ' ' ? 'letter space' : 'letter';
-            span.textContent = char === ' ' ? '' : char;
-            span.style.animationDelay = `${delay + index * 0.05}s`;
-            element.appendChild(span);
-        });
-    }
-
-    window.addEventListener('load', () => {
-        const nameElement = document.getElementById('animatedName');
-        const titleElement = document.getElementById('animatedTitle');
-        
-        if (nameElement) {
-            typeText(nameElement, "АНТОН МУЖЕЛЬСКИЙ", 0);
-        }
-        
-        if (titleElement) {
-            setTimeout(() => {
-                typeText(titleElement, "Директор по цифровой трансформации / CDTO / CPO", 1.2);
-            }, 100);
-        }
-    });
-
     (function liveCareerCounter() {
         const startDate = new Date(2012, 8, 1);
         const displayEl = document.getElementById('careerTime');
@@ -2169,8 +2056,7 @@
                 if (progress < 1) {
                     const currentYears = Math.floor(progress * 12);
                     const currentMonths = Math.floor((progress * 144) % 12);
-                    const currentDays = Math.floor((progress * 4380) % 30);
-                    displayEl.textContent = `${currentYears} лет, ${currentMonths} мес, ${currentDays} дн`;
+                    const currentDays = Math.floor((progress * 4380) % 30);                    displayEl.textContent = `${currentYears} лет, ${currentMonths} мес, ${currentDays} дн`;
                     requestAnimationFrame(updateCounter);
                 } else {
                     update();
@@ -2219,8 +2105,7 @@
                 const rect = section.getBoundingClientRect();
                 if (rect.top <= window.innerHeight * 0.4) {
                     const id = section.id || 'header';
-                    if (sectionNames[id]) currentSection = sectionNames[id];
-                }
+                    if (sectionNames[id]) currentSection = sectionNames[id];                }
             });
 
             sectionIndicator.textContent = currentSection;
@@ -2269,7 +2154,6 @@
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 4000);
             launchConfetti();
-
             const originalColors = ['#14B8A6', '#06B6D4'];
             const partyColors = ['#EC4899', '#8B5CF6', '#F59E0B', '#10B981', '#06B6D4'];
             particles.forEach(p => {
@@ -2319,8 +2203,7 @@
 
                 pieces.forEach(p => {
                     if (p.life <= 0) return;
-                    alive = true;
-                    p.vy += p.gravity;
+                    alive = true;                    p.vy += p.gravity;
                     p.x += p.vx;
                     p.y += p.vy;
                     p.rotation += p.rotationSpeed;
@@ -2369,8 +2252,7 @@
     function resize() {
         width = window.innerWidth;
         height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = width;        canvas.height = height;
     }
     window.addEventListener('resize', resize);
     resize();
@@ -2419,8 +2301,7 @@
         }
     }
 
-    function init() {
-        particles = [];
+    function init() {        particles = [];
         const n = Math.min(80, Math.floor((width * height) / 15000));
         for (let i = 0; i < n; i++) particles.push(new Particle());
     }
@@ -2469,8 +2350,7 @@
         const duration = 1500;
         const startTime = Date.now();
         
-        function update() {
-            const elapsed = Date.now() - startTime;
+        function update() {            const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const currentValue = Math.floor(target * easeProgress);
@@ -2519,8 +2399,7 @@
             if (entry.isIntersecting) {
                 entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
                     setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, 200);
-                });
-            }
+                });            }
         });
     }, { threshold: 0.3 });
 
@@ -2569,8 +2448,7 @@
     document.querySelectorAll('details').forEach((detail) => {
         detail.addEventListener('toggle', () => {
             if (detail.open) {
-                const content = detail.querySelector('.details-content, .language-popup-content');
-                if (content) {
+                const content = detail.querySelector('.details-content, .language-popup-content');                if (content) {
                     content.style.animation = 'none';
                     content.offsetHeight;
                     content.style.animation = 'fadeIn 0.4s ease-out';
@@ -2590,44 +2468,3 @@
 
 </body>
 </html>
-
-4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-        } else {
-            themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-        }
-        updateParticlesForTheme();
-    });
-
-    document.querySelectorAll('details').forEach((detail) => {
-        detail.addEventListener('toggle', () => {
-            if (detail.open) {
-                const content = detail.querySelector('.details-content, .language-popup-content');
-                if (content) {
-                    content.style.animation = 'none';
-                    content.offsetHeight;
-                    content.style.animation = 'fadeIn 0.4s ease-out';
-                }
-            }
-        });
-    });
-
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            document.title = '👋 Вернитесь! Резюме Антона';
-        } else {
-            document.title = 'Антон Мужельский | CDTO / CPO';
-        }
-    });
-</script>
-
-</body>
-</html>
-
-
-
-              <script>
-                              
-              </script>
-                        </body>
-                        </html>
-                    

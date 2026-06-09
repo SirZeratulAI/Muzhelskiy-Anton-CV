@@ -1,8 +1,8 @@
-<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Антон Мужельский | CDTO / CPO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,13 +44,21 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; }
+        html { 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;            background-color: var(--bg-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -71,12 +79,11 @@
 
         h1, h2, h3, .job-title, .title, .award-card h3, .skill-name, .stat-label, .inline-stat-label, .edu-title, .edu-description, .company, .department {
             word-break: keep-all !important;
-            overflow-wrap: normal !important;
-            word-wrap: normal !important;
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
             hyphens: none !important;
             -webkit-hyphens: none !important;
             -ms-hyphens: none !important;
-            white-space: normal !important;
         }
 
         .progress-bar {
@@ -97,6 +104,7 @@
             transition: width 0.1s linear;
             box-shadow: 0 0 10px var(--neon-glow);
         }
+
         @keyframes gradientFlow {
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
@@ -120,6 +128,9 @@
             transition: all 0.3s ease;
             box-shadow: var(--shadow-md);
             white-space: nowrap;
+            max-width: 40vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .section-indicator.visible { opacity: 1; transform: translateY(0); }
@@ -133,21 +144,11 @@
             opacity: 0.7;
         }
 
-        #confetti-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        #confetti-canvas.active { opacity: 1; }
-
-        .container {            max-width: 1100px;
+        .container {
+            max-width: 1100px;
+            width: 100%;
             margin: 0 auto;
-            padding: 1.5rem 1.5rem;
+            padding: 1.5rem;
             position: relative;
             z-index: 1;
         }
@@ -194,14 +195,18 @@
 
         .burger-nav {
             position: fixed;
-            top: 0; left: -320px;            width: 300px; height: 100vh;
+            top: 0; left: -100%;
+            width: min(300px, 85vw);
+            height: 100vh;
+            height: 100dvh;
             background: var(--bg-surface);
             box-shadow: var(--shadow-lg);
             z-index: 1000;
-            padding: 5rem 2rem 2rem;
+            padding: 5rem 1.5rem 2rem;
             transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             border-right: 2px solid transparent;
             border-image: linear-gradient(180deg, var(--gradient-start), var(--gradient-end)) 1;
+            overflow-y: auto;
         }
 
         .burger-nav.active { left: 0; }
@@ -243,7 +248,8 @@
         .theme-toggle {
             position: fixed;
             top: 1.2rem;
-            right: 1.5rem;            z-index: 1001;
+            right: 1.5rem;
+            z-index: 1001;
         }
 
         .theme-toggle-btn {
@@ -292,7 +298,8 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;            box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 0 rgba(20, 184, 166, 0.4);
+            justify-content: center;
+            box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 0 rgba(20, 184, 166, 0.4);
             animation: floatPulse 3s ease-in-out infinite;
             transition: all 0.3s ease;
             color: white;
@@ -339,9 +346,168 @@
             50% { box-shadow: 0 8px 24px var(--neon-glow), 0 0 0 12px rgba(20, 184, 166, 0); }
         }
 
+        .exit-popup-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .exit-popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .exit-popup {
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.8) translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), var(--shadow-glow);
+            overflow: hidden;
+        }
+
+        .exit-popup-overlay.active .exit-popup {
+            transform: scale(1) translateY(0);
+        }
+
+        .exit-popup::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+        }
+
+        .exit-popup-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            width: 36px; height: 36px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .exit-popup-close:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .exit-popup-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-15deg); }
+            75% { transform: rotate(15deg); }
+        }
+
+        .exit-popup-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .exit-popup-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.75rem;
+        }
+
+        .exit-popup-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .exit-contact-btn {
+            width: 52px; height: 52px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .exit-contact-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .exit-contact-btn svg { width: 24px; height: 24px; }
+
+        .exit-popup-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .exit-popup-cta:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 10px 30px var(--neon-glow);
+            gap: 0.75rem;
+        }
+
+        .exit-popup-cta svg { width: 16px; height: 16px; }
+
         header {
             text-align: center;
-            margin-bottom: 1.5rem;            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
             padding-top: 1.5rem;
             border-bottom: 2px solid transparent;
             border-image: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)) 1;
@@ -362,19 +528,20 @@
                         linear-gradient(135deg, var(--gradient-start), var(--gradient-end)) border-box;
             box-shadow: var(--shadow-lg), var(--shadow-glow);
             transition: transform 0.3s ease;
+            max-width: 100%;
         }
 
         .avatar-container:hover .avatar { transform: scale(1.03); }
 
-        /* ИМЯ - ВИДИМОЕ СРАЗУ */
         h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
+            font-size: clamp(1.75rem, 5vw, 3rem);
             font-weight: 700;
             letter-spacing: -0.03em;
             color: var(--gradient-start);
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0.5rem;
             display: block;
@@ -384,17 +551,12 @@
         }
 
         @keyframes fadeInName {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0);             }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .title {
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
             color: var(--accent);
             font-weight: 600;
             letter-spacing: 0.05em;
@@ -426,6 +588,9 @@
             animation: fadeInUp 0.6s ease forwards;
             animation-delay: 0.6s;
             box-shadow: var(--shadow-sm);
+            max-width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .career-counter .counter-value {
@@ -439,7 +604,8 @@
         }
 
         .career-counter .live-dot {
-            width: 8px; height: 8px;            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            width: 8px; height: 8px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             animation: livePulse 2s ease-in-out infinite;
             box-shadow: 0 0 10px var(--neon-glow);
@@ -448,21 +614,6 @@
         @keyframes livePulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.3); opacity: 0.6; }
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem !important; }
-            .title { font-size: 0.85rem !important; }
-        }
-
-        @media (max-width: 640px) {
-            .career-counter {
-                flex-direction: column;
-                gap: 0.3rem;
-                padding: 0.5rem 0.9rem;
-                font-size: 0.8rem;
-            }
-            h1 { font-size: 1.7rem !important; }
         }
 
         .stats-bar {
@@ -488,7 +639,8 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 2px;            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -498,7 +650,7 @@
 
         .stat-value {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.75rem;
+            font-size: clamp(1.25rem, 4vw, 1.75rem);
             font-weight: 700;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
@@ -510,13 +662,8 @@
 
         .stat-label {
             color: var(--text-secondary);
-            font-size: 0.75rem;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
             font-weight: 500;
-        }
-
-        @media (max-width: 640px) {
-            .stats-bar { grid-template-columns: repeat(2, 1fr); }
-            .stat-item:nth-child(5) { grid-column: span 2; }
         }
 
         section {
@@ -526,7 +673,7 @@
 
         h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 1.5rem;
@@ -537,12 +684,14 @@
         }
 
         h2::before {
-            content: '';            display: block;
+            content: '';
+            display: block;
             width: 4px;
             height: 26px;
             background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
             border-radius: 2px;
             box-shadow: var(--shadow-glow);
+            flex-shrink: 0;
         }
 
         .cover-letter-toggle {
@@ -568,6 +717,7 @@
             justify-content: space-between;
             align-items: center;
             font-size: 1rem;
+            gap: 1rem;
         }
 
         .cover-letter-toggle summary::-webkit-details-marker { display: none; }
@@ -576,6 +726,7 @@
             content: '▼';
             font-size: 0.8rem;
             transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
 
         .cover-letter-toggle[open] summary::after { transform: rotate(180deg); }
@@ -586,7 +737,8 @@
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
             font-size: 1rem;
-            line-height: 1.7;        }
+            line-height: 1.7;
+        }
 
         .cover-letter-content p { margin-bottom: 0.875rem; }
         .cover-letter-content strong { color: var(--text-primary); }
@@ -630,16 +782,55 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.from-left { transform: translateX(-60px); }
+        .reveal.from-right { transform: translateX(60px); }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0);
+        }
+
+        .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-stagger.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+        .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.15s; }
+        .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.2s; }
+        .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.25s; }
+        .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
+        .reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.35s; }
+
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+        }
+
         .timeline {
             position: relative;
             padding-left: 0;
         }
 
-        .timeline::before {            content: '';
+        .timeline::before {
+            content: '';
             position: absolute;
             left: 1.5rem;
-            top: 0;
-            bottom: 0;
+            top: 0; bottom: 0;
             width: 3px;
             background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
             border-radius: 3px;
@@ -651,26 +842,12 @@
             align-items: center;
             position: relative;
             margin-bottom: 2.5rem;
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
-        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .timeline-marker {
             grid-column: 1;
             justify-self: center;
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
             border: 3px solid var(--bg-primary);
@@ -684,6 +861,7 @@
             box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.3);
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
@@ -733,7 +911,8 @@
                 box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
             }
             50% {
-                opacity: 0.85;                transform: translate(-50%, -50%) rotate(-90deg) scale(1.08);
+                opacity: 0.85;
+                transform: translate(-50%, -50%) rotate(-90deg) scale(1.08);
                 box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
             }
         }
@@ -747,6 +926,7 @@
             box-shadow: var(--shadow-md);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+            min-width: 0;
         }
 
         .experience-item.current {
@@ -760,7 +940,7 @@
         }
 
         .job-title {
-            font-size: 1.05rem;
+            font-size: clamp(0.95rem, 3vw, 1.05rem);
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 0.25rem;
@@ -782,7 +962,8 @@
         }
 
         .company a {
-            color: inherit;            text-decoration: none;
+            color: inherit;
+            text-decoration: none;
             border-bottom: 2px dotted var(--accent);
             transition: all 0.2s ease;
         }
@@ -798,7 +979,7 @@
 
         .inline-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
             gap: 0.75rem;
             margin: 1rem 0;
             padding: 1rem;
@@ -807,14 +988,11 @@
             border: 1px solid var(--border);
         }
 
-        .inline-stat {
-            text-align: center;
-            padding: 0.5rem;
-        }
+        .inline-stat { text-align: center; padding: 0.5rem; }
 
         .inline-stat-value {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
             font-weight: 700;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
@@ -826,11 +1004,12 @@
 
         .inline-stat-label {
             color: var(--text-secondary);
-            font-size: 0.7rem;
+            font-size: clamp(0.6rem, 2vw, 0.7rem);
             font-weight: 500;
         }
 
         details { margin-top: 0.5rem; }
+
         details summary {
             color: var(--accent);
             font-weight: 600;
@@ -856,6 +1035,7 @@
             font-size: 0.9rem;
             color: white;
             transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
 
         details summary:hover::before { transform: rotate(90deg); }
@@ -866,6 +1046,11 @@
             padding-top: 0.75rem;
             border-top: 2px dashed var(--border);
             animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .details-content ul { list-style: none; padding-left: 0; }
@@ -880,7 +1065,8 @@
         }
 
         .details-content li::before {
-            content: '▸';            color: var(--accent);
+            content: '▸';
+            color: var(--accent);
             position: absolute;
             left: 0;
         }
@@ -896,24 +1082,28 @@
 
         .details-content a:hover { border-bottom-style: solid; }
 
-        .awards-grid {
+        .compact-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 0.75rem;
         }
 
         @media (min-width: 768px) {
-            .awards-grid { grid-template-columns: repeat(3, 1fr); }
+            .compact-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
         }
 
         .award-card {
             background: linear-gradient(135deg, var(--bg-surface), var(--accent-light));
             border: 2px solid var(--border);
             border-radius: 12px;
-            padding: 1rem;
+            padding: 0.875rem;
             transition: all 0.3s ease;
             position: relative;
             cursor: pointer;
+            min-width: 0;
         }
 
         .award-card:hover {
@@ -924,50 +1114,52 @@
 
         .award-card h3 {
             color: var(--accent);
-            font-size: 0.9rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
             font-weight: 700;
             margin-bottom: 0.25rem;
+            line-height: 1.2;
         }
 
-        .award-year {            display: inline-block;
+        .award-year {
+            display: inline-block;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
-            padding: 0.2rem 0.55rem;
+            padding: 0.15rem 0.5rem;
             border-radius: 9999px;
-            font-size: 0.7rem;
+            font-size: clamp(0.6rem, 2vw, 0.7rem);
             font-weight: 700;
-            margin-top: 0.5rem;
+            margin-top: 0.35rem;
         }
 
         .award-details-toggle {
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
+            margin-top: 0.4rem;
+            font-size: 0.7rem;
             color: var(--accent);
             font-weight: 600;
             cursor: pointer;
             list-style: none;
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.2rem;
         }
 
         .award-details-toggle::-webkit-details-marker { display: none; }
 
         .award-details-toggle::before {
             content: '›';
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: transform 0.3s ease;
         }
 
         .award-details-toggle[open]::before { content: '‹'; }
 
         .award-details-content {
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
+            margin-top: 0.4rem;
+            padding-top: 0.4rem;
             border-top: 1px dashed var(--border);
             color: var(--text-secondary);
-            font-size: 0.8rem;
-            line-height: 1.5;
+            font-size: 0.75rem;
+            line-height: 1.4;
             animation: fadeIn 0.3s ease;
         }
 
@@ -975,11 +1167,12 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 28px; height: 28px;
+            width: 24px; height: 24px;
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             border-radius: 50%;
-            color: white;            text-decoration: none;
-            margin-top: 0.5rem;
+            color: white;
+            text-decoration: none;
+            margin-top: 0.4rem;
             transition: all 0.3s ease;
             box-shadow: var(--shadow-glow);
         }
@@ -989,7 +1182,171 @@
             box-shadow: 0 0 25px rgba(20, 184, 166, 0.6);
         }
 
-        .award-link-icon svg { width: 14px; height: 14px; }
+        .award-link-icon svg { width: 12px; height: 12px; }
+
+        .conf-card {
+            background: linear-gradient(135deg, var(--bg-surface), var(--accent-light));
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 0.875rem;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 0;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .conf-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            transform: translateY(-3px);
+        }
+
+        .conf-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .conf-icon {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .conf-icon svg { width: 18px; height: 18px; }
+
+        .conf-card h3 {
+            color: var(--accent);
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .conf-card p {
+            color: var(--text-secondary);
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .conf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-top: auto;
+        }
+
+        .conf-link:hover { gap: 0.6rem; }
+        .conf-link svg { width: 12px; height: 12px; }
+
+        .teaching-card {
+            background: linear-gradient(135deg, var(--bg-surface), var(--accent-light));
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .teaching-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+        }
+
+        .teaching-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            transform: translateY(-3px);
+        }
+
+        .teaching-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .teaching-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .teaching-icon svg { width: 30px; height: 30px; }
+
+        .teaching-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .teaching-subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .teaching-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .teaching-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            background: var(--accent-light);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+
+        .teaching-link:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            gap: 0.75rem;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .teaching-link svg { width: 16px; height: 16px; }
 
         .skills-container {
             display: grid;
@@ -1021,13 +1378,15 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.4rem;
+            gap: 0.5rem;
         }
 
         .skill-name { font-weight: 600; color: var(--text-secondary); font-size: 0.85rem; }
         .skill-percent { font-weight: 700; color: var(--accent); font-size: 0.85rem; }
 
         .skill-bar {
-            height: 7px;            background: var(--border);
+            height: 7px;
+            background: var(--border);
             border-radius: 3px;
             overflow: hidden;
         }
@@ -1076,7 +1435,8 @@
             margin-bottom: 1rem;
             color: var(--text-secondary);
             font-size: 0.9rem;
-            line-height: 1.55;            padding-bottom: 1rem;
+            line-height: 1.55;
+            padding-bottom: 1rem;
             border-bottom: 1px dashed var(--border);
         }
 
@@ -1125,7 +1485,8 @@
         }
 
         .edu-date-badge {
-            display: inline-block;            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             padding: 0.25rem 0.65rem;
             border-radius: 9999px;
@@ -1133,6 +1494,19 @@
             font-weight: 700;
             white-space: nowrap;
             box-shadow: var(--shadow-sm);
+        }
+
+        .edu-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .language-trigger {
@@ -1174,7 +1548,8 @@
             color: var(--text-secondary);
             font-size: 0.875rem;
             line-height: 1.6;
-            animation: fadeIn 0.4s ease-in-out;            box-shadow: var(--shadow-md);
+            animation: fadeIn 0.4s ease-in-out;
+            box-shadow: var(--shadow-md);
         }
 
         .language-popup-content h4 {
@@ -1223,7 +1598,8 @@
             border-radius: 20px;
             text-align: center;
             position: relative;
-            overflow: hidden;            border: 2px solid var(--border);
+            overflow: hidden;
+            border: 2px solid var(--border);
             box-shadow: var(--shadow-lg);
         }
 
@@ -1252,7 +1628,7 @@
 
         .parallax-contacts h3 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.75rem;
+            font-size: clamp(1.4rem, 4vw, 1.75rem);
             margin-bottom: 0.5rem;
             color: var(--text-primary);
             position: relative;
@@ -1272,7 +1648,8 @@
         }
 
         .contact-icons-grid {
-            display: flex;            justify-content: center;
+            display: flex;
+            justify-content: center;
             gap: 1.5rem;
             flex-wrap: wrap;
             position: relative;
@@ -1321,7 +1698,8 @@
             bottom: -28px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.75rem;            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 600;
             color: var(--text-secondary);
             white-space: nowrap;
             opacity: 0;
@@ -1330,88 +1708,254 @@
 
         .contact-icon-circle:hover .contact-icon-label { opacity: 1; }
 
-        .toast {
-            position: fixed;
-            top: 2rem;
-            left: 50%;
-            transform: translate(-50%, -150%);
-            background: linear-gradient(135deg, #EC4899, #8B5CF6, #06B6D4);
-            background-size: 200% 200%;
-            animation: gradientShift 3s ease infinite;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 16px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
-            z-index: 9999;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        .media-carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 0 3rem;
         }
 
-        .toast.show { opacity: 1; transform: translate(-50%, 0); }
+        .media-carousel {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 1.5rem;
+            touch-action: pan-y;
+            cursor: grab;
+        }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .media-carousel.dragging {
+            cursor: grabbing;
+            transition: none;
+        }
+
+        .media-card {
+            flex: 0 0 calc(33.333% - 1rem);
+            min-width: 0;
+            background: linear-gradient(135deg, var(--bg-surface), var(--accent-light));
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .media-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            border-color: var(--accent);
+        }
+
+        .media-card:hover::before { transform: scaleX(1); }
+
+        .media-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .media-type svg { width: 16px; height: 16px; }
+
+        .media-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .media-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .media-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .media-link:hover { gap: 0.75rem; }
+        .media-link svg { width: 16px; height: 16px; }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px; height: 40px;
+            background: var(--bg-surface);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: var(--shadow-md);
+        }
+
+        .carousel-nav:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .carousel-nav.prev { left: 0; }
+        .carousel-nav.next { right: 0; }
+        .carousel-nav svg { width: 20px; height: 20px; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .carousel-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent);
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        .carousel-dot:hover { background: var(--accent); }
+
+        .swipe-hint {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            opacity: 0.7;
+        }
+
+        .swipe-hint svg {
+            width: 16px; height: 16px;
+            animation: swipeHint 2s ease-in-out infinite;
+        }
+
+        @keyframes swipeHint {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
         }
 
         footer {
             text-align: center;
             margin-top: 2.5rem;
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
+            padding: 1.5rem 1rem 2rem;
             border-top: 2px solid var(--border);
             color: var(--text-secondary);
             font-size: 0.85rem;
         }
-        @media (max-width: 768px) {
-            .timeline::before { left: 1.5rem; }
-            .timeline-item { grid-template-columns: 2.5rem 1fr; }
-            .timeline-date { left: 1.5rem; font-size: 0.7rem; padding: 0.35rem 0.6rem; }
-            .current-badge { left: 1.5rem; top: calc(50% + 1.8rem); font-size: 0.65rem; padding: 0.3rem 0.6rem; }
-            .inline-stats { grid-template-columns: repeat(2, 1fr); }
-            .parallax-contacts { padding: 2.5rem 1.25rem; }
-            .parallax-contacts h3 { font-size: 1.4rem; }
-            .contact-icon-circle { width: 60px; height: 60px; }
-            .contact-icon-circle svg { width: 24px; height: 24px; }
-            .contact-icons-grid { gap: 1rem; }
-            .floating-contact { bottom: 1.5rem; right: 1.5rem; width: 50px; height: 50px; }
-            .floating-contact svg { width: 20px; height: 20px; }
-            .floating-contact .tooltip { display: none; }
-            .section-indicator { right: 5rem; font-size: 0.7rem; }
-            .job-title { font-size: 1rem; }
+
+        @media (max-width: 1024px) {
+            .media-card { flex: 0 0 calc(50% - 0.75rem); }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .container { padding: 1.25rem 1rem; }
+            .section-indicator { display: none; }
             .timeline::before { left: 1.25rem; }
-            .timeline-item { grid-template-columns: 2.2rem 1fr; }
-            .timeline-date { left: 1.25rem; font-size: 0.65rem; padding: 0.3rem 0.5rem; }
-            .current-badge { left: 1.25rem; top: calc(50% + 1.6rem); font-size: 0.6rem; padding: 0.25rem 0.5rem; }
-            .experience-item { padding: 1rem; }
-            .inline-stats { grid-template-columns: 1fr 1fr; gap: 0.5rem; padding: 0.75rem; }
-            .inline-stat-value { font-size: 1.25rem; }
-            .job-title { font-size: 0.95rem; }
-            .company { font-size: 0.8rem; }
-            .contact-icons-grid { gap: 0.75rem; }
+            .timeline-item { grid-template-columns: 2.25rem 1fr; }
+            .timeline-date {
+                left: 1.25rem;
+                font-size: 0.65rem;
+                padding: 0.3rem 0.5rem;
+            }
+            .current-badge {
+                left: 1.25rem;
+                top: calc(50% + 1.8rem);
+                font-size: 0.6rem;
+                padding: 0.25rem 0.5rem;
+            }
+            .inline-stats { grid-template-columns: repeat(2, 1fr); }
+            .parallax-contacts { padding: 2rem 1rem; }
             .contact-icon-circle { width: 56px; height: 56px; }
             .contact-icon-circle svg { width: 22px; height: 22px; }
-            .section-indicator { right: 4.5rem; }
+            .contact-icons-grid { gap: 0.75rem; }
+            .floating-contact { bottom: 1.25rem; right: 1.25rem; width: 50px; height: 50px; }
+            .floating-contact svg { width: 20px; height: 20px; }
+            .floating-contact .tooltip { display: none; }
+            .theme-toggle { top: 1rem; right: 1rem; }
+            .theme-toggle-btn { width: 52px; height: 32px; }
+            .theme-toggle-slider { width: 20px; height: 20px; }
+            [data-theme="dark"] .theme-toggle-slider { transform: translateX(20px); }
+            .burger-menu { top: 1rem; left: 1rem; }
+            .burger-btn { width: 40px; height: 40px; }
+            .teaching-header { flex-direction: column; align-items: flex-start; }
+            .teaching-card { padding: 1.25rem; }
+        }
+
+        @media (max-width: 640px) {
+            .media-carousel-container { padding: 0 2rem; }
+            .media-card { flex: 0 0 100%; padding: 1.25rem; }
+            .carousel-nav { width: 32px; height: 32px; }
+            .carousel-nav svg { width: 16px; height: 16px; }
+            .swipe-hint { display: flex; }
+            .exit-popup { padding: 2rem 1.25rem; }
+            .exit-popup-title { font-size: 1.4rem; }
+            .exit-popup-emoji { font-size: 2.75rem; }
+            .exit-contact-btn { width: 46px; height: 46px; }
+            .exit-contact-btn svg { width: 20px; height: 20px; }
+        }
+
+        @media (max-width: 400px) {
+            .container { padding: 1rem 0.75rem; }
+            .avatar-container { width: 130px; height: 130px; }
+            .career-counter { padding: 0.5rem 0.75rem; font-size: 0.75rem; gap: 0.5rem; }
+            .career-counter .counter-value { font-size: 0.9rem; min-width: 70px; }
+            .stats-bar { padding: 0.75rem; gap: 0.5rem; }
+            .experience-item { padding: 1rem; }
+            .award-card, .conf-card { padding: 0.7rem; }
+            .award-card h3 { font-size: 0.72rem; }
+            .conf-card h3 { font-size: 0.78rem; }
+            .conf-icon { width: 28px; height: 28px; }
+            .conf-icon svg { width: 16px; height: 16px; }
         }
 
         @media print {
-            #particles-canvas, #confetti-canvas, .theme-toggle, .burger-menu, .burger-nav, .overlay, .floating-contact, .progress-bar, .section-indicator { display: none !important; }
-            .toast { display: none !important; }
+            #particles-canvas, .theme-toggle, .burger-menu, .burger-nav, .overlay, .floating-contact, .progress-bar, .section-indicator, .exit-popup-overlay { display: none !important; }
             body { background-color: white; }
             .experience-item { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-            .award-card { break-inside: avoid; }
+            .award-card, .conf-card, .teaching-card { break-inside: avoid; }
+            .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
         }
     </style>
 </head>
@@ -1420,10 +1964,41 @@
     <div class="progress-bar">
         <div class="progress-bar-fill" id="progressFill"></div>
     </div>
+
     <div class="section-indicator" id="sectionIndicator">О себе</div>
 
     <canvas id="particles-canvas"></canvas>
-    <canvas id="confetti-canvas"></canvas>
+
+    <div class="exit-popup-overlay" id="exitPopupOverlay">
+        <div class="exit-popup">
+            <button class="exit-popup-close" onclick="closeExitPopup()" aria-label="Закрыть">×</button>
+            <div class="exit-popup-emoji">👋</div>
+            <h3 class="exit-popup-title">Уже уходите?</h3>
+            <p class="exit-popup-text">
+                Давайте просто познакомимся! Напишите мне — отвечу на любые вопросы о цифровых продуктах, HR-технологиях или возможном сотрудничестве.
+            </p>
+            <div class="exit-popup-contacts">
+                <a href="https://t.me/anton.muzhelskiy" target="_blank" class="exit-contact-btn" aria-label="Telegram">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                </a>
+                <a href="mailto:anton.muzhelskiy@gmail.com" class="exit-contact-btn" aria-label="Email">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </a>
+                <a href="tel:+79262899214" class="exit-contact-btn" aria-label="Телефон">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </a>
+                <a href="https://max.ru/u/f9LHodD0cOLXBCJrz0ilG7y8aQWExyfeuJrSrYwPN4rj3tiZwmSkIxfRjkc" target="_blank" class="exit-contact-btn" aria-label="MAX">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 3a7 7 0 100 14 7 7 0 000-14zm0 2a5 5 0 110 10 5 5 0 010-10z"/></svg>
+                </a>
+            </div>
+            <a href="#contacts" class="exit-popup-cta" onclick="closeExitPopup()">
+                Все контакты
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
 
     <div class="burger-menu">
         <button class="burger-btn" onclick="toggleBurger()" aria-label="Меню">
@@ -1437,6 +2012,9 @@
         <ul>
             <li><a href="#about" onclick="closeBurger()">О себе</a></li>
             <li><a href="#experience" onclick="closeBurger()">Опыт работы</a></li>
+            <li><a href="#media" onclick="closeBurger()">Публикации</a></li>
+            <li><a href="#speaker" onclick="closeBurger()">Спикер</a></li>
+            <li><a href="#teaching" onclick="closeBurger()">Преподавание</a></li>
             <li><a href="#skills" onclick="closeBurger()">Навыки</a></li>
             <li><a href="#jury" onclick="closeBurger()">Жюри</a></li>
             <li><a href="#awards" onclick="closeBurger()">Награды</a></li>
@@ -1464,10 +2042,6 @@
         <span class="tooltip">Связаться</span>
     </button>
 
-    <div class="toast" id="konamiToast">
-        <span style="font-size: 1.5rem;">🎮</span>
-        <span>Easter Egg Found! You're a true explorer</span>
-    </div>
 <div class="container">
     <header>
         <div class="avatar-container">
@@ -1482,7 +2056,7 @@
         </div>
     </header>
 
-    <section id="about">
+    <section id="about" class="reveal">
         <h2>О себе</h2>
         <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.75; max-width: 800px;">
             Высокоэффективный менеджер, способный решать масштабные задачи, связанные с технологической трансформацией. Нахожу оптимальные пути решения и говорю на одном языке как с бизнесом, так и с IT.
@@ -1497,7 +2071,7 @@
         </details>
     </section>
 
-    <details class="cover-letter-toggle">
+    <details class="cover-letter-toggle reveal">
         <summary>
             <span>📄 Сопроводительное письмо</span>
         </summary>
@@ -1512,13 +2086,14 @@
     </details>
 
     <section id="experience">
-        <h2>Опыт работы</h2>
+        <h2 class="reveal">Опыт работы</h2>
         <div class="timeline">
 
-            <div class="timeline-item current">
+            <div class="timeline-item current reveal from-left">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2022--н.в.</div>                <div class="current-badge">Работает</div>
-                <div class="experience-item current">
+                <div class="timeline-date">2022—н.в.</div>
+                <div class="current-badge">Работает</div>
+                <div class="experience-item current tilt-card">
                     <div class="job-title">Директор по цифровой трансформации</div>
                     <div class="department">Центр стратегии и аналитики</div>
                     <div class="company"><a href="https://veb.ru/" target="_blank">ВЭБ.РФ</a></div>
@@ -1536,11 +2111,10 @@
                                 <li>Экосистема сервисов реализации <a href="https://стратегия2030.рф/o-banke/strategiya-razvitiya/" target="_blank">Стратегии 2030</a></li>
                                 <li>Развитие экосистемы интерактивных аналитических отчетов для топ-менеджмента</li>
                                 <li>Внедрена модель <span class="highlight">Генеративного ИИ</span> во внутренний периметр организации</li>
-                                <li>Организация системного обучения работников введению в генеративный ИИ для популяризации новых форматов взаимодействия</li>
-                                <li>Внедрена практика <span class="highlight">ИИ-подкастов</span> в регулярные корпоративные подкасты «Полный заряд»</li>
-                                <li>Организация комплексных архитектурных изменений в ИТ-ландшафте для достижения цифрового комфорта сотрудников</li>
-                                <li>Развитие ИТ-ландшафта для повышения качества процессов управления персоналом</li>
-                                <li>Организована информационная кампания: <span class="highlight">полный перевод на ЭДО</span> всех сотрудников (3 вида электронной подписи)</li>
+                                <li>Организация системного обучения работников введению в генеративный ИИ</li>
+                                <li>Внедрена практика <span class="highlight">ИИ-подкастов</span> в корпоративные подкасты «Полный заряд»</li>
+                                <li>Организация комплексных архитектурных изменений в ИТ-ландшафте</li>
+                                <li>Организована информационная кампания: <span class="highlight">полный перевод на ЭДО</span> (3 вида электронной подписи)</li>
                                 <li>Контроль реализации указов Президента и постановлений Правительства РФ в области ЦТ</li>
                                 <li>Анализ применимости отечественных ИС с целью последующего внедрения</li>
                                 <li>Организация закупки ИТ-услуг по 223-ФЗ</li>
@@ -1550,10 +2124,10 @@
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item reveal from-right">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2019--2022</div>
-                <div class="experience-item">
+                <div class="timeline-date">2019—2022</div>
+                <div class="experience-item tilt-card">
                     <div class="job-title">Директор подразделения «Пользовательские сервисы»</div>
                     <div class="company"><a href="https://дом.рф/" target="_blank">ДОМ.РФ</a></div>
                     <div class="job-summary">
@@ -1566,7 +2140,8 @@
                             <div class="inline-stat-label">Автоматизированных сервисов</div>
                         </div>
                         <div class="inline-stat">
-                            <div class="inline-stat-value" data-target="100">0</div>                            <div class="inline-stat-label">Экономии в год (ИИ), млн ₽</div>
+                            <div class="inline-stat-value" data-target="100">0</div>
+                            <div class="inline-stat-label">Экономии в год (ИИ), млн ₽</div>
                         </div>
                         <div class="inline-stat">
                             <div class="inline-stat-value" data-target="90">0</div>
@@ -1586,7 +2161,7 @@
                         <summary>Подробнее</summary>
                         <div class="details-content">
                             <ul>
-                                <li>Создано более <span class="highlight">150 автоматизированных сервисов</span> для внутренних подразделений</li>
+                                <li>Создано более <span class="highlight">150 автоматизированных сервисов</span></li>
                                 <li>Комплексный проект с применением ИИ для прогнозирования эмоционального выгорания (экономия <span class="highlight">100 млн ₽/год</span>)</li>
                                 <li>Перевод до <span class="highlight">90% группы компаний</span> на удалённую работу в период COVID-19</li>
                                 <li>Создано мобильное приложение для сотрудников ДОМ24</li>
@@ -1599,10 +2174,10 @@
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item reveal from-left">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2017--2019</div>
-                <div class="experience-item">
+                <div class="timeline-date">2017—2019</div>
+                <div class="experience-item tilt-card">
                     <div class="job-title">Директор проектов, Управление изменениями HR</div>
                     <div class="company"><a href="https://rosbank.ru/" target="_blank">Группа Societe Generale (Росбанк)</a></div>
                     <div class="job-summary">
@@ -1615,16 +2190,17 @@
                                 <li>Внедрение платформы-конструктора для создания чат-ботов</li>
                                 <li>Десятки цифровых сервисов для IT и HR</li>
                                 <li>Контроль формирования HR-бюджета Банка</li>
-                                <li>Контроль модели численности Банка</li>                            </ul>
+                                <li>Контроль модели численности Банка</li>
+                            </ul>
                         </div>
                     </details>
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item reveal from-right">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2015--2017</div>
-                <div class="experience-item">
+                <div class="timeline-date">2015—2017</div>
+                <div class="experience-item tilt-card">
                     <div class="job-title">Руководитель проектов</div>
                     <div class="company"><a href="https://sberbank.ru/" target="_blank">Сбербанк</a></div>
                     <div class="job-summary">
@@ -1635,7 +2211,7 @@
                         <div class="details-content">
                             <ul>
                                 <li>Программа Operational Excellence</li>
-                                <li>Программа «Олимп 3.0» -- трансформация сети центров сопровождения</li>
+                                <li>Программа «Олимп 3.0» — трансформация сети центров сопровождения</li>
                                 <li>Разработка единой модели локации и численности Блока</li>
                             </ul>
                         </div>
@@ -1643,10 +2219,10 @@
                 </div>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item reveal from-left">
                 <div class="timeline-marker"></div>
-                <div class="timeline-date">2012--2015</div>
-                <div class="experience-item">
+                <div class="timeline-date">2012—2015</div>
+                <div class="experience-item tilt-card">
                     <div class="job-title">Старший консультант / Консультант</div>
                     <div class="company"><a href="https://www.ey.com/en_rs/locations/russia" target="_blank">Ernst & Young</a> / <a href="https://kpmg.com/xx/en.html" target="_blank">KPMG</a></div>
                     <div class="job-summary">
@@ -1665,15 +2241,253 @@
                     </details>
                 </div>
             </div>
+
+        </div>
+    </section>
+
+    <section id="media">
+        <h2 class="reveal">📺 Публикации и выступления</h2>
+        <div class="media-carousel-container reveal">
+            <button class="carousel-nav prev" onclick="moveCarousel(-1)" aria-label="Предыдущий">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            
+            <div class="media-carousel" id="mediaCarousel">
+                <div class="media-card tilt-card">
+                    <div class="media-type">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Видео</span>
+                    </div>
+                    <h3 class="media-title">РБК — Оцифрованный менеджер</h3>
+                    <p class="media-description">Спецвыпуск с Павлом Демидовичем о цифровой трансформации и современных подходах к управлению</p>
+                    <a href="https://tv.rbc.ru/archive/special/6152029d2ae5960de61d3a10" target="_blank" class="media-link">
+                        Смотреть
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="media-card tilt-card">
+                    <div class="media-type">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Видеоотзыв</span>
+                    </div>
+                    <h3 class="media-title">Пульс — HCM платформа</h3>
+                    <p class="media-description">Видеоотзыв о внедрении HCM платформы и цифровизации процессов управления персоналом</p>
+                    <a href="https://rutube.ru/video/private/4966de3a9f667f69402945a4ed1c621c/?r=wd&p=NAcqIMMgs1D7tFLO3EfeOA" target="_blank" class="media-link">
+                        Смотреть
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="media-card tilt-card">
+                    <div class="media-type">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Выступление</span>
+                    </div>
+                    <h3 class="media-title">InterComm 2025 — ИИ в коммуникациях</h3>
+                    <p class="media-description">Как эффективно внедрять ИИ-технологии во внутренние коммуникации</p>
+                    <a href="https://vkvideo.ru/video-204256750_456239556?t=6s" target="_blank" class="media-link">
+                        Смотреть
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="media-card tilt-card">
+                    <div class="media-type">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Подкаст</span>
+                    </div>
+                    <h3 class="media-title">Face to Face — ИИ для прогнозирования</h3>
+                    <p class="media-description">Искусственный интеллект в анализе внутренних коммуникаций для прогнозирования эмоционального выгорания</p>
+                    <a href="https://youtu.be/ttQmhmXyceQ?si=KxJzhpsAu6zrm48T" target="_blank" class="media-link">
+                        Смотреть
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <button class="carousel-nav next" onclick="moveCarousel(1)" aria-label="Следующий">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <div class="swipe-hint">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+            <span>Свайпните для просмотра</span>
+        </div>
+    </section>
+
+    <section id="speaker">
+        <h2 class="reveal">🎤 Спикер конференций</h2>
+        <div class="compact-grid reveal-stagger">
+            <a href="https://impact-lms.ru/events/impact-conf2026#primer" target="_blank" class="conf-card tilt-card">
+                <div class="conf-card-header">
+                    <div class="conf-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3>Impact Conf</h3>
+                </div>
+                <p>Крупнейшая HR-tech конференция о цифровизации и трансформации HR-процессов</p>
+                <span class="conf-link">
+                    Подробнее
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                </span>
+            </a>
+
+            <a href="https://rivelty.ru/" target="_blank" class="conf-card tilt-card">
+                <div class="conf-card-header">
+                    <div class="conf-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3>Rivelty</h3>
+                </div>
+                <p>Международная конференция по внутренним коммуникациям и employee experience</p>
+                <span class="conf-link">
+                    Подробнее
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                </span>
+            </a>
+
+            <a href="https://vnutricom.ru/" target="_blank" class="conf-card tilt-card">
+                <div class="conf-card-header">
+                    <div class="conf-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3>InterComm</h3>
+                </div>
+                <p>Конференция по внутренним коммуникациям и корпоративным медиа</p>
+                <span class="conf-link">
+                    Подробнее
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                </span>
+            </a>
+
+            <div class="conf-card tilt-card">
+                <div class="conf-card-header">
+                    <div class="conf-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3>Ведомости Конф</h3>
+                </div>
+                <p>Деловая конференция ИД «Ведомости» по цифровой трансформации бизнеса</p>
+            </div>
+
+            <a href="https://personalexpo.ru/" target="_blank" class="conf-card tilt-card">
+                <div class="conf-card-header">
+                    <div class="conf-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3>Personal Expo</h3>
+                </div>
+                <p>Международная выставка и конференция по управлению персоналом и HR-технологиям</p>
+                <span class="conf-link">
+                    Подробнее
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                </span>
+            </a>
+
+            <div class="conf-card tilt-card">
+                <div class="conf-card-header">
+                    <div class="conf-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3>ProHRtech</h3>
+                </div>
+                <p>Конференция по HR-технологиям и автоматизации процессов управления персоналом</p>
+            </div>
+
+            <div class="conf-card tilt-card">
+                <div class="conf-card-header">
+                    <div class="conf-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </div>
+                    <h3>EdCrunch</h3>
+                </div>
+                <p>Международная конференция по технологиям в образовании и корпоративном обучении</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="teaching">
+        <h2 class="reveal">🎓 Преподавательская деятельность</h2>
+        <div class="teaching-card reveal tilt-card">
+            <div class="teaching-header">
+                <div class="teaching-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="teaching-title">Приглашенный преподаватель MBA / EMBA</div>
+                    <div class="teaching-subtitle">Московская международная высшая школа бизнеса МИРБИС</div>
+                </div>
+            </div>
+            <p class="teaching-description">
+                Читаю лекции и веду мастер-классы в рамках программы <strong>«Управление человеческими ресурсами»</strong>. 
+                Делюсь практическим опытом цифровой трансформации HR-процессов, внедрения ИИ-технологий 
+                и построения цифровых экосистем для сотрудников на примере крупнейших российских компаний — ВЭБ.РФ, ДОМ.РФ, Сбербанк.
+            </p>
+            <a href="https://mirbis.ru/mba/" target="_blank" class="teaching-link">
+                Подробнее о программе
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
         </div>
     </section>
 
     <section id="jury">
-        <h2>Член жюри</h2>
-        <div class="awards-grid">
-            <div class="award-card">
+        <h2 class="reveal">Член жюри</h2>
+        <div class="compact-grid reveal-stagger">
+            <div class="award-card tilt-card">
                 <h3>⚖️ REXAwards</h3>
-                <span class="award-year">2020 -- н.в.</span>
+                <span class="award-year">2020 — н.в.</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
@@ -1686,9 +2500,9 @@
                 </details>
             </div>
 
-            <div class="award-card">
+            <div class="award-card tilt-card">
                 <h3>⚖️ InterComm</h3>
-                <span class="award-year">2020 -- н.в.</span>
+                <span class="award-year">2020 — н.в.</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
@@ -1701,32 +2515,33 @@
                 </details>
             </div>
 
-            <div class="award-card">
+            <div class="award-card tilt-card">
                 <h3>⚖️ Silver Mercury</h3>
-                <span class="award-year">2021 -- н.в.</span>
+                <span class="award-year">2021 — н.в.</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
-                        Национальная премия в области развития связей с общественностью «Серебряный лучник».
+                        Национальная премия «Серебряный лучник» в области связей с общественностью.
                         <br>
                         <a href="https://silvermercury.ru/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
-                </details>            </div>
+                </details>
+            </div>
         </div>
     </section>
 
     <section id="awards">
-        <h2>Награды</h2>
-        <div class="awards-grid">
-            <div class="award-card">
+        <h2 class="reveal">Награды</h2>
+        <div class="compact-grid reveal-stagger">
+            <div class="award-card tilt-card">
                 <h3>🏆 InterComm</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
-                        Победа за внедрение ИИ в анализе внутренних коммуникаций для прогнозирования эмоционального выгорания.
+                        Победа за внедрение ИИ для прогнозирования эмоционального выгорания.
                         <br>
                         <a href="https://award.intercomm.media/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -1735,13 +2550,13 @@
                 </details>
             </div>
 
-            <div class="award-card">
+            <div class="award-card tilt-card">
                 <h3>🏆 StepTwo</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
-                        Intranet and Digital Workplace Awards в номинации Digital Employee Experience.
+                        Intranet and Digital Workplace Awards — Digital Employee Experience.
                         <br>
                         <a href="https://www.steptwo.com.au/award-winner/dom-rf-building-a-digital-ecosystem-of-services/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -1750,27 +2565,28 @@
                 </details>
             </div>
 
-            <div class="award-card">
+            <div class="award-card tilt-card">
                 <h3>🏆 Digital Workplace</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
-                        Digital Workplace of the Year -- лучшее цифровое рабочее место года по версии StepTwo.
+                        Digital Workplace of the Year по версии StepTwo.
                         <br>
                         <a href="https://дом.рф/media/news/dom-rf-udostoen-premii-digital-workplace-of-the-year-2021/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         </a>
                     </div>
-                </details>            </div>
+                </details>
+            </div>
 
-            <div class="award-card">
+            <div class="award-card tilt-card">
                 <h3>🏆 REXA</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
-                        Rivelty REXA Awards -- международная премия за excellence in employee communications.
+                        Rivelty REXA Awards — excellence in employee communications.
                         <br>
                         <a href="https://awards.rivelty.ru/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -1779,13 +2595,13 @@
                 </details>
             </div>
 
-            <div class="award-card">
+            <div class="award-card tilt-card">
                 <h3>🏆 Magic People IT</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
-                        Победа в номинации «Цифровая трансформация» -- признание excellence в digital-трансформации HR.
+                        Номинация «Цифровая трансформация» — excellence в digital-трансформации HR.
                         <br>
                         <a href="https://magicpeople.ru/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -1794,13 +2610,13 @@
                 </details>
             </div>
 
-            <div class="award-card">
-                <h3>🏆 Нац. банковская премия</h3>
+            <div class="award-card tilt-card">
+                <h3>🏆 Нац. банковская</h3>
                 <span class="award-year">2021</span>
                 <details>
                     <summary class="award-details-toggle">Подробнее</summary>
                     <div class="award-details-content">
-                        Победа в национальной банковской премии за развитие цифровых и финансовых технологий.
+                        Национальная банковская премия за развитие цифровых и финансовых технологий.
                         <br>
                         <a href="https://banking-awards.ru/" target="_blank" class="award-link-icon" title="Перейти на сайт">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -1811,8 +2627,9 @@
         </div>
     </section>
 
-    <section id="skills">        <h2>Ключевые навыки</h2>
-        <div class="skills-container">
+    <section id="skills">
+        <h2 class="reveal">Ключевые навыки</h2>
+        <div class="skills-container reveal-stagger">
             <div class="skill-category">
                 <h3>🎯 Management</h3>
                 <div class="skill-item">
@@ -1860,7 +2677,8 @@
                         <span class="skill-percent">90%</span>
                     </div>
                     <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
-                </div>            </div>
+                </div>
+            </div>
 
             <div class="skill-category">
                 <h3>🎨 Design & Dev</h3>
@@ -1908,32 +2726,30 @@
     </section>
 
     <div class="two-col" id="education">
-        <section>
-            <h2>Образование</h2>            <div class="info-block">
+        <section class="reveal from-left">
+            <h2>Образование</h2>
+            <div class="info-block">
+                <div class="edu-subtitle">🎓 Основное</div>
                 <div class="edu-item">
                     <div class="edu-header">
                         <div class="edu-title"><a href="https://bmstu.ru/" target="_blank">МГТУ им. Баумана</a></div>
-                        <span class="edu-date-badge">2006 -- 2012</span>
+                        <span class="edu-date-badge">2006 — 2012</span>
                     </div>
                     <div class="edu-description">Информатика и системы управления. Инженер по комплексному обеспечению информационной безопасности</div>
                 </div>
                 <div class="edu-item" style="margin-top: 1.25rem;">
                     <div class="edu-header">
                         <div class="edu-title"><a href="https://accaglobal.com/" target="_blank">ACCA</a></div>
-                        <span class="edu-date-badge">2012 -- н.в.</span>
+                        <span class="edu-date-badge">2012 — н.в.</span>
                     </div>
                     <div class="edu-description">Association of Chartered Certified Accountants</div>
                 </div>
-            </div>
-        </section>
 
-        <section>
-            <h2>Дополнительное образование</h2>
-            <div class="info-block">
+                <div class="edu-subtitle">📚 Дополнительное</div>
                 <div class="edu-item">
                     <div class="edu-header">
                         <div class="edu-title"><a href="https://www.skolkovo.ru/" target="_blank">МШУ Сколково</a></div>
-                        <span class="edu-date-badge">2025 -- 2026</span>
+                        <span class="edu-date-badge">2025 — 2026</span>
                     </div>
                     <div class="edu-description">Программа «Лидеры изменений»</div>
                 </div>
@@ -1946,39 +2762,40 @@
                 </div>
             </div>
         </section>
+
+        <section class="reveal from-right">
+            <h2>Дополнительно</h2>
+            <div class="info-block">
+                <ul class="info-list">
+                    <li>
+                        <strong>Языки:</strong>
+                        <details class="language-popup" style="display: inline;">
+                            <summary class="language-trigger">Английский – свободно (подробнее)</summary>
+                            <div class="language-popup-content">
+                                <h4>Cambridge Certificate in Advanced English (CAE)</h4>
+                                <span class="language-badge">Уровень C1 · 2012</span>
+                                <p style="margin-top: 0.75rem;">
+                                    Cambridge CAE — internationally recognised qualification proving high-level achievement in learning English as a foreign language.
+                                </p>
+                                <ul>
+                                    <li>Свободное понимание сложных текстов на различные темы</li>
+                                    <li>Свободное выражение мыслей в устной и письменной форме</li>
+                                    <li>Использование языка в профессиональном и академическом контексте</li>
+                                    <li>Эффективное участие в переговорах и дискуссиях</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </li>
+                    <li><strong>Публикации:</strong> Более 50 публикаций в СМИ</li>
+                    <li><strong>Лидерство:</strong> Лейтенант, командир 2-х рот, 160 курсантов (2012)</li>
+                    <li><strong>Интересы:</strong> Хоккей, горные лыжи, боевые искусства, путешествия, классическая гитара, фортепиано</li>
+                </ul>
+            </div>
+        </section>
     </div>
 
-    <section>
-        <h2>Дополнительно</h2>
-        <div class="info-block">
-            <ul class="info-list">
-                <li>
-                    <strong>Языки:</strong>
-                    <details class="language-popup" style="display: inline;">
-                        <summary class="language-trigger">Английский – свободно (подробнее)</summary>
-                        <div class="language-popup-content">
-                            <h4>Cambridge Certificate in Advanced English (CAE)</h4>
-                            <span class="language-badge">Уровень C1 · 2012</span>                            <p style="margin-top: 0.75rem;">
-                                Cambridge CAE -- internationally recognised qualification proving high-level achievement in learning English as a foreign language.
-                            </p>
-                            <ul>
-                                <li>Свободное понимание сложных текстов на различные темы</li>
-                                <li>Свободное выражение мыслей в устной и письменной форме</li>
-                                <li>Использование языка в профессиональном и академическом контексте</li>
-                                <li>Эффективное участие в переговорах и дискуссиях</li>
-                            </ul>
-                        </div>
-                    </details>
-                </li>
-                <li><strong>Публикации:</strong> Более 50 публикаций в СМИ</li>
-                <li><strong>Лидерство:</strong> Лейтенант, командир 2-х рот, 160 курсантов (2012)</li>
-                <li><strong>Интересы:</strong> Хоккей, горные лыжи, боевые искусства, путешествия, классическая гитара, фортепиано</li>
-            </ul>
-        </div>
-    </section>
-
     <section id="contacts">
-        <div class="parallax-contacts" id="parallaxContacts">
+        <div class="parallax-contacts reveal" id="parallaxContacts">
             <h3>Свяжитесь со мной</h3>
             <p class="subtitle">Открыт к предложениям о сотрудничестве</p>
             <div class="contact-icons-grid">
@@ -2007,7 +2824,140 @@
         <p style="margin-top: 0.5rem; font-size: 0.8rem;">Для PDF: Ctrl+P → Сохранить как PDF</p>
     </footer>
 </div>
+
 <script>
+    let currentSlide = 0;
+    const carousel = document.getElementById('mediaCarousel');
+    const dotsContainer = document.getElementById('carouselDots');
+    const cards = document.querySelectorAll('.media-card');
+    
+    let touchStartX = 0;
+    let isDragging = false;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID = 0;
+    
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        cards.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (index === currentSlide ? ' active' : '');
+            dot.onclick = () => goToSlide(index);
+            dot.setAttribute('aria-label', `Слайд ${index + 1}`);
+            dotsContainer.appendChild(dot);
+        });
+    }
+    
+    function updateCarousel() {
+        const cardWidth = cards[0].offsetWidth + 24;
+        currentTranslate = -currentSlide * cardWidth;
+        prevTranslate = currentTranslate;
+        carousel.style.transform = `translateX(${currentTranslate}px)`;
+        createDots();
+    }
+    
+    function moveCarousel(direction) {
+        const maxSlide = Math.max(0, cards.length - getVisibleCards());
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide > maxSlide) currentSlide = maxSlide;
+        updateCarousel();
+    }
+    
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+    
+    function getVisibleCards() {
+        if (window.innerWidth <= 640) return 1;
+        if (window.innerWidth <= 1024) return 2;
+        return 3;
+    }
+    
+    carousel.addEventListener('touchstart', touchStart, { passive: true });
+    carousel.addEventListener('touchmove', touchMove, { passive: true });
+    carousel.addEventListener('touchend', touchEnd);
+    
+    carousel.addEventListener('mousedown', touchStart);
+    carousel.addEventListener('mousemove', touchMove);
+    carousel.addEventListener('mouseup', touchEnd);
+    carousel.addEventListener('mouseleave', () => { if (isDragging) touchEnd(); });
+    
+    function touchStart(event) {
+        const touch = event.type.includes('mouse') ? event : event.touches[0];
+        touchStartX = touch.clientX;
+        isDragging = true;
+        carousel.classList.add('dragging');
+        animationID = requestAnimationFrame(animation);
+    }
+    
+    function touchMove(event) {
+        if (!isDragging) return;
+        const touch = event.type.includes('mouse') ? event : event.touches[0];
+        const diffX = touch.clientX - touchStartX;
+        currentTranslate = prevTranslate + diffX;
+    }
+    
+    function animation() {
+        if (isDragging) {
+            carousel.style.transform = `translateX(${currentTranslate}px)`;
+            animationID = requestAnimationFrame(animation);
+        }
+    }
+    
+    function touchEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        cancelAnimationFrame(animationID);
+        carousel.classList.remove('dragging');
+        
+        const movedBy = currentTranslate - prevTranslate;
+        const threshold = cards[0].offsetWidth / 4;
+        
+        if (movedBy < -threshold) moveCarousel(1);
+        else if (movedBy > threshold) moveCarousel(-1);
+        else updateCarousel();
+    }
+    
+    window.addEventListener('resize', updateCarousel);
+    createDots();
+
+    function initTiltEffects() {
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 768) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    }
+    initTiltEffects();
+
+    function initScrollAnimations() {
+        const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => observer.observe(el));
+    }
+    initScrollAnimations();
+
     (function liveCareerCounter() {
         const startDate = new Date(2012, 8, 1);
         const displayEl = document.getElementById('careerTime');
@@ -2056,13 +3006,13 @@
                 if (progress < 1) {
                     const currentYears = Math.floor(progress * 12);
                     const currentMonths = Math.floor((progress * 144) % 12);
-                    const currentDays = Math.floor((progress * 4380) % 30);                    displayEl.textContent = `${currentYears} лет, ${currentMonths} мес, ${currentDays} дн`;
+                    const currentDays = Math.floor((progress * 4380) % 30);
+                    displayEl.textContent = `${currentYears} лет, ${currentMonths} мес, ${currentDays} дн`;
                     requestAnimationFrame(updateCounter);
                 } else {
                     update();
                 }
             }
-            
             updateCounter();
         }
 
@@ -2087,6 +3037,9 @@
             'header': 'Главная',
             'about': 'О себе',
             'experience': 'Опыт работы',
+            'media': 'Публикации',
+            'speaker': 'Спикер',
+            'teaching': 'Преподавание',
             'jury': 'Жюри',
             'awards': 'Награды',
             'skills': 'Навыки',
@@ -2105,14 +3058,14 @@
                 const rect = section.getBoundingClientRect();
                 if (rect.top <= window.innerHeight * 0.4) {
                     const id = section.id || 'header';
-                    if (sectionNames[id]) currentSection = sectionNames[id];                }
+                    if (sectionNames[id]) currentSection = sectionNames[id];
+                }
             });
 
-            sectionIndicator.textContent = currentSection;
-            if (scrollTop > 200) {
-                sectionIndicator.classList.add('visible');
-            } else {
-                sectionIndicator.classList.remove('visible');
+            if (sectionIndicator) {
+                sectionIndicator.textContent = currentSection;
+                if (scrollTop > 200) sectionIndicator.classList.add('visible');
+                else sectionIndicator.classList.remove('visible');
             }
         }
 
@@ -2122,113 +3075,8 @@
 
     function scrollToContacts() {
         const contactsSection = document.getElementById('contacts');
-        if (contactsSection) {
-            contactsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (contactsSection) contactsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-
-    (function konamiCode() {
-        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
-        let currentIndex = 0;
-        let konamiTimer = null;
-        let hasTriggered = false;
-
-        document.addEventListener('keydown', (e) => {
-            if (e.code === konamiSequence[currentIndex]) {
-                currentIndex++;
-                clearTimeout(konamiTimer);
-                konamiTimer = setTimeout(() => { currentIndex = 0; }, 2000);
-
-                if (currentIndex === konamiSequence.length && !hasTriggered) {
-                    hasTriggered = true;
-                    triggerKonamiEffect();
-                    setTimeout(() => { hasTriggered = false; }, 10000);
-                }
-            } else {
-                currentIndex = 0;
-            }
-        });
-
-        function triggerKonamiEffect() {
-            const toast = document.getElementById('konamiToast');
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
-            launchConfetti();
-            const originalColors = ['#14B8A6', '#06B6D4'];
-            const partyColors = ['#EC4899', '#8B5CF6', '#F59E0B', '#10B981', '#06B6D4'];
-            particles.forEach(p => {
-                p.color = partyColors[Math.floor(Math.random() * partyColors.length)];
-                p.speedX = (Math.random() - 0.5) * 4;
-                p.speedY = (Math.random() - 0.5) * 4;
-            });
-
-            setTimeout(() => {
-                particles.forEach(p => {
-                    p.color = originalColors[Math.floor(Math.random() * originalColors.length)];
-                    p.speedX = Math.random() * 1 - 0.5;
-                    p.speedY = Math.random() * 1 - 0.5;
-                });
-            }, 5000);
-        }
-
-        function launchConfetti() {
-            const canvas = document.getElementById('confetti-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            canvas.classList.add('active');
-
-            const pieces = [];
-            const colors = ['#EC4899', '#8B5CF6', '#06B6D4', '#10B981', '#F59E0B', '#EF4444'];
-
-            for (let i = 0; i < 100; i++) {
-                pieces.push({
-                    x: canvas.width / 2,
-                    y: canvas.height / 2,
-                    vx: (Math.random() - 0.5) * 15,
-                    vy: (Math.random() - 0.5) * 15 - 5,
-                    size: Math.random() * 8 + 4,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    rotation: Math.random() * 360,
-                    rotationSpeed: (Math.random() - 0.5) * 10,
-                    gravity: 0.25,
-                    life: 1
-                });
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                let alive = false;
-
-                pieces.forEach(p => {
-                    if (p.life <= 0) return;
-                    alive = true;                    p.vy += p.gravity;
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.rotation += p.rotationSpeed;
-                    p.vx *= 0.99;
-                    p.life -= 0.008;
-
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate(p.rotation * Math.PI / 180);
-                    ctx.globalAlpha = Math.max(0, p.life);
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
-                    ctx.restore();
-                });
-
-                if (alive) {
-                    requestAnimationFrame(animate);
-                } else {
-                    canvas.classList.remove('active');
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                }
-            }
-            animate();
-        }
-    })();
 
     function toggleBurger() {
         document.querySelector('.burger-btn').classList.toggle('active');
@@ -2252,7 +3100,8 @@
     function resize() {
         width = window.innerWidth;
         height = window.innerHeight;
-        canvas.width = width;        canvas.height = height;
+        canvas.width = width;
+        canvas.height = height;
     }
     window.addEventListener('resize', resize);
     resize();
@@ -2301,7 +3150,8 @@
         }
     }
 
-    function init() {        particles = [];
+    function init() {
+        particles = [];
         const n = Math.min(80, Math.floor((width * height) / 15000));
         for (let i = 0; i < n; i++) particles.push(new Particle());
     }
@@ -2350,7 +3200,8 @@
         const duration = 1500;
         const startTime = Date.now();
         
-        function update() {            const elapsed = Date.now() - startTime;
+        function update() {
+            const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const currentValue = Math.floor(target * easeProgress);
@@ -2361,13 +3212,9 @@
             
             element.textContent = currentValue + suffix;
             
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            } else {
-                element.textContent = target + suffix;
-            }
+            if (progress < 1) requestAnimationFrame(update);
+            else element.textContent = target + suffix;
         }
-        
         update();
     }
 
@@ -2399,7 +3246,8 @@
             if (entry.isIntersecting) {
                 entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
                     setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, 200);
-                });            }
+                });
+            }
         });
     }, { threshold: 0.3 });
 
@@ -2448,7 +3296,8 @@
     document.querySelectorAll('details').forEach((detail) => {
         detail.addEventListener('toggle', () => {
             if (detail.open) {
-                const content = detail.querySelector('.details-content, .language-popup-content');                if (content) {
+                const content = detail.querySelector('.details-content, .language-popup-content');
+                if (content) {
                     content.style.animation = 'none';
                     content.offsetHeight;
                     content.style.animation = 'fadeIn 0.4s ease-out';
@@ -2464,6 +3313,59 @@
             document.title = 'Антон Мужельский | CDTO / CPO';
         }
     });
+
+    (function exitPopup() {
+        const overlay = document.getElementById('exitPopupOverlay');
+        let hasShown = false;
+        let isMobile = window.innerWidth <= 768;
+        
+        window.closeExitPopup = function() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            sessionStorage.setItem('exitPopupShown', 'true');
+        };
+        
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeExitPopup();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                closeExitPopup();
+            }
+        });
+        
+        function showPopup() {
+            if (hasShown || sessionStorage.getItem('exitPopupShown') === 'true') return;
+            if (window.pageYOffset < 500) return;
+            
+            hasShown = true;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        if (!isMobile) {
+            document.addEventListener('mouseout', (e) => {
+                if (!e.relatedTarget && e.clientY < 10) {
+                    showPopup();
+                }
+            });
+        }
+        
+        let mobileTriggered = false;
+        window.addEventListener('scroll', () => {
+            if (!isMobile || mobileTriggered) return;
+            const scrollPercent = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+            if (scrollPercent > 0.8) {
+                mobileTriggered = true;
+                setTimeout(showPopup, 1000);
+            }
+        }, { passive: true });
+        
+        window.addEventListener('resize', () => {
+            isMobile = window.innerWidth <= 768;
+        });
+    })();
 </script>
 
 </body>

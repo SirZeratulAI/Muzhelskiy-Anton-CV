@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark" data-default-theme="dark" data-qr="">
-<head>
+<html lang="ru" data-theme="dark" data-default-theme="dark" data-qr=""><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Антон Мужельский | CDTO / CPO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-primary:#FAFAF9; --bg-surface:#FFFFFF; --text-primary:#0F172A; --text-secondary:#64748B;
@@ -441,10 +440,10 @@
         .print-contacts{display:none;}
     </style>
 </head>
-<body>
-    <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
-    <div class="section-indicator" id="sectionIndicator">О себе</div>
-    <canvas id="particles-canvas"></canvas>
+<body class="">
+    <div class="progress-bar"><div class="progress-bar-fill" id="progressFill" style="width: 0%;"></div></div>
+    <div class="section-indicator" id="sectionIndicator">Рекомендации</div>
+    <canvas id="particles-canvas" width="1242" height="567"></canvas>
 
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <button class="lightbox-close" type="button" onclick="closeLightbox()" aria-label="Закрыть">×</button>
@@ -480,7 +479,7 @@
 
     <div class="theme-toggle">
         <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Переключить тему">
-            <div class="theme-toggle-slider"><svg class="theme-icon" id="theme-icon" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+            <div class="theme-toggle-slider"><svg class="theme-icon" id="theme-icon" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></div>
         </button>
     </div>
 
@@ -492,33 +491,33 @@
 <div class="container">
     <header>
         <div class="avatar-container">
-            <button class="qr-trigger" id="qrTrigger" type="button" onclick="openQrPopup()" aria-label="QR-код контакта">
-                <svg viewBox="0 0 24 24"><path d="M3 11h2v2H3zm0-4h2v2H3zM3 3h2v2H3zm4 0h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm4 0h2v2h-2zm0-4h2v2h-2zm0-4h2v2h-2zm0-4h2v2h-2zm0-4h2v2h-2zm8 0h2v2h-2zm-4 0h2v2h-2zm0 4h2v2h-2zm4 0h2v2h-2zm0 4h2v2h-2zm-4 0h2v2h-2zm0 4h2v2h-2zm4 0h2v2h-2zm0 4h2v2h-2zm-4 0h2v2h-2zm0 4h2v2h-2zm4 0h2v2h-2z"/></svg>
+            <button class="qr-trigger" id="qrTrigger" type="button" onclick="openQrPopup()" aria-label="QR-код контакта" style="display: none;">
+                <svg viewBox="0 0 24 24"><path d="M3 11h2v2H3zm0-4h2v2H3zM3 3h2v2H3zm4 0h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm4 0h2v2h-2zm0-4h2v2h-2zm0-4h2v2h-2zm0-4h2v2h-2zm0-4h2v2h-2zm8 0h2v2h-2zm-4 0h2v2h-2zm0 4h2v2h-2zm4 0h2v2h-2zm0 4h2v2h-2zm-4 0h2v2h-2zm0 4h2v2h-2zm4 0h2v2h-2zm0 4h2v2h-2zm-4 0h2v2h-2zm0 4h2v2h-2zm4 0h2v2h-2z"></path></svg>
             </button>
-            <img src="https://s10.iimage.su/s/03/g1QZN6VxO6De802eqUPonbRWVCbbBZsjGh01HmXv2.jpg" alt="Антон Мужельский" class="avatar">
+            <img src="https://s6.iimage.su/s/03/gOjD9AfxV1qEZsOoMF99y9jfEv94WyEVVfi3jtKtv.jpg" alt="Антон Мужельский" class="avatar">
         </div>
-        <h1>АНТОН МУЖЕЛЬСКИЙ</h1>
-        <div class="title" data-full="Директор по цифровой трансформации / CDTO / CPO">Директор по цифровой трансформации / CDTO / CPO</div>
+        <h1 class="">АНТОН МУЖЕЛЬСКИЙ</h1>
+        <div class="title typing" data-full="Директор по цифровой трансформации / CDTO / CPO">Д</div>
         <div class="career-counter">
             <span class="live-dot"></span>
             <span>В профессии с сентября 2012:</span>
-            <span class="counter-value" id="careerTime">0 лет, 0 мес, 0 дн</span>
+            <span class="counter-value" id="careerTime">13 лет, 11 месяцев, 2 дня</span>
         </div>
 
         <div class="hero-stats">
-            <div class="hero-stat"><div class="hero-stat-value" data-target="13" data-suffix="+">0</div><div class="hero-stat-label">лет в цифровой трансформации</div></div>
-            <div class="hero-stat"><div class="hero-stat-value" data-target="6" data-suffix="">0</div><div class="hero-stat-label">российских и международных премий</div></div>
-            <div class="hero-stat"><div class="hero-stat-value" data-target="150" data-suffix="+">0</div><div class="hero-stat-label">цифровых сервисов запущено</div></div>
-            <div class="hero-stat"><div class="hero-stat-value" data-target="100" data-suffix=" млн ₽">0</div><div class="hero-stat-label">экономии в год от ИИ-решений</div></div>
+            <div class="hero-stat"><div class="hero-stat-value" data-target="13" data-suffix="+">13+</div><div class="hero-stat-label">лет в цифровой трансформации</div></div>
+            <div class="hero-stat"><div class="hero-stat-value" data-target="6" data-suffix="">6</div><div class="hero-stat-label">российских и международных премий</div></div>
+            <div class="hero-stat"><div class="hero-stat-value" data-target="150" data-suffix="+">150+</div><div class="hero-stat-label">цифровых сервисов запущено</div></div>
+            <div class="hero-stat"><div class="hero-stat-value" data-target="100" data-suffix=" млн ₽">100 млн ₽</div><div class="hero-stat-label">экономии в год от ИИ-решений</div></div>
         </div>
 
         <div class="career-map">
-            <a class="career-item logo-link" href="https://вэб.рф/" target="_blank" data-company="veb" title="ВЭБ.РФ"><span class="career-logo"><img class="editable-img" src="https://logo.clearbit.com/veb.ru?size=160" alt="ВЭБ.РФ" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=veb.ru&sz=128'"></span><span class="career-name">ВЭБ.РФ</span></a>
-            <a class="career-item logo-link" href="https://дом.рф/" target="_blank" data-company="domrf" title="ДОМ.РФ"><span class="career-logo"><img class="editable-img" src="https://logo.clearbit.com/domrf.ru?size=160" alt="ДОМ.РФ" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=domrf.ru&sz=128'"></span><span class="career-name">ДОМ.РФ</span></a>
-            <a class="career-item logo-link" href="https://wholesale.banking.societegenerale.com/en/" target="_blank" data-company="rosbank" title="Société Générale"><span class="career-logo"><img class="editable-img" src="https://logo.clearbit.com/societegenerale.com?size=160" alt="Société Générale" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=societegenerale.com&sz=128'"></span><span class="career-name">Société Générale</span></a>
-            <a class="career-item logo-link" href="https://sberbank.ru/sberprime" target="_blank" data-company="sber" title="Сбер"><span class="career-logo"><img class="editable-img" src="https://logo.clearbit.com/sberbank.ru?size=160" alt="Сбер" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=sberbank.ru&sz=128'"></span><span class="career-name">Сбер</span></a>
-            <a class="career-item logo-link" href="https://kpmg.com/" target="_blank" data-company="consulting" title="KPMG"><span class="career-logo"><img class="editable-img" src="https://logo.clearbit.com/kpmg.com?size=160" alt="KPMG" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=kpmg.com&sz=128'"></span><span class="career-name">KPMG</span></a>
-            <a class="career-item logo-link" href="https://www.ey.com/en_gl" target="_blank" data-company="consulting" title="EY"><span class="career-logo"><img class="editable-img" src="https://logo.clearbit.com/ey.com?size=160" alt="EY" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=ey.com&sz=128'"></span><span class="career-name">EY</span></a>
+            <a class="career-item logo-link" href="https://вэб.рф/" target="_blank" data-company="veb" title="ВЭБ.РФ" style="position: relative;"><span class="career-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=veb.ru&amp;sz=128" alt="ВЭБ.РФ" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=veb.ru&amp;sz=128'"></span><span class="career-name">ВЭБ.РФ</span></a>
+            <a class="career-item logo-link" href="https://дом.рф/" target="_blank" data-company="domrf" title="ДОМ.РФ" style="position: relative;"><span class="career-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=domrf.ru&amp;sz=128" alt="ДОМ.РФ" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=domrf.ru&amp;sz=128'"></span><span class="career-name">ДОМ.РФ</span></a>
+            <a class="career-item logo-link" href="https://wholesale.banking.societegenerale.com/en/" target="_blank" data-company="rosbank" title="Société Générale" style="position: relative;"><span class="career-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=societegenerale.com&amp;sz=128" alt="Société Générale" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=societegenerale.com&amp;sz=128'"></span><span class="career-name">Société Générale</span></a>
+            <a class="career-item logo-link" href="https://sberbank.ru/sberprime" target="_blank" data-company="sber" title="Сбер" style="position: relative;"><span class="career-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=sberbank.ru&amp;sz=128" alt="Сбер" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=sberbank.ru&amp;sz=128'"></span><span class="career-name">Сбер</span></a>
+            <a class="career-item logo-link" href="https://kpmg.com/" target="_blank" data-company="consulting" title="KPMG" style="position: relative;"><span class="career-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=kpmg.com&amp;sz=128" alt="KPMG" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=kpmg.com&amp;sz=128'"></span><span class="career-name">KPMG</span></a>
+            <a class="career-item logo-link" href="https://www.ey.com/en_gl" target="_blank" data-company="consulting" title="EY" style="position: relative;"><span class="career-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=ey.com&amp;sz=128" alt="EY" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=ey.com&amp;sz=128'"></span><span class="career-name">EY</span></a>
         </div>
 
         <div class="print-contacts">
@@ -532,32 +531,32 @@
         </div>
     </header>
 
-    <section id="about" class="reveal">
+    <section id="about" class="reveal" style="position: relative;">
         <h2><span class="h2-text">О себе</span></h2>
         <p class="about-lead">Высокоэффективный CDTO/CPO с опытом создания цифровых экосистем и сервисов «в 1 клик» в государственных и коммерческих организациях.</p>
         <details class="about-expandable">
             <summary>Подробнее</summary>
-            <div class="details-content">
-                <p>Активный участник профессионального сообщества, спикер различных конференций. Член жюри премий Russian Intranet Awards, InterComm и Серебряный лучник.</p>
-                <p>Имею большой опыт создания цифровых экосистем для пользователей, обеспечивающий цифровой комфорт и сервисы «в 1 клик». Продукты, созданные командой под моим руководством, были удостоены ряда российских и международных премий в области цифровых экосистем и инновационных продуктов.</p>
-                <p>Обладаю широкой экспертизой и насмотренностью интерфейсов и цифровых решений, что позволяет быстро оценивать качество продуктов и находить точки роста.</p>
+            <div class="details-content" style="animation: 0.4s ease 0s 1 normal none running fadeIn;">
+                <p class="">Активный участник профессионального сообщества, спикер различных конференций. Член жюри премий Russian Intranet Awards, InterComm и Серебряный лучник.</p>
+                <p class="">Имею большой опыт создания цифровых экосистем для пользователей, обеспечивающий цифровой комфорт и сервисы «в 1 клик». Продукты, созданные командой под моим руководством, были удостоены ряда российских и международных премий в области цифровых экосистем и инновационных продуктов.</p>
+                <p class="">Обладаю широкой экспертизой и насмотренностью интерфейсов и цифровых решений, что позволяет быстро оценивать качество продуктов и находить точки роста.</p>
             </div>
         </details>
     </section>
 
-    <details class="cover-letter-toggle">
+    <details class="cover-letter-toggle" style="position: relative;">
         <summary><span>📄 Сопроводительное письмо</span></summary>
-        <div class="cover-letter-content">
-            <p>Добрый день!</p>
-            <p>Прошу рассмотреть мое резюме на руководящие позиции цифровых продуктов, программ и проектов.</p>
-            <p>Имею большой опыт создания цифровых экосистем для пользователей, обеспечивающий цифровой комфорт и сервисы «в 1 клик». Продукты, созданные командой под моим руководством, были удостоены ряда российских и международных премий в области цифровых экосистем и инновационных продуктов.</p>
-            <p>Являюсь членом жюри ряда российских и международных премий и имею широкую экспертизу и насмотренность интерфейсов и цифровых решений.</p>
-            <p>Имею высокомотивированную команду, а также широкий круг знакомств в профессиональном сообществе, что позволит быстро собрать коллектив высокоэффективных специалистов для решения поставленных задач в масштабах страны.</p>
-            <p>С уважением,<br><strong>Антон Мужельский</strong></p>
+        <div class="cover-letter-content" style="animation: 0.4s ease 0s 1 normal none running fadeIn;">
+            <p class="">Добрый день!</p>
+            <p class="">Прошу рассмотреть мое резюме на руководящие позиции цифровых продуктов, программ и проектов.</p>
+            <p class="">Имею большой опыт создания цифровых экосистем для пользователей, обеспечивающий цифровой комфорт и сервисы «в 1 клик». Продукты, созданные командой под моим руководством, были удостоены ряда российских и международных премий в области цифровых экосистем и инновационных продуктов.</p>
+            <p class="">Являюсь членом жюри ряда российских и международных премий и имею широкую экспертизу и насмотренность интерфейсов и цифровых решений.</p>
+            <p class="">Имею высокомотивированную команду, а также широкий круг знакомств в профессиональном сообществе, что позволит быстро собрать коллектив высокоэффективных специалистов для решения поставленных задач в масштабах страны.</p>
+            <p class="">С уважением,<br><strong>Антон Мужельский</strong></p>
         </div>
     </details>
 
-    <section id="experience">
+    <section id="experience" style="position: relative;">
         <h2><span class="h2-text">Опыт работы</span></h2>
         <div class="timeline">
 
@@ -566,7 +565,7 @@
                 <div class="timeline-side"><span class="timeline-date">2022—н.в.</span><span class="working">работает</span></div>
                 <div class="experience-item current tilt-card" data-company="veb">
                     <div class="exp-header">
-                        <span class="exp-logo"><img class="editable-img" src="https://logo.clearbit.com/veb.ru?size=160" alt="ВЭБ.РФ" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=veb.ru&sz=128'"></span>
+                        <span class="exp-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=veb.ru&amp;sz=128" alt="ВЭБ.РФ" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=veb.ru&amp;sz=128'"></span>
                         <div class="exp-titles">
                             <div class="job-title">Директор по цифровой трансформации</div>
                             <div class="department">Центр стратегии и аналитики</div>
@@ -575,30 +574,30 @@
                     </div>
                     <div class="job-summary">Запустил платформу управления персоналом и внедрил GenAI во внутренний периметр организации.</div>
                     <div class="key-achievements">
-                        <h4>🏅 Ключевые достижения</h4>
+                        <h4 class="">🏅 Ключевые достижения</h4>
                         <ul>
-                            <li>Платформа управления персоналом с нуля — доступна из 5 корпоративных сред</li>
-                            <li>Внедрил GenAI во внутренний периметр + ИИ-подкасты «Полный заряд»</li>
-                            <li>Перевёл 99% сотрудников на КЭДО (3 вида электронной подписи)</li>
+                            <li class="" style="position: relative;">Платформа управления персоналом с нуля — доступна из 5 корпоративных сред</li>
+                            <li class="" style="position: relative;">Внедрил GenAI во внутренний периметр + ИИ-подкасты «Полный заряд»</li>
+                            <li class="" style="position: relative;">Перевёл 99% сотрудников на КЭДО (3 вида электронной подписи)</li>
                         </ul>
                     </div>
                     <div class="inline-stats">
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="70">0</div><div class="inline-stat-label">DAU, %</div></div>
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="95">0</div><div class="inline-stat-label">MAU, %</div></div>
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="99">0</div><div class="inline-stat-label">КЭДО, %</div></div>
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="60">0</div><div class="inline-stat-label">Мобильных, %</div></div>
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="5">0</div><div class="inline-stat-label">Корп. сред</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">DAU, %</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">MAU, %</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">КЭДО, %</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">Мобильных, %</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">Корп. сред</div></div>
                     </div>
                     <details>
                         <summary>Подробнее</summary>
-                        <div class="details-content">
+                        <div class="details-content" style="animation: 0.4s ease 0s 1 normal none running fadeIn;">
                             <ul>
-                                <li>Запустил платформу управления персоналом с нуля → доступна из <span class="highlight">5 корпоративных сред</span></li>
-                                <li>Внедрил <span class="highlight">GenAI</span> во внутренний периметр: обучение сотрудников + ИИ-подкасты «Полный заряд»</li>
-                                <li>Перевёл <span class="highlight">99% сотрудников на КЭДО</span> (3 вида электронной подписи)</li>
-                                <li>Запустил дашборды для топ-менеджмента: данные для принятия решений в реальном времени</li>
-                                <li>Провёл архитектурную трансформацию ИТ-ландшафта → цифровой комфорт сотрудников</li>
-                                <li>Заместил зарубежные системы на отечественные аналоги в рамках импортозамещения</li>
+                                <li class="" style="position: relative;">Запустил платформу управления персоналом с нуля → доступна из <span class="highlight">5 корпоративных сред</span></li>
+                                <li class="" style="position: relative;">Внедрил <span class="highlight">GenAI</span> во внутренний периметр: обучение сотрудников + ИИ-подкасты «Полный заряд»</li>
+                                <li class="" style="position: relative;">Перевёл <span class="highlight">99% сотрудников на КЭДО</span> (3 вида электронной подписи)</li>
+                                <li class="" style="position: relative;">Запустил дашборды для топ-менеджмента: данные для принятия решений в реальном времени</li>
+                                <li class="" style="position: relative;">Провёл архитектурную трансформацию ИТ-ландшафта → цифровой комфорт сотрудников</li>
+                                <li class="" style="position: relative;">Заместил зарубежные системы на отечественные аналоги в рамках импортозамещения</li>
                             </ul>
                         </div>
                     </details>
@@ -610,7 +609,7 @@
                 <div class="timeline-side"><span class="timeline-date">2019—2022</span></div>
                 <div class="experience-item tilt-card" data-company="domrf">
                     <div class="exp-header">
-                        <span class="exp-logo"><img class="editable-img" src="https://logo.clearbit.com/domrf.ru?size=160" alt="ДОМ.РФ" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=domrf.ru&sz=128'"></span>
+                        <span class="exp-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=domrf.ru&amp;sz=128" alt="ДОМ.РФ" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=domrf.ru&amp;sz=128'"></span>
                         <div class="exp-titles">
                             <div class="job-title">Директор подразделения «Пользовательские сервисы»</div>
                             <div class="company"><a href="https://дом.рф/" target="_blank">ДОМ.РФ</a></div>
@@ -618,30 +617,30 @@
                     </div>
                     <div class="job-summary">Запустил цифровую экосистему пользовательских сервисов и оцифровал пользовательский опыт группы компаний.</div>
                     <div class="key-achievements">
-                        <h4>🏅 Ключевые достижения</h4>
+                        <h4 class="">🏅 Ключевые достижения</h4>
                         <ul>
-                            <li>150+ автоматизированных сервисов для сотрудников</li>
-                            <li>ИИ-прогноз выгорания: экономия 100 млн ₽/год</li>
-                            <li>Перевёл 90% группы компаний на удалёнку (COVID-19)</li>
+                            <li class="" style="position: relative;">150+ автоматизированных сервисов для сотрудников</li>
+                            <li class="" style="position: relative;">ИИ-прогноз выгорания: экономия 100 млн ₽/год</li>
+                            <li class="" style="position: relative;">Перевёл 90% группы компаний на удалёнку (COVID-19)</li>
                         </ul>
                     </div>
                     <div class="inline-stats">
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="150">0</div><div class="inline-stat-label">Сервисов</div></div>
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="100">0</div><div class="inline-stat-label">млн ₽ экономии</div></div>
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="90">0</div><div class="inline-stat-label">Удалёнка, %</div></div>
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="50">0</div><div class="inline-stat-label">Публикаций</div></div>
-                        <div class="inline-stat"><div class="inline-stat-value" data-target="5">0</div><div class="inline-stat-label">Побед</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">Сервисов</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">млн ₽ экономии</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">Удалёнка, %</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">Публикаций</div></div>
+                        <div class="inline-stat"><div class="inline-stat-value" data-target="0">0</div><div class="inline-stat-label">Побед</div></div>
                     </div>
                     <details>
                         <summary>Подробнее</summary>
-                        <div class="details-content">
+                        <div class="details-content" style="animation: 0.4s ease 0s 1 normal none running fadeIn;">
                             <ul>
-                                <li>Запустил более <span class="highlight">150 автоматизированных сервисов</span></li>
-                                <li>Внедрил ИИ для прогнозирования выгорания (экономия <span class="highlight">100 млн ₽/год</span>)</li>
-                                <li>Перевёл <span class="highlight">90% группы компаний</span> на удалённую работу в период COVID-19</li>
-                                <li>Запустил мобильное приложение для сотрудников ДОМ24</li>
-                                <li>Оцифровал кадровый ЭДО, внедрил механизмы электронной подписи</li>
-                                <li>Завоевал 5 побед в международных и российских премиях</li>
+                                <li class="" style="position: relative;">Запустил более <span class="highlight">150 автоматизированных сервисов</span></li>
+                                <li class="" style="position: relative;">Внедрил ИИ для прогнозирования выгорания (экономия <span class="highlight">100 млн ₽/год</span>)</li>
+                                <li class="" style="position: relative;">Перевёл <span class="highlight">90% группы компаний</span> на удалённую работу в период COVID-19</li>
+                                <li class="" style="position: relative;">Запустил мобильное приложение для сотрудников ДОМ24</li>
+                                <li class="" style="position: relative;">Оцифровал кадровый ЭДО, внедрил механизмы электронной подписи</li>
+                                <li class="" style="position: relative;">Завоевал 5 побед в международных и российских премиях</li>
                             </ul>
                         </div>
                     </details>
@@ -653,7 +652,7 @@
                 <div class="timeline-side"><span class="timeline-date">2017—2019</span></div>
                 <div class="experience-item tilt-card" data-company="rosbank">
                     <div class="exp-header">
-                        <span class="exp-logo"><img class="editable-img" src="https://logo.clearbit.com/rosbank.ru?size=160" alt="Росбанк" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=rosbank.ru&sz=128'"></span>
+                        <span class="exp-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=rosbank.ru&amp;sz=128" alt="Росбанк" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=rosbank.ru&amp;sz=128'"></span>
                         <div class="exp-titles">
                             <div class="job-title">Директор проектов, Управление изменениями HR</div>
                             <div class="company"><a href="https://rosbank.ru/" target="_blank">Группа Societe Generale (Росбанк)</a></div>
@@ -661,21 +660,21 @@
                     </div>
                     <div class="job-summary">Внедрил платформу-конструктор для чат-ботов и десятки цифровых сервисов для IT и HR.</div>
                     <div class="key-achievements">
-                        <h4>🏅 Ключевые достижения</h4>
+                        <h4 class="">🏅 Ключевые достижения</h4>
                         <ul>
-                            <li>Платформа-конструктор для создания чат-ботов</li>
-                            <li>Десятки цифровых сервисов для IT и HR</li>
-                            <li>Оптимизация HR-бюджета и модели численности банка</li>
+                            <li class="" style="position: relative;">Платформа-конструктор для создания чат-ботов</li>
+                            <li class="" style="position: relative;">Десятки цифровых сервисов для IT и HR</li>
+                            <li class="" style="position: relative;">Оптимизация HR-бюджета и модели численности банка</li>
                         </ul>
                     </div>
                     <details>
                         <summary>Подробнее</summary>
-                        <div class="details-content">
+                        <div class="details-content" style="animation: 0.4s ease 0s 1 normal none running fadeIn;">
                             <ul>
-                                <li>Внедрил платформу-конструктор для создания чат-ботов</li>
-                                <li>Запустил десятки цифровых сервисов для IT и HR</li>
-                                <li>Оптимизировал HR-бюджет Банка</li>
-                                <li>Оптимизировал модель численности Банка</li>
+                                <li class="" style="position: relative;">Внедрил платформу-конструктор для создания чат-ботов</li>
+                                <li class="" style="position: relative;">Запустил десятки цифровых сервисов для IT и HR</li>
+                                <li class="" style="position: relative;">Оптимизировал HR-бюджет Банка</li>
+                                <li class="" style="position: relative;">Оптимизировал модель численности Банка</li>
                             </ul>
                         </div>
                     </details>
@@ -687,7 +686,7 @@
                 <div class="timeline-side"><span class="timeline-date">2015—2017</span></div>
                 <div class="experience-item tilt-card" data-company="sber">
                     <div class="exp-header">
-                        <span class="exp-logo"><img class="editable-img" src="https://logo.clearbit.com/sberbank.ru?size=160" alt="Сбер" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=sberbank.ru&sz=128'"></span>
+                        <span class="exp-logo"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=sberbank.ru&amp;sz=128" alt="Сбер" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=sberbank.ru&amp;sz=128'"></span>
                         <div class="exp-titles">
                             <div class="job-title">Руководитель проектов</div>
                             <div class="company"><a href="https://sberbank.ru/" target="_blank">Сбербанк</a></div>
@@ -695,20 +694,20 @@
                     </div>
                     <div class="job-summary">Реализовал программу «Технологическая трансформация»: сократил Time-to-market и снизил стоимость бизнес-операций.</div>
                     <div class="key-achievements">
-                        <h4>🏅 Ключевые достижения</h4>
+                        <h4 class="">🏅 Ключевые достижения</h4>
                         <ul>
-                            <li>Программа Operational Excellence</li>
-                            <li>Трансформация сети центров сопровождения («Олимп 3.0»)</li>
-                            <li>Единая модель локации и численности Блока</li>
+                            <li class="" style="position: relative;">Программа Operational Excellence</li>
+                            <li class="" style="position: relative;">Трансформация сети центров сопровождения («Олимп 3.0»)</li>
+                            <li class="" style="position: relative;">Единая модель локации и численности Блока</li>
                         </ul>
                     </div>
                     <details>
                         <summary>Подробнее</summary>
-                        <div class="details-content">
+                        <div class="details-content" style="animation: 0.4s ease 0s 1 normal none running fadeIn;">
                             <ul>
-                                <li>Реализовал программу Operational Excellence</li>
-                                <li>Трансформировал сеть центров сопровождения (программа «Олимп 3.0»)</li>
-                                <li>Разработал единую модель локации и численности Блока</li>
+                                <li class="" style="position: relative;">Реализовал программу Operational Excellence</li>
+                                <li class="" style="position: relative;">Трансформировал сеть центров сопровождения (программа «Олимп 3.0»)</li>
+                                <li class="" style="position: relative;">Разработал единую модель локации и численности Блока</li>
                             </ul>
                         </div>
                     </details>
@@ -721,31 +720,31 @@
                 <div class="experience-item tilt-card" data-company="consulting">
                     <div class="exp-header">
                         <span class="exp-logo">
-                            <img class="editable-img" src="https://logo.clearbit.com/ey.com?size=160" alt="EY" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=ey.com&sz=128'">
-                            <img class="editable-img" src="https://logo.clearbit.com/kpmg.com?size=160" alt="KPMG" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=kpmg.com&sz=128'">
+                            <img class="editable-img" src="https://www.google.com/s2/favicons?domain=ey.com&amp;sz=128" alt="EY" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=ey.com&amp;sz=128'">
+                            <img class="editable-img" src="https://www.google.com/s2/favicons?domain=kpmg.com&amp;sz=128" alt="KPMG" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=kpmg.com&amp;sz=128'">
                         </span>
                         <div class="exp-titles">
                             <div class="job-title">Старший консультант / Консультант</div>
-                            <div class="company"><a href="https://www.ey.com/en_gl" target="_blank">Ernst & Young</a> / <a href="https://kpmg.com/" target="_blank">KPMG</a></div>
+                            <div class="company"><a href="https://www.ey.com/en_gl" target="_blank">Ernst &amp; Young</a> / <a href="https://kpmg.com/" target="_blank">KPMG</a></div>
                         </div>
                     </div>
                     <div class="job-summary">Провёл предынвестиционные исследования (Due Diligence) компаний для целей слияния/поглощения.</div>
                     <div class="key-achievements">
-                        <h4>🏅 Ключевые достижения</h4>
+                        <h4 class="">🏅 Ключевые достижения</h4>
                         <ul>
-                            <li>Due Diligence для сделок M&amp;A</li>
-                            <li>Интеграция активов Роснефть и ТНК-БП</li>
-                            <li>Анализ и корректировки EBITDA и цены сделки</li>
+                            <li class="" style="position: relative;">Due Diligence для сделок M&amp;A</li>
+                            <li class="" style="position: relative;">Интеграция активов Роснефть и ТНК-БП</li>
+                            <li class="" style="position: relative;">Анализ и корректировки EBITDA и цены сделки</li>
                         </ul>
                     </div>
                     <details>
                         <summary>Подробнее</summary>
-                        <div class="details-content">
+                        <div class="details-content" style="animation: 0.4s ease 0s 1 normal none running fadeIn;">
                             <ul>
-                                <li>Интеграция активов Роснефть и ТНК-БП</li>
-                                <li>Due Diligence ТГК-2 для Группы Синтез</li>
-                                <li>Исследование для Вымпелком и Hearst Corp</li>
-                                <li>Анализ и корректировки к EBITDA и цене сделки</li>
+                                <li class="" style="position: relative;">Интеграция активов Роснефть и ТНК-БП</li>
+                                <li class="" style="position: relative;">Due Diligence ТГК-2 для Группы Синтез</li>
+                                <li class="" style="position: relative;">Исследование для Вымпелком и Hearst Corp</li>
+                                <li class="" style="position: relative;">Анализ и корректировки к EBITDA и цене сделки</li>
                             </ul>
                         </div>
                     </details>
@@ -755,139 +754,169 @@
         </div>
     </section>
 
-    <section id="media">
+    <section id="media" style="position: relative;">
         <h2><span class="h2-text">📺 Публикации и выступления</span></h2>
         <div class="media-carousel-container reveal">
-            <button class="carousel-nav prev" onclick="moveCarousel(-1)" aria-label="Предыдущий"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg></button>
-            <div class="media-carousel" id="mediaCarousel">
-                <div class="media-card tilt-card">
-                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Видео</span></div>
-                    <h3 class="media-title">РБК — Оцифрованный менеджер</h3>
-                    <p class="media-description">Спецвыпуск с Павлом Демидовичем о цифровой трансформации и современных подходах к управлению</p>
-                    <a href="https://tv.rbc.ru/archive/special/6152029d2ae5960de61d3a10" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
-                </div>
-                <div class="media-card tilt-card">
-                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Видеоотзыв</span></div>
+            <button class="carousel-nav prev" onclick="moveCarousel(-1)" aria-label="Предыдущий"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg></button>
+            <div class="media-carousel" id="mediaCarousel" style="transition: none; transform: translateX(-981px);"><div class="media-card tilt-card clone">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Видеоотзыв</span></div>
                     <h3 class="media-title">Пульс — HCM платформа</h3>
                     <p class="media-description">Видеоотзыв о внедрении HCM платформы и цифровизации процессов управления персоналом</p>
-                    <a href="https://rutube.ru/video/private/4966de3a9f667f69402945a4ed1c621c/?r=wd&p=NAcqIMMgs1D7tFLO3EfeOA" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
-                </div>
-                <div class="media-card tilt-card">
-                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Выступление</span></div>
+                    <a href="https://rutube.ru/video/private/4966de3a9f667f69402945a4ed1c621c/?r=wd&amp;p=NAcqIMMgs1D7tFLO3EfeOA" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div><div class="media-card tilt-card clone">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Выступление</span></div>
                     <h3 class="media-title">InterComm 2025 — ИИ в коммуникациях</h3>
                     <p class="media-description">Как эффективно внедрять ИИ-технологии во внутренние коммуникации</p>
-                    <a href="https://vkvideo.ru/video-204256750_456239556?t=6s" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
-                </div>
-                <div class="media-card tilt-card">
-                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><span>Подкаст</span></div>
+                    <a href="https://vkvideo.ru/video-204256750_456239556?t=6s" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div><div class="media-card tilt-card clone">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Подкаст</span></div>
                     <h3 class="media-title">Face to Face — ИИ для прогнозирования</h3>
                     <p class="media-description">Искусственный интеллект в анализе внутренних коммуникаций для прогнозирования эмоционального выгорания</p>
-                    <a href="https://youtu.be/ttQmhmXyceQ?si=KxJzhpsAu6zrm48T" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+                    <a href="https://youtu.be/ttQmhmXyceQ?si=KxJzhpsAu6zrm48T" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
                 </div>
-            </div>
-            <button class="carousel-nav next" onclick="moveCarousel(1)" aria-label="Следующий"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
+                <div class="media-card tilt-card">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Видео</span></div>
+                    <h3 class="media-title">РБК — Оцифрованный менеджер</h3>
+                    <p class="media-description">Спецвыпуск с Павлом Демидовичем о цифровой трансформации и современных подходах к управлению</p>
+                    <a href="https://tv.rbc.ru/archive/special/6152029d2ae5960de61d3a10" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div>
+                <div class="media-card tilt-card">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Видеоотзыв</span></div>
+                    <h3 class="media-title">Пульс — HCM платформа</h3>
+                    <p class="media-description">Видеоотзыв о внедрении HCM платформы и цифровизации процессов управления персоналом</p>
+                    <a href="https://rutube.ru/video/private/4966de3a9f667f69402945a4ed1c621c/?r=wd&amp;p=NAcqIMMgs1D7tFLO3EfeOA" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div>
+                <div class="media-card tilt-card">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Выступление</span></div>
+                    <h3 class="media-title">InterComm 2025 — ИИ в коммуникациях</h3>
+                    <p class="media-description">Как эффективно внедрять ИИ-технологии во внутренние коммуникации</p>
+                    <a href="https://vkvideo.ru/video-204256750_456239556?t=6s" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div>
+                <div class="media-card tilt-card">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Подкаст</span></div>
+                    <h3 class="media-title">Face to Face — ИИ для прогнозирования</h3>
+                    <p class="media-description">Искусственный интеллект в анализе внутренних коммуникаций для прогнозирования эмоционального выгорания</p>
+                    <a href="https://youtu.be/ttQmhmXyceQ?si=KxJzhpsAu6zrm48T" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div>
+            <div class="media-card tilt-card clone">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Видео</span></div>
+                    <h3 class="media-title">РБК — Оцифрованный менеджер</h3>
+                    <p class="media-description">Спецвыпуск с Павлом Демидовичем о цифровой трансформации и современных подходах к управлению</p>
+                    <a href="https://tv.rbc.ru/archive/special/6152029d2ae5960de61d3a10" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div><div class="media-card tilt-card clone">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Видеоотзыв</span></div>
+                    <h3 class="media-title">Пульс — HCM платформа</h3>
+                    <p class="media-description">Видеоотзыв о внедрении HCM платформы и цифровизации процессов управления персоналом</p>
+                    <a href="https://rutube.ru/video/private/4966de3a9f667f69402945a4ed1c621c/?r=wd&amp;p=NAcqIMMgs1D7tFLO3EfeOA" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div><div class="media-card tilt-card clone">
+                    <div class="media-type"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg><span>Выступление</span></div>
+                    <h3 class="media-title">InterComm 2025 — ИИ в коммуникациях</h3>
+                    <p class="media-description">Как эффективно внедрять ИИ-технологии во внутренние коммуникации</p>
+                    <a href="https://vkvideo.ru/video-204256750_456239556?t=6s" target="_blank" class="media-link">Смотреть<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg></a>
+                </div></div>
+            <button class="carousel-nav next" onclick="moveCarousel(1)" aria-label="Следующий"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg></button>
         </div>
-        <div class="carousel-dots" id="carouselDots"></div>
-        <div class="swipe-hint"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><span>Свайпните для просмотра</span></div>
+        <div class="carousel-dots" id="carouselDots"><button class="carousel-dot active" aria-label="Слайд 1"></button><button class="carousel-dot" aria-label="Слайд 2"></button><button class="carousel-dot" aria-label="Слайд 3"></button><button class="carousel-dot" aria-label="Слайд 4"></button></div>
+        <div class="swipe-hint"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg><span>Свайпните для просмотра</span></div>
     </section>
 
-    <section id="speaker">
+    <section id="speaker" style="position: relative;">
         <h2><span class="h2-text">🎤 Спикер конференций</span></h2>
         <div class="badges-grid reveal-stagger">
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card speaker"><div class="badge-hole"></div><div class="badge-type">СПИКЕР</div>
-                    <a class="badge-logo logo-link" href="https://abazhur.rivelty.ru/itogi-riawards-2021/" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/rivelty.ru?size=160" alt="Rivelty" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=rivelty.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://abazhur.rivelty.ru/itogi-riawards-2021/" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=rivelty.ru&amp;sz=128" alt="Rivelty" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=rivelty.ru&amp;sz=128'"></a>
                     <div class="badge-title">Rivelty</div><div class="badge-desc">Международная конференция</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card speaker"><div class="badge-hole"></div><div class="badge-type">СПИКЕР</div>
-                    <a class="badge-logo logo-link" href="https://vnutricom.ru/" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/vnutricom.ru?size=160" alt="InterComm" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=vnutricom.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://vnutricom.ru/" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=vnutricom.ru&amp;sz=128" alt="InterComm" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=vnutricom.ru&amp;sz=128'"></a>
                     <div class="badge-title">InterComm</div><div class="badge-desc">Корпоративные медиа</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card speaker"><div class="badge-hole"></div><div class="badge-type">СПИКЕР</div>
-                    <a class="badge-logo logo-link" href="https://impact-lms.ru/events/impact-conf2026" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/impact-lms.ru?size=160" alt="Impact Conf" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=impact-lms.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://impact-lms.ru/events/impact-conf2026" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=impact-lms.ru&amp;sz=128" alt="Impact Conf" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=impact-lms.ru&amp;sz=128'"></a>
                     <div class="badge-title">Impact Conf</div><div class="badge-desc">HR-tech конференция</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card speaker"><div class="badge-hole"></div><div class="badge-type">СПИКЕР</div>
-                    <a class="badge-logo logo-link" href="https://events.vedomosti.ru/" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/vedomosti.ru?size=160" alt="Ведомости" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=vedomosti.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://events.vedomosti.ru/" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=vedomosti.ru&amp;sz=128" alt="Ведомости" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=vedomosti.ru&amp;sz=128'"></a>
                     <div class="badge-title">Ведомости Конф</div><div class="badge-desc">Цифровая трансформация</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="teaching">
+    <section id="teaching" style="position: relative;">
         <h2><span class="h2-text">🎓 Преподавательская деятельность</span></h2>
         <div class="teaching-grid reveal-stagger">
-            <div class="teaching-card tilt-card"><div class="teaching-list-icon">🎓</div><div class="teaching-list-content"><h4>Мастер-класс по автоматизации на основе опыта внедрения цифровых платформ и мобильных решений</h4><p>МИРБИС — практический мастер-класс по внедрению цифровых платформ</p><span class="teaching-tag tag-external">Внешнее · 2022</span></div></div>
-            <div class="teaching-card tilt-card"><div class="teaching-list-icon">🤖</div><div class="teaching-list-content"><h4>Внутренний онлайн-курс по основам генеративного ИИ</h4><p>Участие в разработке внутреннего онлайн-курса для сотрудников по основам генеративного ИИ</p><span class="teaching-tag tag-internal">Внутреннее · 2025 — н.в.</span></div></div>
-            <div class="teaching-card tilt-card"><div class="teaching-list-icon">🌐</div><div class="teaching-list-content"><h4>Развитие внутреннего сообщества амбассадоров ИИ</h4><p>Участие в проекте развития внутреннего сообщества амбассадоров искусственного интеллекта</p><span class="teaching-tag tag-internal">Внутреннее · 2025 — н.в.</span></div></div>
+            <div class="teaching-card tilt-card"><div class="teaching-list-icon">🎓</div><div class="teaching-list-content"><h4 class="">Мастер-класс по автоматизации на основе опыта внедрения цифровых платформ и мобильных решений</h4><p class="">МИРБИС — практический мастер-класс по внедрению цифровых платформ</p><span class="teaching-tag tag-external">Внешнее · 2022</span></div></div>
+            <div class="teaching-card tilt-card"><div class="teaching-list-icon">🤖</div><div class="teaching-list-content"><h4 class="">Внутренний онлайн-курс по основам генеративного ИИ</h4><p class="">Участие в разработке внутреннего онлайн-курса для сотрудников по основам генеративного ИИ</p><span class="teaching-tag tag-internal">Внутреннее · 2025 — н.в.</span></div></div>
+            <div class="teaching-card tilt-card"><div class="teaching-list-icon">🌐</div><div class="teaching-list-content"><h4 class="">Развитие внутреннего сообщества амбассадоров ИИ</h4><p class="">Участие в проекте развития внутреннего сообщества амбассадоров искусственного интеллекта</p><span class="teaching-tag tag-internal">Внутреннее · 2025 — н.в.</span></div></div>
         </div>
     </section>
 
-    <section id="jury">
+    <section id="jury" style="position: relative;">
         <h2><span class="h2-text">⚖️ Член жюри</span></h2>
         <div class="badges-grid reveal-stagger">
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card jury"><div class="badge-hole"></div><div class="badge-type">ЖЮРИ</div>
-                    <a class="badge-logo logo-link" href="https://awards.rivelty.ru/" target="_blank"><img class="editable-img" src="https://awards.rivelty.ru/img/awards/logo_rexa2025.png" alt="REXAwards" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=awards.rivelty.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://awards.rivelty.ru/" target="_blank" style="position: relative;"><img class="editable-img" src="https://awards.rivelty.ru/img/awards/logo_rexa2025.png" alt="REXAwards" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=awards.rivelty.ru&amp;sz=128'"></a>
                     <div class="badge-title">REXAwards</div><div class="badge-desc">Rivelty Intranet Awards</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card jury"><div class="badge-hole"></div><div class="badge-type">ЖЮРИ</div>
-                    <a class="badge-logo logo-link" href="https://vnutricom.ru/" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/vnutricom.ru?size=160" alt="InterComm" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=vnutricom.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://vnutricom.ru/" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=vnutricom.ru&amp;sz=128" alt="InterComm" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=vnutricom.ru&amp;sz=128'"></a>
                     <div class="badge-title">InterComm</div><div class="badge-desc">Корпоративные коммуникации</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card jury"><div class="badge-hole"></div><div class="badge-type">ЖЮРИ</div>
-                    <a class="badge-logo logo-link" href="https://silvermercury.ru/" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/silvermercury.ru?size=160" alt="Silver Mercury" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=silvermercury.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://silvermercury.ru/" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=silvermercury.ru&amp;sz=128" alt="Silver Mercury" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=silvermercury.ru&amp;sz=128'"></a>
                     <div class="badge-title">Silver Mercury</div><div class="badge-desc">Серебряный лучник</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="awards">
+    <section id="awards" style="position: relative;">
         <h2><span class="h2-text">Награды</span></h2>
         <div class="badges-grid reveal-stagger">
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card award"><div class="badge-hole"></div><div class="badge-type">НАГРАДА</div>
-                    <a class="badge-logo logo-link" href="https://vnutricom.ru/" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/vnutricom.ru?size=160" alt="InterComm" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=vnutricom.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://vnutricom.ru/" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=vnutricom.ru&amp;sz=128" alt="InterComm" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=vnutricom.ru&amp;sz=128'"></a>
                     <div class="badge-title">InterComm</div><div class="badge-desc">ИИ для прогнозирования выгорания</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card award"><div class="badge-hole"></div><div class="badge-type">НАГРАДА</div>
-                    <a class="badge-logo logo-link" href="https://www.steptwo.com.au/awards/" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/steptwo.com.au?size=160" alt="StepTwo" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=steptwo.com.au&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://www.steptwo.com.au/awards/" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=steptwo.com.au&amp;sz=128" alt="StepTwo" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=steptwo.com.au&amp;sz=128'"></a>
                     <div class="badge-title">StepTwo</div><div class="badge-desc">Digital Employee Experience</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card award"><div class="badge-hole"></div><div class="badge-type">НАГРАДА</div>
-                    <a class="badge-logo logo-link" href="https://digitalworkplacegroup.com/organizations-recognized-in-digital-workplace-of-the-year-2021-awards/" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/digitalworkplacegroup.com?size=160" alt="Digital Workplace" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=digitalworkplacegroup.com&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://digitalworkplacegroup.com/organizations-recognized-in-digital-workplace-of-the-year-2021-awards/" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=digitalworkplacegroup.com&amp;sz=128" alt="Digital Workplace" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=digitalworkplacegroup.com&amp;sz=128'"></a>
                     <div class="badge-title">Digital Workplace</div><div class="badge-desc">Digital Workplace of the Year</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card award"><div class="badge-hole"></div><div class="badge-type">НАГРАДА</div>
-                    <a class="badge-logo logo-link" href="https://awards.rivelty.ru/" target="_blank"><img class="editable-img" src="https://awards.rivelty.ru/img/awards/logo_rexa2025.png" alt="REXA" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=awards.rivelty.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://awards.rivelty.ru/" target="_blank" style="position: relative;"><img class="editable-img" src="https://awards.rivelty.ru/img/awards/logo_rexa2025.png" alt="REXA" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=awards.rivelty.ru&amp;sz=128'"></a>
                     <div class="badge-title">REXA</div><div class="badge-desc">Employee communications</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card award"><div class="badge-hole"></div><div class="badge-type">НАГРАДА</div>
-                    <a class="badge-logo logo-link" href="https://it-channel-awards.ru/nominations" target="_blank"><img class="editable-img" src="https://logo.clearbit.com/it-channel-awards.ru?size=160" alt="Magic People IT" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=it-channel-awards.ru&sz=128'"></a>
+                    <a class="badge-logo logo-link" href="https://it-channel-awards.ru/nominations" target="_blank" style="position: relative;"><img class="editable-img" src="https://www.google.com/s2/favicons?domain=it-channel-awards.ru&amp;sz=128" alt="Magic People IT" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=it-channel-awards.ru&amp;sz=128'"></a>
                     <div class="badge-title">Magic People IT</div><div class="badge-desc">Цифровая трансформация</div>
                 </div>
             </div>
-            <div class="badge-wrapper"><div class="badge-lanyard"></div>
+            <div class="badge-wrapper" style="position: relative;"><div class="badge-lanyard"></div>
                 <div class="badge-card award"><div class="badge-hole"></div><div class="badge-type">НАГРАДА</div>
                     <div class="badge-title">🏆 Нац. банковская</div><div class="badge-desc">Цифровые и финтех-технологии</div>
                 </div>
@@ -895,82 +924,82 @@
         </div>
     </section>
 
-    <section id="recommendations" class="reveal section-empty">
+    <section id="recommendations" class="reveal section-empty" style="position: relative;">
         <h2><span class="h2-text">Рекомендации</span></h2>
         <div class="reco-grid"></div>
     </section>
 
-    <section id="skills">
+    <section id="skills" style="position: relative;">
         <h2><span class="h2-text">Ключевые навыки</span></h2>
         <div class="skills-container reveal-stagger">
             <div class="skill-category"><h3>🎯 Management</h3>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">Цифровая трансформация</span><span class="skill-percent">95%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div></div>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">Управление проектами</span><span class="skill-percent">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div></div>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">Agile &amp; Lean</span><span class="skill-percent">85%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">Цифровая трансформация</span><span class="skill-percent">95%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="95" style="width: 95%;"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">Управление проектами</span><span class="skill-percent">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90" style="width: 90%;"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">Agile &amp; Lean</span><span class="skill-percent">85%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="85" style="width: 85%;"></div></div></div>
             </div>
             <div class="skill-category"><h3>💻 Technical</h3>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">Искусственный интеллект (AI)</span><span class="skill-percent">91%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="91"></div></div></div>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">Power BI</span><span class="skill-percent">80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div></div>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">JIRA / Bitrix24</span><span class="skill-percent">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">Искусственный интеллект (AI)</span><span class="skill-percent">91%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="91" style="width: 91%;"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">Power BI</span><span class="skill-percent">80%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="80" style="width: 80%;"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">JIRA / Bitrix24</span><span class="skill-percent">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90" style="width: 90%;"></div></div></div>
             </div>
             <div class="skill-category"><h3>🎨 Design &amp; Dev</h3>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">UI/UX &amp; Figma</span><span class="skill-percent">99%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="99"></div></div></div>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">VibeCoding</span><span class="skill-percent">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div></div>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">C++ / VBA / Delphi</span><span class="skill-percent">70%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">UI/UX &amp; Figma</span><span class="skill-percent">99%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="99" style="width: 99%;"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">VibeCoding</span><span class="skill-percent">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90" style="width: 90%;"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">C++ / VBA / Delphi</span><span class="skill-percent">70%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="70" style="width: 70%;"></div></div></div>
             </div>
             <div class="skill-category"><h3>🌐 Soft Skills</h3>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">Публичные выступления</span><span class="skill-percent">95%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div></div>
-                <div class="skill-item"><div class="skill-header"><span class="skill-name">Change Management</span><span class="skill-percent">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">Публичные выступления</span><span class="skill-percent">95%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="95" style="width: 95%;"></div></div></div>
+                <div class="skill-item" style="position: relative;"><div class="skill-header"><span class="skill-name">Change Management</span><span class="skill-percent">90%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-width="90" style="width: 90%;"></div></div></div>
             </div>
         </div>
     </section>
 
-    <div class="two-col" id="education">
+    <div class="two-col" id="education" style="position: relative;">
         <section class="reveal from-left">
             <h2><span class="h2-text">Образование</span></h2>
             <div class="info-block">
                 <div class="edu-subtitle">🎓 Основное</div>
-                <div class="edu-item"><div class="edu-header"><div class="edu-title"><a href="https://bmstu.ru/" target="_blank">МГТУ им. Баумана</a></div><span class="edu-date-badge">2006 — 2012</span></div><div class="edu-description">Информатика и системы управления. Инженер по комплексному обеспечению информационной безопасности</div></div>
-                <div class="edu-item" style="margin-top:1.25rem;"><div class="edu-header"><div class="edu-title"><a href="https://accaglobal.com/" target="_blank">ACCA</a></div><span class="edu-date-badge">2012 — н.в.</span></div><div class="edu-description">Association of Chartered Certified Accountants</div></div>
+                <div class="edu-item" style="position: relative;"><div class="edu-header"><div class="edu-title"><a href="https://bmstu.ru/" target="_blank">МГТУ им. Баумана</a></div><span class="edu-date-badge">2006 — 2012</span></div><div class="edu-description">Информатика и системы управления. Инженер по комплексному обеспечению информационной безопасности</div></div>
+                <div class="edu-item" style="margin-top: 1.25rem; position: relative;"><div class="edu-header"><div class="edu-title"><a href="https://accaglobal.com/" target="_blank">ACCA</a></div><span class="edu-date-badge">2012 — н.в.</span></div><div class="edu-description">Association of Chartered Certified Accountants</div></div>
                 <div class="edu-subtitle">📚 Дополнительное</div>
-                <div class="edu-item"><div class="edu-header"><div class="edu-title"><a href="https://www.skolkovo.ru/" target="_blank">МШУ Сколково</a></div><span class="edu-date-badge">2025 — 2026</span></div><div class="edu-description">Программа «Лидеры изменений»</div></div>
-                <div class="edu-item" style="margin-top:1.25rem;"><div class="edu-header"><div class="edu-title"><a href="https://www.skoltech.ru/" target="_blank">СколТех</a></div><span class="edu-date-badge">2025</span></div><div class="edu-description">«Введение в практику эффективного промптинга»</div></div>
+                <div class="edu-item" style="position: relative;"><div class="edu-header"><div class="edu-title"><a href="https://www.skolkovo.ru/" target="_blank">МШУ Сколково</a></div><span class="edu-date-badge">2025 — 2026</span></div><div class="edu-description">Программа «Лидеры изменений»</div></div>
+                <div class="edu-item" style="margin-top: 1.25rem; position: relative;"><div class="edu-header"><div class="edu-title"><a href="https://www.skoltech.ru/" target="_blank">СколТех</a></div><span class="edu-date-badge">2025</span></div><div class="edu-description">«Введение в практику эффективного промптинга»</div></div>
             </div>
         </section>
         <section class="reveal from-right">
             <h2><span class="h2-text">Дополнительно</span></h2>
             <div class="info-block">
                 <ul class="info-list">
-                    <li><strong>Языки:</strong>
+                    <li style="position: relative;"><strong>Языки:</strong>
                         <details class="language-popup" style="display:inline;"><summary class="language-trigger">Английский – свободно (подробнее)</summary>
-                            <div class="language-popup-content"><h4>Cambridge Certificate in Advanced English (CAE)</h4><span class="language-badge">Уровень C1 · 2012</span><p style="margin-top:.75rem;">Cambridge CAE — internationally recognised qualification proving high-level achievement in learning English as a foreign language.</p>
-                                <ul><li>Свободное понимание сложных текстов на различные темы</li><li>Свободное выражение мыслей в устной и письменной форме</li><li>Использование языка в профессиональном и академическом контексте</li><li>Эффективное участие в переговорах и дискуссиях</li></ul>
+                            <div class="language-popup-content" style="animation: 0.4s ease 0s 1 normal none running fadeIn;"><h4 class="">Cambridge Certificate in Advanced English (CAE)</h4><span class="language-badge">Уровень C1 · 2012</span><p style="margin-top:.75rem;" class="">Cambridge CAE — internationally recognised qualification proving high-level achievement in learning English as a foreign language.</p>
+                                <ul><li class="" style="position: relative;">Свободное понимание сложных текстов на различные темы</li><li class="" style="position: relative;">Свободное выражение мыслей в устной и письменной форме</li><li class="" style="position: relative;">Использование языка в профессиональном и академическом контексте</li><li class="" style="position: relative;">Эффективное участие в переговорах и дискуссиях</li></ul>
                             </div>
                         </details>
                     </li>
-                    <li><strong>Публикации:</strong> Более 50 публикаций в СМИ</li>
-                    <li><strong>Лидерство:</strong> Лейтенант, командир 2-х рот, 160 курсантов (2012)</li>
-                    <li><strong>Интересы:</strong> Хоккей, горные лыжи, боевые искусства, путешествия, классическая гитара, фортепиано</li>
+                    <li class="" style="position: relative;"><strong>Публикации:</strong> Более 50 публикаций в СМИ</li>
+                    <li class="" style="position: relative;"><strong>Лидерство:</strong> Лейтенант, командир 2-х рот, 160 курсантов (2012)</li>
+                    <li class="" style="position: relative;"><strong>Интересы:</strong> Хоккей, горные лыжи, боевые искусства, путешествия, классическая гитара, фортепиано</li>
                 </ul>
             </div>
         </section>
     </div>
 
-    <section id="contacts">
+    <section id="contacts" style="position: relative;">
         <div class="parallax-contacts reveal" id="parallaxContacts">
-            <h3>Свяжитесь со мной</h3>
+            <h3 class="">Свяжитесь со мной</h3>
             <p class="subtitle">Открыт к предложениям о сотрудничестве</p>
             <div class="contact-icons-grid">
                 <a href="tel:+79262899214" class="contact-icon-circle"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg><span class="contact-icon-label">Позвонить</span></a>
                 <a href="mailto:anton.muzhelskiy@gmail.com" class="contact-icon-circle"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><span class="contact-icon-label">Написать</span></a>
-                <a href="https://t.me/anton.muzhelskiy" target="_blank" class="contact-icon-circle"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span class="contact-icon-label">Telegram</span></a>
-                <a href="https://max.ru/u/f9LHodD0cOLXBCJrz0ilG7y8aQWExyfeuJrSrYwPN4rj3tiZwmSkIxfRjkc" target="_blank" class="contact-icon-circle"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 3a7 7 0 100 14 7 7 0 000-14zm0 2a5 5 0 110 10 5 5 0 010-10z"/></svg><span class="contact-icon-label">MAX</span></a>
+                <a href="https://t.me/anton.muzhelskiy" target="_blank" class="contact-icon-circle"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg><span class="contact-icon-label">Telegram</span></a>
+                <a href="https://max.ru/u/f9LHodD0cOLXBCJrz0ilG7y8aQWExyfeuJrSrYwPN4rj3tiZwmSkIxfRjkc" target="_blank" class="contact-icon-circle"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 3a7 7 0 100 14 7 7 0 000-14zm0 2a5 5 0 110 10 5 5 0 010-10z"></path></svg><span class="contact-icon-label">MAX</span></a>
             </div>
         </div>
     </section>
 
     <div style="text-align:center;">
-        <button class="print-button" onclick="window.print()"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>Версия для печати</button>
+        <button class="print-button" onclick="window.print()"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>Версия для печати</button>
     </div>
 
     <footer>
@@ -982,7 +1011,7 @@
 <div class="admin-bar">
     <button class="admin-btn admin-only admin-save" type="button" onclick="adminSave()">💾 Сохранить HTML</button>
     <button class="admin-btn admin-only admin-qr" type="button" onclick="editQr()">📱 QR-код</button>
-    <button class="admin-btn admin-only admin-deftheme" id="defThemeBtn" type="button" onclick="toggleDefaultTheme()">🌓 По умолчанию</button>
+    <button class="admin-btn admin-only admin-deftheme" id="defThemeBtn" type="button" onclick="toggleDefaultTheme()">🌓 По умолчанию: тёмная</button>
     <button class="admin-btn admin-only admin-cancel" type="button" onclick="adminDisable()">✕ Отмена</button>
 </div>
 <div class="admin-hint admin-only">✏️ Режим редактирования (Alt+R — выход): клик по тексту/заголовку — изменить; клик по картинке (лого/фото) — сменить изображение (URL или файл); кнопка 🔗 у логотипов — сменить ссылку; «📱 QR-код» — загрузить QR; стрелки ↑↓ меняют порядок пунктов и блоков, × удаляет.</div>
@@ -1252,5 +1281,5 @@
         if(a&&!a.closest('[data-admin-tmp]')&&!e.target.closest('[contenteditable="true"]')&&a.closest('.container')){ e.preventDefault(); editLink(a); return; }
     },true);
 </script>
-</body>
-</html>
+
+<div class="career-tooltip"></div></body></html>

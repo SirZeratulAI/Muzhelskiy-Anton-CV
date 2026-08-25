@@ -1,0 +1,20 @@
+name: link-check
+on:
+  schedule:
+    - cron: '0 8 * * *'        # ежедневно 08:00 UTC; можно '0 */6 * * *' для каждых 6 часов
+  workflow_dispatch: {}          # ручной запуск из UI GitHub
+  push:
+    paths: ['index.html']        # проверять сразу после правок резюме
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Check links
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          HTML_FILE: index.html
+        run: node link-checker.mjs

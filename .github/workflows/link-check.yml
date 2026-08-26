@@ -1,0 +1,28 @@
+name: link-check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "10 3 * * *"
+  push:
+    paths:
+      - index.html
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check links
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          HTML_FILE: index.html
+        run: node link-checker.mjs

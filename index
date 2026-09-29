@@ -3367,6 +3367,50 @@
         });
     })();
 </script>
+// Кнопка редактирования текста для бота (добавляется при входе в админку)
+(function setupBotTextEditor(){
+  const origEnable = window.adminEnable;
+  if (!origEnable) {
+    // Если adminEnable ещё не определён — перехватим через MutationObserver или добавим позже
+    const check = setInterval(() => {
+      if (window.adminEnable) {
+        clearInterval(check);
+        wrapAdminEnable();
+      }
+    }, 100);
+    return;
+  }
+  wrapAdminEnable();
+  
+  function wrapAdminEnable(){
+    const original = window.adminEnable;
+    window.adminEnable = function(){
+      original.apply(this, arguments);
+      const botTextDiv = document.querySelector('.bot-message-text');
+      if (botTextDiv) {
+        botTextDiv.style.display = 'block';
+        if (!document.getElementById('editBotTextBtn')) {
+          const editBtn = document.createElement('button');
+          editBtn.id = 'editBotTextBtn';
+          editBtn.className = 'admin-btn admin-only';
+          editBtn.style.cssText = 'background:linear-gradient(135deg,#EC4899,#8B5CF6);margin-left:.5rem;';
+          editBtn.type = 'button';
+          editBtn.textContent = '✏️ Текст для бота';
+          editBtn.onclick = () => {
+            const currentText = botTextDiv.textContent.trim();
+            const newText = prompt('Текст для Telegram-бота (переносы строк сохраняются):', currentText);
+            if (newText !== null) {
+              botTextDiv.textContent = newText;
+              if (typeof adminToast === 'function') adminToast('✅ Текст для бота обновлён');
+            }
+          };
+          const bar = document.querySelector('.admin-bar');
+          if (bar) bar.appendChild(editBtn);
+        }
+      }
+    };
+  }
+})();
 </script>
 
 <!-- Текст для Telegram-бота (скрыт в режиме просмотра, редактируется в админке) -->

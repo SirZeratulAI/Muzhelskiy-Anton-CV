@@ -14,14 +14,19 @@ if (/^https?:\/\//i.test(HTML_FILE)) {
   html = readFileSync(HTML_FILE, 'utf8');
 }
 
+// Собираем все URL
 const urls = new Set(); let m;
 const re1 = /(?:href|src)=["']([^"']+)["']/g;
 while ((m = re1.exec(html))) { const u = m[1].trim(); if (/^https?:\/\//i.test(u)) urls.add(u); }
 const re2 = /this\.src\s*=\s*['"](https?:\/\/[^'"]+)['"]/g;
 while ((m = re2.exec(html))) urls.add(m[1].trim());
 const list = [...urls];
-console.log(`Внешних ссылок найдено: ${list.length}`);
 
+// Извлекаем текст для бота из скрытого блока
+const botTextMatch = html.match(/<div\s+class="bot-message-text"[^>]*>([\s\S]*?)<\/div>/);
+const botMessageText = botTextMatch ? botTextMatch[1].replace(/<[^>]+>/g, '').trim() : '';
+
+// Карта: URL видео/статьи -> его название
 const vmap = {};
 { const re = /<h3 class="media-title">([\s\S]*?)<\/h3>[\s\S]*?<a[^>]*?href="([^"]+?)"[^>]*?class="media-link"/g; let m2;
   while ((m2 = re.exec(html))) vmap[m2[2]] = m2[1].trim(); }
@@ -48,6 +53,8 @@ async function mapLimit(items, limit, fn){
 const results = await mapLimit(list, 8, check);
 
 function short(u){ try{ const x=new URL(u); let p=x.pathname+x.search; if(p.length>35)p=p.slice(0,35)+'…'; return x.host.replace(/^www\./,'')+p; }catch{ return u; } }
+
+// Игнорируемые ссылки (системные, анти-бот)
 function isIgnored(u, status){
   const l = u.toLowerCase();
   if (l.includes('fonts.googleapis.com') || l.includes('fonts.gstatic.com') || l.includes('google.com/s2')) return true;
@@ -55,6 +62,8 @@ function isIgnored(u, status){
   if (status === 'ERR' && /(вэб\.рф|veb\.ru|sberbank\.ru|rosbank\.ru|дом\.рф|domrf\.ru)/.test(l)) return true;
   return false;
 }
+
+// Классификация ссылок
 function kind(u){
   const l = u.toLowerCase();
   if (l.includes('rutube')||l.includes('vkvideo')||l.includes('youtube')||l.includes('youtu.be')||l.includes('/video')) return 'video';
@@ -63,95 +72,99 @@ function kind(u){
   return 'other';
 }
 
-const ignored = results.filter(r => !r.ok && isIgnored(r.u, r.status));
-const warned  = results.filter(r => r.ok && r.warn);
-const checked = results.filter(r => !isIgnored(r.u, r.status));
-const broken  = checked.filter(r => !r.ok);
-const okCount = checked.length - broken.length;
-const okPercent = checked.length ? Math.round((okCount / checked.length) * 100) : 0;
-
+// Разделяем: аватар/логотипы vs остальные ссылки
 const avatarUrl = list.find(u => /iimage\.su/.test(u));
 const avatarRes = avatarUrl ? results.find(r => r.u === avatarUrl) : null;
 const avatarOk = avatarRes && avatarRes.ok;
-const avatarLine = !avatarRes ? '❓ не найден' : (avatarOk ? '✅ работает' : `⛔ не открывается (${avatarRes.status})`);
 
-console.log(`OK: ${okCount}  WARN: ${warned.length}  BROKEN: ${broken.length}  IGNORED: ${ignored.length}`);
-broken.forEach(b => console.log('BROKEN', b.status, b.u));
+const logoUrls = list.filter(u => kind(u) === 'logo');
+const logoResults = logoUrls.map(u => results.find(r => r.u === u)).filter(Boolean);
+const logosOk = logoResults.filter(r => r.ok).length;
+const logosBroken = logoResults.filter(r => !r.ok && !isIgnored(r.u, r.status));
 
+const otherUrls = list.filter(u => kind(u) !== 'logo' && u !== avatarUrl);
+const otherResults = otherUrls.map(u => results.find(r => r.u === u)).filter(Boolean);
+const otherOk = otherResults.filter(r => r.ok || isIgnored(r.u, r.status)).length;
+const otherBroken = otherResults.filter(r => !r.ok && !isIgnored(r.u, r.status));
+
+const totalChecked = logoResults.length + otherResults.length;
+const totalBroken = logosBroken.length + otherBroken.length;
+
+console.log(`Всего ссылок: ${list.length}`);
+console.log(`Аватар: ${avatarOk ? '✅' : ''}`);
+console.log(`Логотипы: ${logosOk} OK, ${logosBroken.length} битых`);
+console.log(`Остальные: ${otherOk} OK, ${otherBroken.length} битых`);
+
+// Формируем сообщение
 if (TG_TOKEN && TG_CHAT) {
-  let text;
   const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
   
-  if (!broken.length) {
-    text = `✅ ВСЕ ССЫЛКИ РАБОТАЮТ\n${divider}\n\n` +
-           `👤 Аватар: ${avatarLine}\n\n` +
-           `📊 Проверено: ${checked.length}\n` +
-           `✅ Работает: ${okCount} (100%)\n\n` +
-           `🙈 Игнор (системные): ${ignored.length}`;
+  // Сообщение 1: Статус ссылок
+  let msg1 = `🔍 ПРОВЕРКА ССЫЛОК\n${divider}\n\n`;
+  
+  // Аватар
+  msg1 += `👤 Аватар: ${avatarOk ? '✅ работает' : '⛔ не открывается'}\n\n`;
+  
+  // Логотипы компаний
+  msg1 += `🖼 Логотипы компаний:\n`;
+  if (logosBroken.length === 0) {
+    msg1 += `   ✅ Все OK (${logosResults.length})\n`;
   } else {
-    const cats = [
-      ['photo','📷','ФОТО'],
-      ['logo','🖼','ЛОГОТИПЫ'],
-      ['video','🎬','ВИДЕО'],
-      ['other','📄','ПРОЧЕЕ']
-    ];
-    
-    const L = [];
-    L.push(`⛔ НАЙДЕНЫ БИТЫЕ ССЫЛКИ`);
-    L.push(divider);
-    L.push('');
-    L.push(`👤 Аватар: ${avatarLine}`);
-    L.push('');
-    
-    for (const [key, emo, name] of cats) {
-      const all = checked.filter(r => kind(r.u) === key);
-      if (!all.length) continue;
-      
-      const bad = all.filter(r => !r.ok);
-      const good = all.length - bad.length;
-      
-      L.push(`${emo} ${name}`);
-      
-      if (!bad.length) {
-        L.push(`   ✅ Все OK (${all.length} из ${all.length})`);
-      } else {
-        L.push(`   ⛔ Проблемы (${bad.length} из ${all.length})`);
-        L.push('');
-        bad.forEach(b => {
-          L.push(`   ⛔ ${b.status}`);
-          const t = vmap[b.u];
-          if (t) L.push(`      📺 ${t}`);
-          L.push(`      🔗 ${short(b.u)}`);
-          L.push('');
-        });
-      }
-      L.push('');
-    }
-    
-    L.push(divider);
-    L.push(`📊 ИТОГО`);
-    L.push(`Проверено: ${checked.length}`);
-    L.push(`Работает: ${okCount} (${okPercent}%)`);
-    L.push(`Не работает: ${broken.length}`);
-    if (ignored.length) L.push(`🙈 Игнор (системные): ${ignored.length}`);
-    
-    text = L.join('\n');
+    msg1 += `   ⛔ Битых: ${logosBroken.length} из ${logoResults.length}\n`;
+    logosBroken.forEach(b => {
+      msg1 += `      ⛔ ${b.status} — ${short(b.u)}\n`;
+    });
+  }
+  msg1 += `\n`;
+  
+  // Видео, статьи, прочие ссылки
+  msg1 += `🎬 Видео, статьи, ссылки:\n`;
+  if (otherBroken.length === 0) {
+    msg1 += `   ✅ Все OK (${otherResults.length})\n`;
+  } else {
+    msg1 += `   ⛔ Битых: ${otherBroken.length} из ${otherResults.length}\n`;
+    otherBroken.forEach(b => {
+      const name = vmap[b.u];
+      msg1 += `      ⛔ ${b.status}\n`;
+      if (name) msg1 += `         📺 ${name}\n`;
+      msg1 += `          ${short(b.u)}\n`;
+    });
   }
   
-  if (RESUME_URL) text += `\n\n🔗 ${RESUME_URL}`;
-
-  const body = { chat_id: TG_CHAT, text };
-  if (RESUME_URL) body.reply_markup = { inline_keyboard: [[{ text: '👀 Открыть резюме', url: RESUME_URL }]] };
+  msg1 += `\n${divider}\n`;
+  msg1 += ` ИТОГО: проверено ${totalChecked}, OK ${totalChecked - totalBroken}, битых ${totalBroken}`;
+  
+  if (RESUME_URL) msg1 += `\n\n🔗 ${RESUME_URL}`;
+  
+  const body1 = { chat_id: TG_CHAT, text: msg1 };
+  if (RESUME_URL) body1.reply_markup = { inline_keyboard: [[{ text: '👀 Открыть резюме', url: RESUME_URL }]] };
   
   try {
-    const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+    const r1 = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body1)
     });
-    const b2 = await r.json().catch(()=>({}));
-    console.log(`Telegram HTTP ${r.status}, ok=${b2.ok}, description=${b2.description||'-'}`);
-  } catch(e){ console.log('Telegram ошибка сети:', e?.message); }
+    const b1 = await r1.json().catch(()=>({}));
+    console.log(`Telegram msg1: HTTP ${r1.status}, ok=${b1.ok}`);
+  } catch(e){ console.log('Telegram msg1 ошибка:', e?.message); }
+  
+  // Сообщение 2: Текст для бота + превью
+  if (botMessageText) {
+    const msg2 = `${botMessageText}\n\n🔗 ${RESUME_URL || 'Ссылка на резюме не настроена'}`;
+    const body2 = { chat_id: TG_CHAT, text: msg2 };
+    if (RESUME_URL) body2.reply_markup = { inline_keyboard: [[{ text: '👀 Открыть резюме', url: RESUME_URL }]] };
+    
+    try {
+      const r2 = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+        method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body2)
+      });
+      const b2 = await r2.json().catch(()=>({}));
+      console.log(`Telegram msg2: HTTP ${r2.status}, ok=${b2.ok}`);
+    } catch(e){ console.log('Telegram msg2 ошибка:', e?.message); }
+  } else {
+    console.log('Текст для бота не найден в HTML');
+  }
 } else {
-  console.log('TELEGRAM НЕ НАСТРОЕН: задайте секреты TG_BOT_TOKEN и TG_CHAT_ID');
+  console.log('TELEGRAM НЕ НАСТРОЕН');
 }
 
 process.exit(0);

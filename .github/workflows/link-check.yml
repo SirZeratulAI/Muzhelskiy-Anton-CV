@@ -3,7 +3,7 @@ name: link-check
 on:
   workflow_dispatch:
   schedule:
-    - cron: "10 3 * * *"
+   # - cron: "10 3 * * *"
   push:
     paths:
       - index.html

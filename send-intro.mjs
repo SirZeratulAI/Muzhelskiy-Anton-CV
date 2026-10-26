@@ -8,6 +8,7 @@ const TELEGRAM_URL = 'https://t.me/AntonMuzhelskiy';
 
 // Текст сообщения (обрати внимание на переносы строк через \n)
 const text = `Добрый день!
+
 Направляю резюме для рассмотрения на руководящие позиции в цифровой трансформации / CPO / CDTO / ЗГД по цифровой трансформации
 
 Подробнее о моем опыте вы можете ознакомиться в интерактивном или классическом PDF резюме
@@ -19,7 +20,7 @@ const text = `Добрый день!
 const keyboard = {
   inline_keyboard: [
     [{ text: '🌐 Интерактивное CV', url: INTERACTIVE_URL }],
-    [{ text: ' Классическое PDF CV', url: PDF_URL }],
+    [{ text: '📎 Классическое PDF CV', url: PDF_URL }],
     [{ text: '💬 Связаться со мной', url: TELEGRAM_URL }]
   ]
 };

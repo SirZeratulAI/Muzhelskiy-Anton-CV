@@ -9,6 +9,7 @@
     <link rel="icon" type="image/jpeg" href="favicon.jpg">
     <link rel="apple-touch-icon" href="favicon.jpg">
     
+    <!-- Open Graph теги пока ведут на GitHub Pages -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Антон Мужельский | CDTO / CPO">
     <meta property="og:description" content="Директор по цифровой трансформации. ВЭБ.РФ, ДОМ.РФ, Сбер. 13+ лет опыта, 6 премий, 150+ сервисов.">
@@ -200,7 +201,6 @@
         .inline-stat-label{color:var(--text-secondary);font-size:clamp(.6rem,1.8vw,.7rem);font-weight:500;}
         .media-stats{grid-template-columns:repeat(2,minmax(0,240px));justify-content:center;margin:0 0 1.5rem;}
 
-        /* Единая карусель */
         .media-carousel-container{position:relative;overflow:hidden;padding:0 3rem;}
         .media-carousel{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1);gap:1.5rem;touch-action:pan-y;cursor:grab;}
         .media-carousel.dragging{cursor:grabbing;transition:none;}
@@ -330,8 +330,10 @@
         .contact-icon-label{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);font-size:.75rem;font-weight:600;color:var(--text-secondary);white-space:nowrap;opacity:0;transition:opacity .3s;}
         .contact-icon-circle:hover .contact-icon-label{opacity:1;}
 
-        .print-button{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.75rem;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;border:none;border-radius:9999px;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .3s;box-shadow:var(--shadow-glow);margin:2rem auto;}
+        /* Обновленные стили для кнопки скачивания PDF */
+        .print-button{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.75rem;background:linear-gradient(135deg,var(--gradient-start),var(--gradient-end));color:#fff;border:none;border-radius:9999px;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .3s;box-shadow:var(--shadow-glow);margin:2rem auto; text-decoration: none;}
         .print-button:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 30px var(--neon-glow);}.print-button svg{width:18px;height:18px;}
+        
         footer{text-align:center;margin-top:2.5rem;padding:1.5rem 1rem 2rem;border-top:2px solid var(--border);color:var(--text-secondary);font-size:.85rem;}
 
         @media (max-width:1024px){.media-card{flex:0 0 calc(50% - .75rem);}.badges-grid{grid-template-columns:repeat(3,1fr);gap:1.5rem;}}
@@ -565,7 +567,7 @@
             <strong>Контакты:</strong>
             <div class="print-contacts-grid">
                 <span>📞 +7 (926) 289-92-14</span>
-                <span>✉️ anton.muzhelskiy@gmail.com</span>
+                <span>️ anton.muzhelskiy@gmail.com</span>
                 <span>💬 Telegram: @anton.muzhelskiy</span>
                 <span>🔗 MAX: max.ru/u/f9LHodD0cOLXBCJrz0ilG7y8aQWExyfeuJrSrYwPN4rj3tiZwmSkIxfRjkc</span>
             </div>
@@ -608,7 +610,7 @@
                     </div>
                     <div class="job-summary">Запустил платформу управления персоналом и внедрил GenAI во внутренний периметр организации.</div>
                     <div class="key-achievements">
-                        <h4>🏅 Ключевые достижения</h4>
+                        <h4> Ключевые достижения</h4>
                         <ul>
                             <li>Платформа управления персоналом с нуля — доступна из 5 корпоративных сред</li>
                             <li>Внедрил GenAI во внутренний периметр + ИИ-подкасты «Полный заряд»</li>
@@ -651,7 +653,7 @@
                     </div>
                     <div class="job-summary">Запустил цифровую экосистему пользовательских сервисов и оцифровал пользовательский опыт группы компаний.</div>
                     <div class="key-achievements">
-                        <h4> Ключевые достижения</h4>
+                        <h4>🏅 Ключевые достижения</h4>
                         <ul>
                             <li>150+ автоматизированных сервисов для сотрудников</li>
                             <li>ИИ-прогноз выгорания: экономия 100 млн ₽/год</li>
@@ -876,11 +878,11 @@
     </section>
 
     <section id="teaching">
-        <h2><span class="h2-text"> Преподавательская деятельность</span></h2>
+        <h2><span class="h2-text">🎓 Преподавательская деятельность</span></h2>
         <div class="teaching-grid reveal-stagger">
-            <div class="teaching-card tilt-card"><div class="teaching-list-icon"></div><div class="teaching-list-content"><h4>Мастер-класс по автоматизации на основе опыта внедрения цифровых платформ и мобильных решений</h4><p>МИРБИС — практический мастер-класс по внедрению цифровых платформ</p><span class="teaching-tag tag-external">Внешнее · 2022</span></div></div>
+            <div class="teaching-card tilt-card"><div class="teaching-list-icon">🎯</div><div class="teaching-list-content"><h4>Мастер-класс по автоматизации на основе опыта внедрения цифровых платформ и мобильных решений</h4><p>МИРБИС — практический мастер-класс по внедрению цифровых платформ</p><span class="teaching-tag tag-external">Внешнее · 2022</span></div></div>
             <div class="teaching-card tilt-card"><div class="teaching-list-icon">🤖</div><div class="teaching-list-content"><h4>Внутренний онлайн-курс по основам генеративного ИИ</h4><p>Участие в разработке внутреннего онлайн-курса для сотрудников по основам генеративного ИИ</p><span class="teaching-tag tag-internal">Внутреннее · 2025 — н.в.</span></div></div>
-            <div class="teaching-card tilt-card"><div class="teaching-list-icon"></div><div class="teaching-list-content"><h4>Развитие внутреннего сообщества амбассадоров ИИ</h4><p>Участие в проекте развития внутреннего сообщества амбассадоров искусственного интеллекта</p><span class="teaching-tag tag-internal">Внутреннее · 2025 — н.в.</span></div></div>
+            <div class="teaching-card tilt-card"><div class="teaching-list-icon">🌐</div><div class="teaching-list-content"><h4>Развитие внутреннего сообщества амбассадоров ИИ</h4><p>Участие в проекте развития внутреннего сообщества амбассадоров искусственного интеллекта</p><span class="teaching-tag tag-internal">Внутреннее · 2025 — н.в.</span></div></div>
         </div>
     </section>
 
@@ -909,7 +911,7 @@
     </section>
 
     <section id="awards">
-        <h2><span class="h2-text">Награды</span></h2>
+        <h2><span class="h2-text"> Награды</span></h2>
         <div class="badges-grid reveal-stagger">
             <div class="badge-wrapper"><div class="badge-lanyard"></div>
                 <div class="badge-card award"><div class="badge-hole"></div><div class="badge-type">НАГРАДА</div>
@@ -1018,8 +1020,18 @@
         </div>
     </section>
 
-    <div style="text-align:center;">
-        <button class="print-button" onclick="window.print()"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>Версия для печати</button>
+    <!-- ОБНОВЛЕННАЯ КНОПКА СКАЧИВАНИЯ PDF -->
+    <div style="text-align:center; margin: 2rem auto;">
+        <a href="/CV_Мужельcкий-Антон_dark_2026.pdf" 
+           target="_blank" 
+           download="CV_Мужельcкий-Антон_dark_2026.pdf"
+           class="print-button"
+           style="display:inline-flex; text-decoration:none; cursor:pointer;">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" width="18" height="18">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Скачать PDF резюме
+        </a>
     </div>
 
     <footer>
@@ -1028,14 +1040,30 @@
     </footer>
 </div>
 
+<!-- Текст для Telegram-бота (скрыт в режиме просмотра, редактируется в админке) -->
+<div class="bot-message-text admin-only" style="display:none;">
+ Здравствуйте!
+
+Я — Антон Мужельский, CDTO/CPO с 13+ летним опытом цифровой трансформации.
+
+📊 Ключевые достижения:
+• 150+ цифровых сервисов запущено
+• 100 млн ₽ экономии от ИИ-решений
+• 6 российских и международных премий
+• Работал в ВЭБ.РФ, ДОМ.РФ, Сбер, KPMG, EY
+
+📄 Моё интерактивное резюме:
+</div>
+
 <div class="admin-bar">
-    <button class="admin-btn admin-only admin-save" type="button" onclick="adminSave()">💾 Сохранить HTML</button>
+    <button class="admin-btn admin-only admin-save" type="button" onclick="adminSave()"> Сохранить HTML</button>
     <button class="admin-btn admin-only admin-publish" type="button" onclick="publishToGitHub()">🚀 Опубликовать</button>
+    <button class="admin-btn admin-only" type="button" onclick="editBotText()" style="background:linear-gradient(135deg,#EC4899,#8B5CF6);">✏️ Текст для бота</button>
     <button class="admin-btn admin-only admin-qr" type="button" onclick="editQr()">📱 QR-код</button>
     <button class="admin-btn admin-only admin-deftheme" id="defThemeBtn" type="button" onclick="toggleDefaultTheme()">🌓 По умолчанию</button>
     <button class="admin-btn admin-only admin-cancel" type="button" onclick="adminDisable()">✕ Отмена</button>
 </div>
-<div class="admin-hint admin-only">️ Режим редактирования (Alt+R или долгое нажатие на аватар): клик по тексту — изменить; клик по картинке — сменить; «🚀 Опубликовать» — отправить в GitHub; стрелки ↑↓ меняют порядок, × удаляет.</div>
+<div class="admin-hint admin-only">✏️ Режим редактирования (Alt+R или долгое нажатие на аватар): клик по тексту — изменить; клик по картинке — сменить; «🚀 Опубликовать» — отправить в GitHub; стрелки ↑↓ меняют порядок, × удаляет.</div>
 
 <script>
     const ADMIN_PASSWORD = 'anton2024';
@@ -1053,8 +1081,19 @@
         'consulting2': { name: 'EY (Ernst & Young)', description: 'Глобальная организация. Аудит, налоги, консалтинг.', website: 'https://www.ey.com/en_gl' }
     };
 
-    // Статьи (хранятся в localStorage)
     let articles = JSON.parse(localStorage.getItem('articles') || '[]');
+
+    // Функция редактирования текста для бота
+    function editBotText() {
+        const botTextDiv = document.querySelector('.bot-message-text');
+        if (!botTextDiv) return;
+        const currentText = botTextDiv.textContent.trim();
+        const newText = prompt('Текст для Telegram-бота (переносы строк сохраняются):', currentText);
+        if (newText !== null) {
+            botTextDiv.textContent = newText;
+            adminToast('✅ Текст для бота обновлён');
+        }
+    }
 
     const carousel=document.getElementById('mediaCarousel'); const dotsContainer=document.getElementById('carouselDots');
     let visibleCount=3,totalOriginal=0,currentPos=0,isDragging=false,touchStartX=0,startTranslate=0,animating=false;
@@ -1096,7 +1135,6 @@
     let rsz; window.addEventListener('resize',()=>{clearTimeout(rsz);rsz=setTimeout(rebuildCarousel,150);});
     rebuildCarousel();
 
-    // Карусель статей
     const articlesCarousel=document.getElementById('articlesCarousel'); const articlesDotsContainer=document.getElementById('articlesCarouselDots');
     let articlesVisibleCount=3,articlesTotalOriginal=0,articlesCurrentPos=0,articlesIsDragging=false,articlesTouchStartX=0,articlesStartTranslate=0,articlesAnimating=false;
     function getArticlesVisibleCards(){ if(window.innerWidth<=640) return 1; if(window.innerWidth<=1024) return 2; return 3; }
@@ -1296,7 +1334,6 @@
     function updateRecoVisibility(){ const sec=document.getElementById('recommendations'); if(!sec) return; const has=document.querySelectorAll('.reco-card').length>0; sec.classList.toggle('section-empty',!has); }
     function updateKeyAchVisibility(){ document.querySelectorAll('.key-achievements').forEach(ka=>{ const lis=ka.querySelectorAll('ul li'); const has=Array.from(lis).some(li=>li.textContent.trim()!==''); ka.classList.toggle('section-empty',!has); }); }
 
-    // Долгое нажатие на аватар для открытия админки (мобильные)
     let avatarPressTimer;
     const avatarContainer = document.getElementById('avatarContainer');
     avatarContainer.addEventListener('touchstart', (e) => {
@@ -1380,7 +1417,6 @@
         const recoSec=document.getElementById('recommendations'); const recoGrid=document.querySelector('.reco-grid');
         if(recoSec&&recoGrid){ recoGrid.parentNode.insertBefore(mkBtn('admin-add','+ Добавить рекомендацию',()=>addReco()),recoGrid.nextSibling); }
         document.querySelectorAll('.key-achievements ul').forEach(ul=>{ ul.parentNode.insertBefore(mkBtn('admin-add','+ Достижение',()=>addKeyAch(ul)),ul.nextSibling); });
-        // Кнопка добавления статьи
         const articlesSec=document.getElementById('articles');
         if(articlesSec){ articlesSec.appendChild(mkBtn('admin-add','+ Добавить статью',()=>addArticle())); }
         document.querySelectorAll('.details-content li').forEach(el=>decorate(el,'li',false));
@@ -1412,6 +1448,11 @@
         document.querySelectorAll(EDITABLE).forEach(el=>{ if(el.querySelector('details, ul, ol, .details-content, .language-popup, .skill-bar')) return; makeEditable(el); });
         const titleEl=document.querySelector('.title'); if(titleEl){ titleEl.textContent=titleEl.getAttribute('data-full')||titleEl.textContent; titleEl.classList.remove('typing'); makeEditable(titleEl); }
         buildBlockButtons(); refreshDefThemeBtn(); updateRecoVisibility(); updateKeyAchVisibility();
+        
+        // Показываем блок текста для бота в режиме редактирования
+        const botTextDiv = document.querySelector('.bot-message-text');
+        if (botTextDiv) botTextDiv.style.display = 'block';
+        
         adminToast('✏️ Режим правки включён · Alt+R или долгое нажатие на аватар — выход');
     }
     function adminDisable(){
@@ -1422,15 +1463,18 @@
         document.querySelectorAll('details[open]').forEach(d=>d.removeAttribute('open'));
         openSnapshot.forEach(d=>{if(d.isConnected) d.setAttribute('open','');});
         updateRecoVisibility(); updateKeyAchVisibility(); typeWriter();
+        // Скрываем блок текста для бота при выходе из режима редактирования
+        const botTextDiv = document.querySelector('.bot-message-text');
+        if (botTextDiv) botTextDiv.style.display = 'none';
     }
     function adminToggle(){ if(editMode) adminDisable(); else adminEnable(); }
 
     async function publishToGitHub() {
-        if (!editMode) { adminToast('️ Сначала включите режим редактирования'); return; }
+        if (!editMode) { adminToast('⚠️ Сначала включите режим редактирования'); return; }
         
         let token = localStorage.getItem('gh_pat');
         if (!token) {
-            token = prompt('🔑 Введите GitHub Personal Access Token (один раз):\n\nСоздать: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token\n\nПоставьте галочку только на "repo"');
+            token = prompt(' Введите GitHub Personal Access Token (один раз):\n\nСоздать: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token\n\nПоставьте галочку только на "repo"');
             if (token) localStorage.setItem('gh_pat', token);
         }
         if (!token) return alert('Токен не введён. Публикация отменена.');

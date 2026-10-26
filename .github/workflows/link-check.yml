@@ -1,15 +1,10 @@
-name: link-check
+name: send-intro
 
 on:
   workflow_dispatch:
-  schedule:
-   # - cron: "10 3 * * *"
-  push:
-    paths:
-      - index.html
 
 jobs:
-  check:
+  send:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,9 +15,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Check links
+      - name: Send intro message
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-          HTML_FILE: index.html
-        run: node link-checker.mjs
+        run: node send-intro.mjs
